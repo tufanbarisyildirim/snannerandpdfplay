@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">scanner n\' pdf play</string>
+    <string name="hello_world">welcome to scanner n\' pdf play!</string>
+    <string name="menu_settings">settings</string>
+    <string name="select_scanner">open scanner</string>
+    <string name="select_imageconvert">convert image to pdf</string>
+    <string name="select_txtconvert">convert txt file to pdf</string>
+    <string name="select_htmlconvert">convert html file to pdf</string>
+    <string name="select_unlockpdf">unlock pdf</string>
+    <string name="select_lockpdf">protect pdf with password</string>
+    <string name="title_activity_scanner">scanner</string>
+    <string name="title_activity_image_to_pdf">image To pdf</string>
+    <string name="title_activity_file_to_pdf">file To pdf</string>
+    <string name="title_activity_protect_pdf">protect pdf</string>
+    <string name="open_pdf">open pdf</string>
+    <string name="share_pdf">share pdf</string>
+    <string name="protect_pdf">protect pdf</string>
+    <string name="concatenate_pdf">concatenate Two pdfs</string>
+    <string name="extract_pdf">extract pages from a pdf</string>
+    <string name="enter_password">enter the password</string>
+    <string name="confirm_password">confirm the password</string>
+    <string name="title_activity_pick_password">enter password</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="title_activity_lock_pdf">lock pdf</string>
+    <string name="title_activity_concatenate_pdf">concatenate pdf</string>
+    <string name="title_activity_split">split pdf</string>
+    <string name="title_activity_pick_number">enter Number</string>
+    <string name="enter_frompgnumber">enter from page Number</string>
+    <string name="enter_topgnumber">enter to page Number</string>
+
+</resources>
