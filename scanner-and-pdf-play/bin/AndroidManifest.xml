@@ -74,6 +74,22 @@
             android:label="@string/title_activity_pick_number"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name="com.snpdfp.activity.OpenSNPDFFolderActivity"
+            android:label="@string/title_activity_open_snpdffolder" >
+        </activity>
+        <activity
+            android:name="com.snpdfp.activity.PickedPDFActivity"
+            android:label="@string/title_activity_picked_pdf" >
+        </activity>
+        <activity
+            android:name="com.snpdfp.menu.FAQActivity"
+            android:label="@string/title_activity_faq" >
+        </activity>
+         <activity
+            android:name="com.snpdfp.menu.About"
+            android:label="@string/title_about" >
+        </activity>       
     </application>
 
 </manifest>

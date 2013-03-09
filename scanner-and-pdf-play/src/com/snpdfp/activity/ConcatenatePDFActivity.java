@@ -204,7 +204,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 					"PDFs " + firstFile.getName() + " and "
 							+ secondFile.getName()
 							+ " successfully concatenated to: "
-							+ pdffile.getAbsolutePath());
+							+ pdffile.getName());
 		}
 
 	}

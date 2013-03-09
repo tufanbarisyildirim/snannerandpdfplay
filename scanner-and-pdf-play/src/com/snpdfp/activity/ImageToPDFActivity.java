@@ -126,6 +126,8 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to create PDF", e);
 				error = true;
+			} finally {
+				SAPDFPathManager.getSNPDFPicFile().delete();
 			}
 
 			return error;
@@ -148,7 +150,8 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
 		} else {
-			SAPDFUtils.setSuccessText(textView, "Created PDF File: " + pdffile);
+			SAPDFUtils.setSuccessText(textView,
+					"Created PDF File: " + pdffile.getName());
 		}
 	}
 

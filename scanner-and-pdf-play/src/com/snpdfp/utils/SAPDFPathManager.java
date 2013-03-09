@@ -47,4 +47,17 @@ public class SAPDFPathManager {
 		return file;
 	}
 
+	public static File getRootDirectory() {
+		File dir = new File(Environment.getExternalStorageDirectory(), "snpdf");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+
+		return dir;
+	}
+
+	public static File getSNPDFPicFile() {
+		return getSavePDFPathWOTimestamp("PIC.jpg");
+	}
+
 }

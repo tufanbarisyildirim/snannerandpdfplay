@@ -214,10 +214,8 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
 		} else {
-			SAPDFUtils.setSuccessText(
-					textView,
-					"PDF file successfully created at: "
-							+ pdffile.getAbsolutePath());
+			SAPDFUtils.setSuccessText(textView,
+					"PDF file successfully created: " + pdffile.getName());
 		}
 	}
 

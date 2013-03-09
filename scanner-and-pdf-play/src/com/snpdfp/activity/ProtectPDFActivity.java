@@ -194,7 +194,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			share_button.setEnabled(false);
 		} else {
 			SAPDFUtils.setSuccessText(textView,
-					"PDF successfully protected at: " + pdffile);
+					"PDF successfully protected: " + pdffile.getName());
 		}
 	}
 
