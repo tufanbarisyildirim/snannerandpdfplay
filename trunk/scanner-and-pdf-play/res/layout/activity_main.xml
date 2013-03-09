@@ -1,0 +1,86 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".MainActivity" >
+
+        <TextView
+            style="@style/HeadText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_world" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="scan"
+            android:text="@string/select_scanner" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="convertImage"
+            android:text="@string/select_imageconvert" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="lockPDF"
+            android:text="@string/select_lockpdf" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="concatenatePDF"
+            android:text="@string/concatenate_pdf" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="extractPDF"
+            android:text="@string/extract_pdf" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="convertTXTFile"
+            android:text="@string/select_txtconvert" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="convertHTMLFile"
+            android:text="@string/select_htmlconvert" />
+    </LinearLayout>
+
+</ScrollView>
