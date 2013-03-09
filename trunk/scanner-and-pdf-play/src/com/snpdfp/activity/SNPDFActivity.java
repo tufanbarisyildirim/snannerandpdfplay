@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.ContextThemeWrapper;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.snpdfp.menu.About;
-import com.snpdfp.menu.Help;
+import com.snpdfp.menu.FAQActivity;
 import com.snpdfp.utils.SAPDFCContstants;
 
 public class SNPDFActivity extends Activity {
@@ -59,6 +60,31 @@ public class SNPDFActivity extends Activity {
 		startActivity(pdfintent);
 	}
 
+	public void deletePDF(View view) {
+		getAlertDialog()
+				.setTitle("Delete PDF?")
+				.setMessage("Are you sure to delete file: " + pdffile.getName())
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						delete();
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						}).show();
+
+	}
+
+	private void delete() {
+		pdffile.delete();
+		startActivity(new Intent(this, MainActivity.class));
+	}
+
 	public android.app.AlertDialog.Builder getAlertDialog() {
 		return new AlertDialog.Builder(new ContextThemeWrapper(this,
 				android.R.style.Theme_Dialog));
@@ -77,12 +103,23 @@ public class SNPDFActivity extends Activity {
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
 			return true;
-		case R.id.help:
-			startActivity(new Intent(this, Help.class));
+		case R.id.sndpf_location:
+			startActivity(new Intent(this, OpenSNPDFFolderActivity.class));
+			return true;
+		case R.id.faq:
+			startActivity(new Intent(this, FAQActivity.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	@Override
+	public void onBackPressed() {
+		finish();
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
 }

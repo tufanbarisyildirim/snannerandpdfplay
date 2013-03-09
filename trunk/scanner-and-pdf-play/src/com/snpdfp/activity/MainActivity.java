@@ -158,7 +158,7 @@ public class MainActivity extends SNPDFActivity {
 		logger.info("*************** starting scanner **************");
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		File file = SAPDFPathManager.getSavePDFPathWOTimestamp("PIC.jpg");
+		File file = SAPDFPathManager.getSNPDFPicFile();
 
 		output = Uri.fromFile(file);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
@@ -242,6 +242,14 @@ public class MainActivity extends SNPDFActivity {
 				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		cursor.moveToFirst();
 		return cursor.getString(column_index);
+	}
+
+	/**
+	 * It is absolutely necessary here
+	 */
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 
 }

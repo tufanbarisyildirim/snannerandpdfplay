@@ -17,6 +17,7 @@
     <string name="open_pdf">open pdf</string>
     <string name="share_pdf">share pdf</string>
     <string name="protect_pdf">protect pdf</string>
+    <string name="delete_pdf">delete pdf</string>
     <string name="concatenate_pdf">concatenate Two pdfs</string>
     <string name="extract_pdf">extract pages from a pdf</string>
     <string name="enter_password">enter the password</string>
@@ -30,5 +31,12 @@
     <string name="title_activity_pick_number">enter Number</string>
     <string name="enter_frompgnumber">enter from page Number</string>
     <string name="enter_topgnumber">enter to page Number</string>
+    <string name="app_home">Open Source App: http://code.google.com/p/snannerandpdfplay</string>
+    <string name="source_code">Source Code: http://code.google.com/p/snannerandpdfplay/source/checkout</string>
+    <string name="title_about">about scanner n\' pdf play</string>
+    <string name="open_snpdf_file">open prepared pdfs</string>
+    <string name="title_activity_open_snpdffolder">SNPDF Folder</string>
+    <string name="title_activity_picked_pdf">Chosen PDF</string>
+    <string name="title_activity_faq">FAQActivity</string>
 
 </resources>

@@ -43,6 +43,18 @@
             android:background="@drawable/snpdf_button"
             android:onClick="protectPDF"
             android:text="@string/protect_pdf" />
+        
+        <Button
+            android:id="@+id/deletePDF"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:onClick="deletePDF"
+            android:text="@string/delete_pdf" />
+        
+        
+        
     </LinearLayout>
 
 </ScrollView>
