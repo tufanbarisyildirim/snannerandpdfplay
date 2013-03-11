@@ -2,6 +2,9 @@ package com.snpdfp.layout;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
@@ -64,20 +67,41 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 
 		if (!dirPath.equals(root)) {
 
-			item.add(root);
+			item.add("<- goto root (/)");
 			path.add(root);
-			item.add("../");
+			item.add("<- go back (../)");
 			path.add(f.getParent());
 
 		}
-		for (int i = 0; i < files.length; i++) {
-			File file = files[i];
+
+		// Sort the files
+		List<File> fileList = Arrays.asList(files);
+		Collections.sort(fileList, new Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				if (lhs.lastModified() > rhs.lastModified()) {
+					return -1;
+				} else if (lhs.lastModified() < rhs.lastModified()) {
+					return 1;
+				}
+
+				return 0;
+			}
+		});
+
+		// Display all directories first
+		for (File file : fileList) {
 			path.add(file.getPath());
 			if (file.isDirectory())
 				item.add(file.getName() + "/");
-			else
-				item.add(file.getName());
 
+		}
+
+		// Display files now
+		for (File file : fileList) {
+			path.add(file.getPath());
+			if (file.isFile())
+				item.add(file.getName());
 		}
 
 		Log.i("Folders", files.length + "");
@@ -86,7 +110,6 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 
 	}
 
-	// can manually set Item to display, if u want
 	public void setItemList(List<String> item) {
 		ArrayAdapter<String> fileList = new ArrayAdapter<String>(context,
 				R.layout.row, item);
