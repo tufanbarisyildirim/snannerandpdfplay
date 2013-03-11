@@ -10,13 +10,11 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.snpdfp.activity.R;
 import com.snpdfp.utils.SAPDFCContstants;
 import com.snpdfp.utils.SAPDFPathManager;
 
@@ -81,11 +79,6 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 		Intent filePick = new Intent(this, PickedPDFActivity.class);
 		filePick.putExtra(SAPDFCContstants.FILE_URI, pdffile.getAbsolutePath());
 		startActivity(filePick);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return true;
 	}
 
 }
