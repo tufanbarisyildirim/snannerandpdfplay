@@ -6,10 +6,10 @@ This doc lists the activity flow of this application.
 
 
 == Details ==
-*MainActivity\.java* is the main activity class which gets invoked when the application starts.
+*MainActivity* is the main activity class which gets invoked when the application starts.
 This activity then invokes the various other activities as per user selection.
 Following are the list of Activity classes:
-||*Activity Name*||*Purpose*||
+||Activity Name||*Purpose*||
 ||MainActivity||Main activity class which is invoked when application starts||
 ||BrowsePDFActivity||For browsing files||
 ||ConcatenatePDFActivity||For concatenating two PDFs||
