@@ -16,7 +16,5 @@ public class About extends SNPDFActivity {
 
 		Linkify.addLinks((TextView) findViewById(R.id.app_home),
 				Linkify.WEB_URLS);
-		Linkify.addLinks((TextView) findViewById(R.id.source_code),
-				Linkify.WEB_URLS);
 	}
 }
