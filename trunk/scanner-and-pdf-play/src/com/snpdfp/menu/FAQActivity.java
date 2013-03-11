@@ -1,7 +1,6 @@
 package com.snpdfp.menu;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.TextView;
 
 import com.snpdfp.activity.R;
@@ -20,11 +19,6 @@ public class FAQActivity extends SNPDFActivity {
 
 		TextView answer1 = (TextView) findViewById(R.id.answer1);
 		answer1.setText(SAPDFPathManager.getRootDirectory().getAbsolutePath());
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return true;
 	}
 
 }

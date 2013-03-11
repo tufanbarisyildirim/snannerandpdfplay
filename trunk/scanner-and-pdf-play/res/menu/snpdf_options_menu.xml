@@ -10,7 +10,7 @@
     
      <item
         android:id="@+id/faq"
-        android:title="FAQs"/>
+        android:title="faqs"/>
     
 
 </menu>
