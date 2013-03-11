@@ -5,23 +5,49 @@
     android:orientation="vertical" >
 
     <TextView
-        style="@style/HeadText"
+        android:id="@+id/app_name"
+        style="@style/HeadTextLeft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name" />
 
     <TextView
         android:id="@+id/app_home"
-        style="@style/HeadText"
+        style="@style/HeadTextLeft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/app_home" />
 
     <TextView
-        android:id="@+id/source_code"
-        style="@style/HeadText"
+        android:id="@+id/motivation"
+        style="@style/HeadTextLeft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/source_code" />
+        android:layout_marginTop="20dp"
+        android:text="@string/motivation" />
+
+    <TextView
+        android:id="@+id/aahuti"
+        style="@style/AnswerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aahuti" />
+
+    <TextView
+        android:id="@+id/developer"
+        style="@style/HeadTextLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/developer" />
+
+    <TextView
+        android:id="@+id/shikhar"
+        style="@style/AnswerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shikhar"
+        android:visibility="visible" />
 
 </LinearLayout>

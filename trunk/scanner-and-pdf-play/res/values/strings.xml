@@ -32,11 +32,15 @@
     <string name="enter_frompgnumber">enter from page Number</string>
     <string name="enter_topgnumber">enter to page Number</string>
     <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
-    <string name="source_code">source code: http://code.google.com/p/snannerandpdfplay/source/checkout</string>
     <string name="title_about">about scanner n\' pdf play</string>
     <string name="open_snpdf_file">open prepared pdfs</string>
     <string name="title_activity_open_snpdffolder">snpdf folder view</string>
     <string name="title_activity_picked_pdf">chosen pdf</string>
     <string name="title_activity_faq">faqs</string>
+    <string name="motivation">Motivation and Resources</string>
+    <string name="developer">Developer</string>
+    <string name="aahuti">Aahuti Ghosh</string>
+    <string name="shikhar">Kumar Shikhar</string>
+    
 
 </resources>
