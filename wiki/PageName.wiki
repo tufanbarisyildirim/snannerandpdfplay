@@ -1,0 +1,10 @@
+#Activity Flow
+
+= Introduction =
+
+This doc lists the activity flow of this application
+
+
+= Details =
+MainActivity.java is the main activity class which gets invoked when the application starts.
+This activity then invokes the various other activities as per user selection.
