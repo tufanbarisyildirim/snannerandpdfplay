@@ -132,7 +132,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			String fileName = srcFile.getName().substring(0,
 					srcFile.getName().lastIndexOf("."))
 					+ ".pdf";
-			pdffile = SAPDFPathManager.getSavePDFPath(fileName);
+			mainFile = SAPDFPathManager.getSavePDFPath(fileName);
 
 			// create a new document
 			Document document = new Document();
@@ -141,7 +141,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 
 			try {
 				pdfWriter = PdfWriter.getInstance(document,
-						new FileOutputStream(pdffile));
+						new FileOutputStream(mainFile));
 				// open document
 				document.open();
 				pdfWriter.open();
@@ -206,6 +206,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 		Button open_button = (Button) findViewById(R.id.openPDF);
 		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to convert file "
@@ -213,9 +214,10 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			open_button.setEnabled(false);
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
+			delete_button.setEnabled(false);
 		} else {
 			SAPDFUtils.setSuccessText(textView,
-					"PDF file successfully created: " + pdffile.getName());
+					"PDF file successfully created: " + mainFile.getName());
 		}
 	}
 

@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -146,13 +147,13 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			String fileName = "PROTECTED_"
 					+ srcFile.getName().substring(0,
 							srcFile.getName().lastIndexOf(".")) + ".pdf";
-			pdffile = SAPDFPathManager.getSavePDFPath(fileName);
+			mainFile = SAPDFPathManager.getSavePDFPath(fileName);
 
 			PdfReader reader = null;
 			PdfStamper stamper = null;
 			try {
 				reader = new PdfReader(srcFile.getAbsolutePath());
-				stamper = new PdfStamper(reader, new FileOutputStream(pdffile));
+				stamper = new PdfStamper(reader, new FileOutputStream(mainFile));
 				stamper.setEncryption(password.getBytes(), password.getBytes(),
 						PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128
 								| PdfWriter.DO_NOT_ENCRYPT_METADATA);
@@ -184,17 +185,20 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		Button open_button = (Button) findViewById(R.id.openPDF);
 		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
+
 		// Disable the already protected pdf
-		protect_button.setEnabled(false);
+		protect_button.setVisibility(View.GONE);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView,
 					"Unable to lock file: " + srcFile.getName());
 			open_button.setEnabled(false);
 			share_button.setEnabled(false);
+			delete_button.setEnabled(false);
 		} else {
-			SAPDFUtils.setSuccessText(textView,
-					"PDF successfully protected: " + pdffile.getName());
+			SAPDFUtils.setSuccessText(textView, "PDF successfully protected: "
+					+ mainFile.getName());
 		}
 	}
 

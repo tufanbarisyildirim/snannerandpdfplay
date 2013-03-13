@@ -278,7 +278,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 		protected Boolean doInBackground(String... params) {
 			boolean error = false;
 
-			pdffile = SAPDFPathManager.getSavePDFPath("EXTRACTED_"
+			mainFile = SAPDFPathManager.getSavePDFPath("EXTRACTED_"
 					+ srcPDF.getName() + ".pdf");
 
 			Document document = new Document();
@@ -288,7 +288,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 				inputPDF = getPDFReader(srcPDF);
 				// Create a writer for the outputstream
 				writer = PdfWriter.getInstance(document, new FileOutputStream(
-						pdffile));
+						mainFile));
 
 				document.open();
 				PdfContentByte cb = writer.getDirectContent(); // Holds the PDF
@@ -326,6 +326,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 		Button open_button = (Button) findViewById(R.id.openPDF);
 		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to extract PDF " + srcPDF
@@ -334,13 +335,14 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 			open_button.setEnabled(false);
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
+			delete_button.setEnabled(false);
 
 		} else {
 			SAPDFUtils.setSuccessText(textView,
 					"PDF " + srcPDF.getName()
 							+ " successfully extracted  from page "
 							+ fromPageNumber + " to page " + toPageNumber
-							+ " into PDF file:" + pdffile.getName());
+							+ " into PDF file:" + mainFile.getName());
 		}
 	}
 
