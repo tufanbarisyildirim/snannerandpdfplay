@@ -60,4 +60,18 @@ public class SAPDFPathManager {
 		return getSavePDFPathWOTimestamp("PIC.jpg");
 	}
 
+	public static File getTextFileForPDF(File pdffile) {
+		File file = new File(Environment.getExternalStorageDirectory(), "snpdf");
+
+		String pdfFileName = pdffile.getName();
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+
+		file = getFile(file,
+				pdfFileName.substring(0, pdfFileName.lastIndexOf(".")) + ".txt");
+
+		return file;
+	}
+
 }

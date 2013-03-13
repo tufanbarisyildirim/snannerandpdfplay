@@ -153,13 +153,13 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 			PdfReader reader2 = null;
 			PdfCopyFields copy = null;
 
-			pdffile = SAPDFPathManager.getSavePDFPath(firstFile.getName() + "_"
+			mainFile = SAPDFPathManager.getSavePDFPath(firstFile.getName() + "_"
 					+ secondFile.getName() + ".pdf");
 
 			try {
 				reader1 = new PdfReader(firstFile.getAbsolutePath());
 				reader2 = new PdfReader(secondFile.getAbsolutePath());
-				copy = new PdfCopyFields(new FileOutputStream(pdffile));
+				copy = new PdfCopyFields(new FileOutputStream(mainFile));
 				copy.addDocument(reader1);
 				copy.addDocument(reader2);
 
@@ -190,6 +190,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 		Button open_button = (Button) findViewById(R.id.openPDF);
 		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to concatenate PDFs "
@@ -197,14 +198,12 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 			open_button.setEnabled(false);
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
+			delete_button.setEnabled(false);
 
 		} else {
-			SAPDFUtils.setSuccessText(
-					textView,
-					"PDFs " + firstFile.getName() + " and "
-							+ secondFile.getName()
-							+ " successfully concatenated to: "
-							+ pdffile.getName());
+			SAPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
+					+ " and " + secondFile.getName()
+					+ " successfully concatenated to: " + mainFile.getName());
 		}
 
 	}

@@ -8,11 +8,13 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.snpdfp.menu.About;
@@ -21,28 +23,47 @@ import com.snpdfp.utils.SAPDFCContstants;
 
 public class SNPDFActivity extends Activity {
 
-	protected File pdffile = null;
+	protected File mainFile = null;
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		if (mainFile != null
+				&& mainFile.getName().toLowerCase().endsWith(".txt")) {
+			Button protect_button = (Button) findViewById(R.id.protectPDF);
+			protect_button.setVisibility(View.GONE);
+		}
+
+	}
 
 	/** Called when the user clicks the SCAN button */
 	public void openPDF(View view) {
-		Uri path = Uri.fromFile(pdffile);
+		Uri path = Uri.fromFile(mainFile);
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setDataAndType(path, "application/pdf");
+		if (mainFile.getName().toLowerCase().endsWith(".txt")) {
+			intent.setDataAndType(path, "text/plain");
+		} else {
+			intent.setDataAndType(path, "application/pdf");
+		}
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		try {
-			startActivity(Intent.createChooser(intent, "Open PDF with..."));
+			startActivity(Intent.createChooser(intent, "Open file with..."));
 		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, "No Application Available to View PDF",
+			Toast.makeText(this, "No Application Available to View file",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	public void sharePDF(View view) {
-		Uri path = Uri.fromFile(pdffile);
+		Uri path = Uri.fromFile(mainFile);
 		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("application/pdf");
-		String shareBody = "Sharing file:" + pdffile.getName();
+		if (mainFile.getName().toLowerCase().endsWith(".txt")) {
+			intent.setDataAndType(path, "text/plain");
+		} else {
+			intent.setDataAndType(path, "application/pdf");
+		}
+		String shareBody = "Sharing file:" + mainFile.getName();
 		intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 		intent.putExtra(android.content.Intent.EXTRA_STREAM, path);
 		try {
@@ -54,19 +75,37 @@ public class SNPDFActivity extends Activity {
 	}
 
 	public void protectPDF(View view) {
-		Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
-		pdfintent
-				.putExtra(SAPDFCContstants.FILE_URI, pdffile.getAbsolutePath());
-		startActivity(pdfintent);
+		if (!mainFile.getName().toLowerCase().endsWith(".pdf")) {
+			getAlertDialog()
+					.setTitle("Invalid option")
+					.setMessage(
+							"This option is not valid for non-pdf files: "
+									+ mainFile.getName())
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+
+							}).show();
+		} else {
+			Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
+			pdfintent.putExtra(SAPDFCContstants.FILE_URI,
+					mainFile.getAbsolutePath());
+			startActivity(pdfintent);
+		}
+
 	}
 
 	public void deletePDF(View view) {
 		getAlertDialog()
-				.setTitle("Delete PDF?")
-				.setMessage("Are you sure to delete file: " + pdffile.getName())
+				.setTitle("Delete file?")
+				.setMessage(
+						"Are you sure to delete file: " + mainFile.getName())
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						delete();
+						delete(mainFile);
 					}
 
 				})
@@ -80,8 +119,8 @@ public class SNPDFActivity extends Activity {
 
 	}
 
-	private void delete() {
-		pdffile.delete();
+	private void delete(File file) {
+		file.delete();
 		startActivity(new Intent(this, MainActivity.class));
 	}
 

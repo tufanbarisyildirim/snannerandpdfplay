@@ -107,6 +107,12 @@ public class MainActivity extends SNPDFActivity {
 		Intent filePick = new Intent(this, SplitActivity.class);
 		startActivity(filePick);
 	}
+	
+	public void pdfToText(View view) {
+		logger.info("*************** starting to extract text from PDF **************");
+		Intent filePick = new Intent(this, ExtractTextActivity.class);
+		startActivity(filePick);
+	}
 
 	public void convertTXTFile(View view) {
 		logger.info("*************** starting converting TXT to pdf **************");

@@ -81,6 +81,15 @@
             android:gravity="center"
             android:onClick="convertHTMLFile"
             android:text="@string/select_htmlconvert" />
+        
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="pdfToText"
+            android:text="@string/select_pdfToText" />
     </LinearLayout>
 
 </ScrollView>

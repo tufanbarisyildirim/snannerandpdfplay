@@ -120,8 +120,8 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
 			try {
 				File file = new File(imagePath);
-				pdffile = convertToPDF(file);
-				logger.info("Created PDF File: " + pdffile);
+				mainFile = convertToPDF(file);
+				logger.info("Created PDF File: " + mainFile);
 
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to create PDF", e);
@@ -143,15 +143,17 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		Button open_button = (Button) findViewById(R.id.openPDF);
 		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to create PDF");
 			open_button.setEnabled(false);
 			share_button.setEnabled(false);
 			protect_button.setEnabled(false);
+			delete_button.setEnabled(false);
 		} else {
 			SAPDFUtils.setSuccessText(textView,
-					"Created PDF File: " + pdffile.getName());
+					"Created PDF File: " + mainFile.getName());
 		}
 	}
 

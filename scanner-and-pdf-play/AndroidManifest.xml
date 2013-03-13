@@ -86,10 +86,14 @@
             android:name="com.snpdfp.menu.FAQActivity"
             android:label="@string/title_activity_faq" >
         </activity>
-         <activity
+        <activity
             android:name="com.snpdfp.menu.About"
             android:label="@string/title_about" >
-        </activity>       
+        </activity>
+        <activity
+            android:name="com.snpdfp.activity.ExtractTextActivity"
+            android:label="@string/title_activity_extract_text" >
+        </activity>
     </application>
 
 </manifest>

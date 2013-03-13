@@ -29,7 +29,8 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 		File[] snpdfFiles = root.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
-				if (filename.toLowerCase().endsWith(".pdf"))
+				if (filename.toLowerCase().endsWith(".pdf")
+						|| filename.toLowerCase().endsWith(".txt"))
 					return true;
 				return false;
 			}
@@ -63,7 +64,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 			lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View v,
 						int position, long id) {
-					pdffile = new File(SAPDFPathManager.getRootDirectory(),
+					mainFile = new File(SAPDFPathManager.getRootDirectory(),
 							(String) parent.getAdapter().getItem(position));
 
 					showIntentForPickedPDF();
@@ -77,7 +78,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 
 	private void showIntentForPickedPDF() {
 		Intent filePick = new Intent(this, PickedPDFActivity.class);
-		filePick.putExtra(SAPDFCContstants.FILE_URI, pdffile.getAbsolutePath());
+		filePick.putExtra(SAPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
 		startActivity(filePick);
 	}
 
