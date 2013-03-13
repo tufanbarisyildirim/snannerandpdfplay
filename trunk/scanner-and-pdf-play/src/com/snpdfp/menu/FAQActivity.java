@@ -26,6 +26,12 @@ public class FAQActivity extends SNPDFActivity {
 		TextView answer2 = (TextView) findViewById(R.id.answer2);
 		answer2.setText("1. Prepare a .txt file with new text and convert this file to PDF using this tool.\n2. Finally concatenate this created PDF to the intended PDF.");
 
+		TextView question3 = (TextView) findViewById(R.id.question3);
+		question3.setText("What are Core and Non-Core Options?");
+
+		TextView answer3 = (TextView) findViewById(R.id.answer3);
+		answer3.setText("1. Core Options are the application capabilities which provide perfect results.\n2. Non-Core Options are the application capabilities which does not provide perfect, but more than workable results.");
+
 	}
 
 }

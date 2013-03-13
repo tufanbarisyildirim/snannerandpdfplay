@@ -19,6 +19,18 @@
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#2f6699"
+            android:paddingTop="10dp" />
+
+        <TextView
+            style="@style/AnswerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Core Options" />
+
         <Button
             style="@style/ButtonText"
             android:layout_width="fill_parent"
@@ -72,6 +84,18 @@
             android:gravity="center"
             android:onClick="convertTXTFile"
             android:text="@string/select_txtconvert" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#2f6699"
+            android:paddingTop="10dp" />
+
+        <TextView
+            style="@style/AnswerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Non-Core Options" />
 
         <Button
             style="@style/ButtonText"
