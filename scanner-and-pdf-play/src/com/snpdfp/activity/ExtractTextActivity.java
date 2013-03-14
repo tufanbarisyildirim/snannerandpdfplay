@@ -6,8 +6,10 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.itextpdf.text.pdf.parser.RenderFilter;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
+import com.snpdfp.utils.SAPDFCContstants;
 import com.snpdfp.utils.SAPDFPathManager;
 import com.snpdfp.utils.SAPDFUtils;
 
@@ -33,6 +36,8 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 	FolderLayout localFolders;
 	File selectedFile;
+
+	String password;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,9 +78,82 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			new TextExtractor().execute();
+			extractText();
 		}
 
+	}
+
+	private void extractText() {
+		PdfReader pdfReader = null;
+		try {
+			pdfReader = new PdfReader(selectedFile.getAbsolutePath());
+			if (pdfReader.isEncrypted()) {
+				Intent pickPassword = new Intent(this,
+						PickPasswordActivity.class);
+				startActivityForResult(pickPassword,
+						SAPDFCContstants.PICK_PASSWORD_REQUEST);
+
+			} else {
+				new TextExtractor().execute();
+			}
+
+		} catch (Exception e) {
+			final Intent pickPassword = new Intent(this,
+					PickPasswordActivity.class);
+			getAlertDialog()
+					.setTitle("Protected PDF")
+					.setMessage(
+							"Unable to read PDF, as it seems to be protected. You want to continue the EXTRACT action by filling the password?")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									startActivityForResult(
+											pickPassword,
+											SAPDFCContstants.PICK_PASSWORD_REQUEST);
+								}
+
+							})
+					.setNegativeButton("Cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									finish();
+									return;
+								}
+
+							}).show();
+		} finally {
+			if (pdfReader != null)
+				pdfReader.close();
+		}
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
+				password = data.getStringExtra(SAPDFCContstants.TEXT);
+				new TextExtractor().execute();
+			}
+
+		} else {
+			getAlertDialog()
+					.setTitle("Operation Cancelled!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									finish();
+									return;
+								}
+
+							}).show();
+		}
 	}
 
 	private class TextExtractor extends AsyncTask<String, Void, Boolean> {
@@ -97,6 +175,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 				progressDialog.dismiss();
 
 			displayResult(result);
+
 		}
 
 		@Override
@@ -104,19 +183,25 @@ public class ExtractTextActivity extends SNPDFActivity implements
 			logger.info("****** starting to extract text from pdf **********");
 			boolean error = false;
 
-			PdfReader reader = null;
 			PrintWriter out = null;
+			PdfReader pdfReader = null;
 			mainFile = SAPDFPathManager.getTextFileForPDF(selectedFile);
 			try {
-				reader = new PdfReader(selectedFile.getAbsolutePath());
+				if (password != null) {
+					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
+							password.getBytes());
+				} else {
+					pdfReader = new PdfReader(selectedFile.getAbsolutePath());
+				}
+
 				out = new PrintWriter(new FileOutputStream(mainFile));
 				Rectangle rect = new Rectangle(70, 80, 490, 580);
 				RenderFilter filter = new RegionTextRenderFilter(rect);
 				TextExtractionStrategy strategy;
-				for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+				for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
 					strategy = new FilteredTextRenderListener(
 							new LocationTextExtractionStrategy(), filter);
-					out.println(PdfTextExtractor.getTextFromPage(reader, i,
+					out.println(PdfTextExtractor.getTextFromPage(pdfReader, i,
 							strategy));
 				}
 				out.flush();
@@ -128,8 +213,8 @@ public class ExtractTextActivity extends SNPDFActivity implements
 				if (out != null)
 					out.close();
 				// close the writer
-				if (reader != null)
-					reader.close();
+				if (pdfReader != null)
+					pdfReader.close();
 			}
 
 			return error;
