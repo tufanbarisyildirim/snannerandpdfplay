@@ -42,45 +42,65 @@
         </activity>
         <activity
             android:name="com.snpdfp.activity.ImageToPDFActivity"
-            android:label="@string/title_activity_image_to_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_image_to_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.FileToPDFActivity"
-            android:label="@string/title_activity_file_to_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_file_to_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.BrowsePDFActivity"
-            android:label="@string/title_activity_protect_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_protect_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickPasswordActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_pick_password"
+            android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ProtectPDFActivity"
-            android:label="@string/title_activity_lock_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_lock_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ConcatenatePDFActivity"
-            android:label="@string/title_activity_concatenate_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_concatenate_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.SplitActivity"
-            android:label="@string/title_activity_split" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_split"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickNumberActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_pick_number"
+            android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.OpenSNPDFFolderActivity"
-            android:label="@string/title_activity_open_snpdffolder" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_open_snpdffolder"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickedPDFActivity"
-            android:label="@string/title_activity_picked_pdf" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_picked_pdf"
+            android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.menu.FAQActivity"
@@ -92,7 +112,9 @@
         </activity>
         <activity
             android:name="com.snpdfp.activity.ExtractTextActivity"
-            android:label="@string/title_activity_extract_text" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_extract_text"
+            android:screenOrientation="nosensor" >
         </activity>
     </application>
 
