@@ -63,9 +63,10 @@ public class SNPDFActivity extends Activity {
 		} else {
 			intent.setDataAndType(path, "application/pdf");
 		}
-		String shareBody = "Sharing file:" + mainFile.getName();
-		intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-		intent.putExtra(android.content.Intent.EXTRA_STREAM, path);
+		String shareBody = "Emailing " + mainFile.getName();
+		intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+		intent.putExtra(Intent.EXTRA_STREAM, path);
+
 		try {
 			startActivity(Intent.createChooser(intent, "Share via..."));
 		} catch (ActivityNotFoundException e) {
