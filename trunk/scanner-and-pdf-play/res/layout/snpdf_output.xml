@@ -53,6 +53,15 @@
             android:background="@drawable/snpdf_button"
             android:onClick="protectPDF"
             android:text="@string/protect_pdf" />
+        
+        <Button
+            android:id="@+id/renamePDF"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:onClick="renamePDF"
+            android:text="@string/rename_pdf" />
 
         <Button
             android:id="@+id/deletePDF"

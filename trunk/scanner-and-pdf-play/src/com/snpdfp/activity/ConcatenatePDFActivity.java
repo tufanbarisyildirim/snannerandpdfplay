@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.itextpdf.text.pdf.PdfCopyFields;
@@ -153,8 +152,8 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 			PdfReader reader2 = null;
 			PdfCopyFields copy = null;
 
-			mainFile = SAPDFPathManager.getSavePDFPath(firstFile.getName() + "_"
-					+ secondFile.getName() + ".pdf");
+			mainFile = SAPDFPathManager.getSavePDFPath(firstFile.getName()
+					+ "_" + secondFile.getName() + ".pdf");
 
 			try {
 				reader1 = new PdfReader(firstFile.getAbsolutePath());
@@ -187,19 +186,11 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 
 		setContentView(R.layout.activity_concatenate_pdf);
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button open_button = (Button) findViewById(R.id.openPDF);
-		Button share_button = (Button) findViewById(R.id.sharePDF);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to concatenate PDFs "
 					+ firstFile.getName() + " and " + secondFile.getName());
-			open_button.setEnabled(false);
-			share_button.setEnabled(false);
-			protect_button.setEnabled(false);
-			delete_button.setEnabled(false);
-
+			disableButtons();
 		} else {
 			SAPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
 					+ " and " + secondFile.getName()

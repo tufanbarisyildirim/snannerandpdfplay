@@ -182,20 +182,14 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		setContentView(R.layout.activity_protect_pdf);
 
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button open_button = (Button) findViewById(R.id.openPDF);
-		Button share_button = (Button) findViewById(R.id.sharePDF);
 		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		Button delete_button = (Button) findViewById(R.id.deletePDF);
-
 		// Disable the already protected pdf
 		protect_button.setVisibility(View.GONE);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView,
 					"Unable to lock file: " + srcFile.getName());
-			open_button.setEnabled(false);
-			share_button.setEnabled(false);
-			delete_button.setEnabled(false);
+			disableButtons();
 		} else {
 			SAPDFUtils.setSuccessText(textView, "PDF successfully protected: "
 					+ mainFile.getName());

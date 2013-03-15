@@ -4,10 +4,8 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import android.app.Activity;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -107,11 +105,17 @@ public class MainActivity extends SNPDFActivity {
 		Intent filePick = new Intent(this, SplitActivity.class);
 		startActivity(filePick);
 	}
-	
+
 	public void pdfToText(View view) {
 		logger.info("*************** starting to extract text from PDF **************");
 		Intent filePick = new Intent(this, ExtractTextActivity.class);
 		startActivity(filePick);
+	}
+
+	public void addWatermark(View view) {
+		logger.info("*************** starting to add watermark to PDF **************");
+		Intent waterMarkIntent = new Intent(this, WatermarkActivity.class);
+		startActivity(waterMarkIntent);
 	}
 
 	public void convertTXTFile(View view) {
@@ -237,17 +241,6 @@ public class MainActivity extends SNPDFActivity {
 							}).show();
 		}
 
-	}
-
-	private String getImagePathFromURI(Uri contentUri) {
-		String[] proj = { MediaStore.Images.Media.DATA };
-		CursorLoader loader = new CursorLoader(this, contentUri, proj, null,
-				null, null);
-		Cursor cursor = loader.loadInBackground();
-		int column_index = cursor
-				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		cursor.moveToFirst();
-		return cursor.getString(column_index);
 	}
 
 	/**

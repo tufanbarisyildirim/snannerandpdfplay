@@ -19,9 +19,11 @@
     <string name="share_pdf">share file</string>
     <string name="protect_pdf">protect pdf</string>
     <string name="delete_pdf">delete file</string>
+    <string name="rename_pdf">rename file</string>
     <string name="concatenate_pdf">concatenate two pdfs</string>
     <string name="extract_pdf">extract pages from a pdf</string>
     <string name="enter_password">enter the password</string>
+    <string name="enter_name">enter name</string>
     <string name="confirm_password">confirm the password</string>
     <string name="title_activity_pick_password">enter password</string>
     <string name="ok">ok</string>
@@ -43,6 +45,10 @@
     <string name="aahuti">Aahuti Ghosh</string>
     <string name="shikhar">Kumar Shikhar</string>
     <string name="title_activity_extract_text">extract text from pdf</string>
+    <string name="select_addwatermark">add watermark image to pdf</string>
     <string name="adUnitId">a151431df70e0ce</string>
+    <string name="title_activity_watermark">add watermark</string>
+    <string name="title_activity_rename">rename file</string>
+    <string name="title_activity_pick_string">enter name</string>
 
 </resources>
