@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -42,63 +43,63 @@
         </activity>
         <activity
             android:name="com.snpdfp.activity.ImageToPDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_image_to_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.FileToPDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_file_to_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.BrowsePDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_protect_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickPasswordActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_pick_password"
             android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ProtectPDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_lock_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ConcatenatePDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_concatenate_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.SplitActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_split"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickNumberActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_pick_number"
             android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.OpenSNPDFFolderActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_open_snpdffolder"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickedPDFActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_picked_pdf"
             android:screenOrientation="nosensor" >
         </activity>
@@ -112,10 +113,13 @@
         </activity>
         <activity
             android:name="com.snpdfp.activity.ExtractTextActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_extract_text"
             android:screenOrientation="nosensor" >
         </activity>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>

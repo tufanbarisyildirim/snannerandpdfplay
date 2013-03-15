@@ -6,10 +6,20 @@
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
+        <com.google.ads.AdView
+            android:id="@+id/adView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
         <TextView
             android:id="@+id/message"
@@ -43,7 +53,7 @@
             android:background="@drawable/snpdf_button"
             android:onClick="protectPDF"
             android:text="@string/protect_pdf" />
-        
+
         <Button
             android:id="@+id/deletePDF"
             style="@style/ButtonText"
@@ -52,9 +62,15 @@
             android:background="@drawable/snpdf_button"
             android:onClick="deletePDF"
             android:text="@string/delete_pdf" />
-        
-        
-        
+
+        <com.google.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
     </LinearLayout>
 
 </ScrollView>
