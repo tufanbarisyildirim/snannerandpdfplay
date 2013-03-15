@@ -65,11 +65,13 @@ public class FileToPDFActivity extends SNPDFActivity implements
 	public void OnFileClicked(File file) {
 		srcFile = file;
 		if (SAPDFCContstants.FILE_TYPE_TXT.equals(fileType)) {
-			if (!file.getName().toLowerCase().endsWith(".txt")) {
+			if (!file.getName().toLowerCase().endsWith(".txt")
+					&& !file.getName().toLowerCase().endsWith(".log")
+					&& !file.getName().toLowerCase().endsWith(".csv")) {
 				getAlertDialog()
 						.setTitle("Invalid selection")
 						.setMessage(
-								"You can only select a .txt file for this conversion!")
+								"You can only select a .txt, .log or .csv file for this conversion!")
 						.setPositiveButton("OK",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
@@ -146,7 +148,9 @@ public class FileToPDFActivity extends SNPDFActivity implements
 				document.open();
 				pdfWriter.open();
 
-				if (srcFile.getName().endsWith(".txt")) {
+				if (srcFile.getName().toLowerCase().endsWith(".txt")
+						|| srcFile.getName().toLowerCase().endsWith(".log")
+						|| srcFile.getName().toLowerCase().endsWith(".csv")) {
 					BufferedReader in = null;
 					try {
 						in = new BufferedReader(new FileReader(srcFile));
@@ -162,8 +166,8 @@ public class FileToPDFActivity extends SNPDFActivity implements
 							in.close();
 					}
 
-				} else if (srcFile.getName().endsWith(".htm")
-						|| srcFile.getName().endsWith(".html")) {
+				} else if (srcFile.getName().toLowerCase().endsWith(".htm")
+						|| srcFile.getName().toLowerCase().endsWith(".html")) {
 					// To convert a HTML file from the filesystem
 					FileInputStream fis = null;
 					XMLWorkerHelper worker = null;
