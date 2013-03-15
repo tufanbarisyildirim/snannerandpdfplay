@@ -9,6 +9,7 @@
 	<classpathentry kind="lib" path="libs/bcpkix-jdk15on-1.47.jar"/>
 	<classpathentry kind="lib" path="libs/bcprov-jdk15on-1.47.jar"/>
 	<classpathentry kind="lib" path="libs/xmlworker-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/GoogleAdMobAdsSdk-6.3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
