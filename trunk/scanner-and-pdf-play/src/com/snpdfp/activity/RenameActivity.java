@@ -23,10 +23,7 @@ public class RenameActivity extends SNPDFActivity {
 		Intent intent = getIntent();
 
 		file = new File(intent.getStringExtra(SAPDFCContstants.FILE_URI));
-		Intent pickName = new Intent(this, PickStringActivity.class);
-		pickName.putExtra(SAPDFCContstants.TEXT,
-				file.getName().substring(0, file.getName().lastIndexOf(".")));
-		startActivityForResult(pickName, SAPDFCContstants.PICK_NAME_REQUEST);
+		tryRename();
 	}
 
 	@Override
@@ -56,22 +53,57 @@ public class RenameActivity extends SNPDFActivity {
 		String newFileName = name
 				+ file.getName().substring(file.getName().lastIndexOf("."));
 		File newFile = new File(file.getParentFile(), newFileName);
-		boolean success = file.renameTo(newFile);
-		mainFile = newFile;
+		if (newFile.exists()) {
+			getAlertDialog()
+					.setTitle("Name already exists!")
+					.setMessage("Want to re-enter new name?")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									tryRename();
+									return;
+								}
 
-		setContentView(R.layout.activity_rename);
+							})
+					.setNegativeButton("cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									finish();
+									return;
+								}
 
-		TextView textView = (TextView) findViewById(R.id.message);
-
-		if (!success) {
-			SAPDFUtils.setErrorText(textView,
-					"Unable to rename file: " + file.getName());
-			disableButtons();
-
+							}).show();
 		} else {
-			SAPDFUtils.setSuccessText(textView,
-					"File successfully renamed to: " + mainFile.getName());
+			boolean success = file.renameTo(newFile);
+			mainFile = newFile;
+
+			setContentView(R.layout.activity_rename);
+
+			TextView textView = (TextView) findViewById(R.id.message);
+
+			if (!success) {
+				SAPDFUtils.setErrorText(textView, "Unable to rename file: "
+						+ file.getName());
+				disableButtons();
+
+			} else {
+				SAPDFUtils.setSuccessText(textView,
+						"File successfully renamed to: " + mainFile.getName());
+			}
 		}
+
+	}
+
+	private void tryRename() {
+		Intent pickName = new Intent(this, PickStringActivity.class);
+		pickName.putExtra(SAPDFCContstants.TEXT,
+				file.getName().substring(0, file.getName().lastIndexOf(".")));
+		startActivityForResult(pickName, SAPDFCContstants.PICK_NAME_REQUEST);
+
 	}
 
 }
