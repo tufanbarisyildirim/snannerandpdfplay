@@ -2,7 +2,6 @@ package com.snpdfp.activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,30 +11,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.provider.MediaStore;
 import android.widget.TextView;
 
-import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.parser.FilteredTextRenderListener;
-import com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy;
-import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-import com.itextpdf.text.pdf.parser.RegionTextRenderFilter;
-import com.itextpdf.text.pdf.parser.RenderFilter;
-import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SAPDFCContstants;
 import com.snpdfp.utils.SAPDFPathManager;
 import com.snpdfp.utils.SAPDFUtils;
 
-public class ExtractTextActivity extends SNPDFActivity implements
+public class WatermarkActivity extends SNPDFActivity implements
 		IFolderItemListener {
-	Logger logger = Logger.getLogger(ExtractTextActivity.class.getName());
+	Logger logger = Logger.getLogger(WatermarkActivity.class.getName());
 
 	FolderLayout localFolders;
 	File selectedFile;
+	File image;
 
 	String password;
 
@@ -68,22 +64,22 @@ public class ExtractTextActivity extends SNPDFActivity implements
 			getAlertDialog()
 					.setTitle("Invalid selection")
 					.setMessage(
-							"Please select a valid .pdf file to extract text from!")
+							"Please select a valid .pdf file to add watermark to!")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
-
+									dialog.dismiss();
 								}
 
 							}).show();
 		} else {
-			extractText();
+			addWatermark();
 		}
 
 	}
 
-	private void extractText() {
+	private void addWatermark() {
 		PdfReader pdfReader = null;
 		try {
 			pdfReader = new PdfReader(selectedFile.getAbsolutePath());
@@ -94,7 +90,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 						SAPDFCContstants.PICK_PASSWORD_REQUEST);
 
 			} else {
-				new TextExtractor().execute();
+				pickImage();
 			}
 
 		} catch (Exception e) {
@@ -103,7 +99,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 			getAlertDialog()
 					.setTitle("Protected PDF")
 					.setMessage(
-							"Unable to read PDF, as it seems to be protected. You want to continue the EXTRACT action by filling the password?")
+							"Unable to read PDF, as it seems to be protected. You want to continue the add-watermark action by filling the password?")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -132,12 +128,30 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 	}
 
+	private void pickImage() {
+		getAlertDialog().setTitle("Pick Image")
+				.setMessage("Pick the image to add as watermark!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						Intent imagePick = new Intent(Intent.ACTION_PICK,
+								MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+						startActivityForResult(imagePick,
+								SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
+					}
+				}).show();
+
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
 				password = data.getStringExtra(SAPDFCContstants.TEXT);
-				new TextExtractor().execute();
+				pickImage();
+			} else if (requestCode == SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
+				image = new File(getImagePathFromURI(data.getData()));
+				new WatermarkExecutor().execute();
 			}
 
 		} else {
@@ -156,14 +170,14 @@ public class ExtractTextActivity extends SNPDFActivity implements
 		}
 	}
 
-	private class TextExtractor extends AsyncTask<String, Void, Boolean> {
+	private class WatermarkExecutor extends AsyncTask<String, Void, Boolean> {
 
 		private ProgressDialog progressDialog;
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(ExtractTextActivity.this);
-			progressDialog.setMessage("Extracting text from PDF...");
+			progressDialog = new ProgressDialog(WatermarkActivity.this);
+			progressDialog.setMessage("Adding watermark to the PDF...");
 			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			progressDialog.show();
 
@@ -180,12 +194,12 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 		@Override
 		protected Boolean doInBackground(String... params) {
-			logger.info("****** starting to extract text from pdf **********");
+			logger.info("****** starting to add watermark to pdf **********");
 			boolean error = false;
 
-			PrintWriter out = null;
 			PdfReader pdfReader = null;
-			mainFile = SAPDFPathManager.getTextFileForPDF(selectedFile);
+			PdfStamper stamp = null;
+			mainFile = SAPDFPathManager.getSavePDFPath(selectedFile.getName());
 			try {
 				if (password != null) {
 					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
@@ -194,24 +208,34 @@ public class ExtractTextActivity extends SNPDFActivity implements
 					pdfReader = new PdfReader(selectedFile.getAbsolutePath());
 				}
 
-				out = new PrintWriter(new FileOutputStream(mainFile));
-				Rectangle rect = new Rectangle(70, 80, 490, 580);
-				RenderFilter filter = new RegionTextRenderFilter(rect);
-				TextExtractionStrategy strategy;
-				for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
-					strategy = new FilteredTextRenderListener(
-							new LocationTextExtractionStrategy(), filter);
-					out.println(PdfTextExtractor.getTextFromPage(pdfReader, i,
-							strategy));
+				int number_of_pages = pdfReader.getNumberOfPages();
+				stamp = new PdfStamper(pdfReader,
+						new FileOutputStream(mainFile));
+				int i = 0;
+				Image watermark_image = Image.getInstance(image
+						.getAbsolutePath());
+				watermark_image.scaleToFit(PageSize.A4.getWidth(),
+						PageSize.A4.getHeight());
+				watermark_image.setAbsolutePosition(0, 0);
+				PdfContentByte add_watermark = null;
+				while (i < number_of_pages) {
+					i++;
+					add_watermark = stamp.getUnderContent(i);
+					add_watermark.addImage(watermark_image);
 				}
-				out.flush();
+
 			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Unable to extract Text from PDF", e);
+				logger.log(Level.SEVERE, "Unable to add watermark to PDF", e);
 				error = true;
 			} finally {
 				// close the document
-				if (out != null)
-					out.close();
+				if (stamp != null) {
+					try {
+						stamp.close();
+					} catch (Exception e) {
+
+					}
+				}
 				// close the writer
 				if (pdfReader != null)
 					pdfReader.close();
@@ -227,19 +251,17 @@ public class ExtractTextActivity extends SNPDFActivity implements
 		setContentView(R.layout.activity_file_to_pdf);
 
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		protect_button.setVisibility(View.GONE);
-
 		if (error) {
-			SAPDFUtils.setErrorText(
-					textView,
-					"Unable to extract text from file "
+			SAPDFUtils
+					.setErrorText(textView, "Unable to add watermark to PDF: "
 							+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView,
-					"TXT file successfully created: " + mainFile.getName());
+			SAPDFUtils.setSuccessText(
+					textView,
+					"Watermark successfully added, pdf created: "
+							+ mainFile.getName());
 		}
 	}
 

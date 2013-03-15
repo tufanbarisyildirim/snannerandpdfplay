@@ -18,6 +18,8 @@ public class SAPDFCContstants {
 
 	public static final int PICK_PASSWORD_REQUEST = 4;
 
+	public static final int PICK_NAME_REQUEST = 5;
+
 	public static final String TEXT = "TEXT";
 
 	public static final String FILE_TYPE = "FILE_TYPE";

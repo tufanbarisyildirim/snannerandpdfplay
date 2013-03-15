@@ -94,6 +94,15 @@
             android:gravity="center"
             android:onClick="convertTXTFile"
             android:text="@string/select_txtconvert" />
+        
+         <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="addWatermark"
+            android:text="@string/select_addwatermark" />
 
         <View
             android:layout_width="match_parent"
@@ -113,8 +122,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/snpdf_button"
             android:gravity="center"
-            android:onClick="convertHTMLFile"
-            android:text="@string/select_htmlconvert" />
+            android:onClick="pdfToText"
+            android:text="@string/select_pdfToText" />
 
         <Button
             style="@style/ButtonText"
@@ -122,8 +131,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/snpdf_button"
             android:gravity="center"
-            android:onClick="pdfToText"
-            android:text="@string/select_pdfToText" />
+            android:onClick="convertHTMLFile"
+            android:text="@string/select_htmlconvert" />
 
         <com.google.ads.AdView
             android:id="@+id/adView2"

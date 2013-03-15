@@ -203,18 +203,11 @@ public class FileToPDFActivity extends SNPDFActivity implements
 		setContentView(R.layout.activity_file_to_pdf);
 
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button open_button = (Button) findViewById(R.id.openPDF);
-		Button share_button = (Button) findViewById(R.id.sharePDF);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to convert file "
 					+ srcFile.getName() + " to PDF!");
-			open_button.setEnabled(false);
-			share_button.setEnabled(false);
-			protect_button.setEnabled(false);
-			delete_button.setEnabled(false);
+			disableButtons();
 		} else {
 			SAPDFUtils.setSuccessText(textView,
 					"PDF file successfully created: " + mainFile.getName());

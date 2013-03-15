@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.itextpdf.text.Document;
@@ -323,19 +322,12 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_split);
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button open_button = (Button) findViewById(R.id.openPDF);
-		Button share_button = (Button) findViewById(R.id.sharePDF);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		Button delete_button = (Button) findViewById(R.id.deletePDF);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView, "Unable to extract PDF " + srcPDF
 					+ " from page " + fromPageNumber + " to page "
 					+ toPageNumber);
-			open_button.setEnabled(false);
-			share_button.setEnabled(false);
-			protect_button.setEnabled(false);
-			delete_button.setEnabled(false);
+			disableButtons();
 
 		} else {
 			SAPDFUtils.setSuccessText(textView,

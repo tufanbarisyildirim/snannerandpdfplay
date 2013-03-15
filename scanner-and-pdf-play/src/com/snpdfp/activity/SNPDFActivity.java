@@ -5,10 +5,13 @@ import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -106,6 +109,7 @@ public class SNPDFActivity extends Activity {
 						"Are you sure to delete file: " + mainFile.getName())
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
 						delete(mainFile);
 					}
 
@@ -120,6 +124,47 @@ public class SNPDFActivity extends Activity {
 
 	}
 
+	public void renamePDF(View view) {
+		getAlertDialog()
+				.setTitle("New name")
+				.setMessage(
+						"Enter the new name. File type will not be changed!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						renameFile(mainFile);
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						}).show();
+
+	}
+
+	protected void disableButtons() {
+		Button open_button = (Button) findViewById(R.id.openPDF);
+		Button share_button = (Button) findViewById(R.id.sharePDF);
+		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		Button delete_button = (Button) findViewById(R.id.deletePDF);
+		Button rename_button = (Button) findViewById(R.id.renamePDF);
+		open_button.setEnabled(false);
+		share_button.setEnabled(false);
+		delete_button.setEnabled(false);
+		protect_button.setEnabled(false);
+		rename_button.setEnabled(false);
+	}
+
+	private void renameFile(File mainFile) {
+		Intent intent = new Intent(this, RenameActivity.class);
+		intent.putExtra(SAPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
+		startActivity(intent);
+	}
+
 	private void delete(File file) {
 		file.delete();
 		startActivity(new Intent(this, MainActivity.class));
@@ -128,6 +173,17 @@ public class SNPDFActivity extends Activity {
 	public android.app.AlertDialog.Builder getAlertDialog() {
 		return new AlertDialog.Builder(new ContextThemeWrapper(this,
 				android.R.style.Theme_Dialog));
+	}
+
+	protected String getImagePathFromURI(Uri contentUri) {
+		String[] proj = { MediaStore.Images.Media.DATA };
+		CursorLoader loader = new CursorLoader(this, contentUri, proj, null,
+				null, null);
+		Cursor cursor = loader.loadInBackground();
+		int column_index = cursor
+				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
 	}
 
 	@Override
