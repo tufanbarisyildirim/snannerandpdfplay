@@ -3,14 +3,11 @@
     <item
         android:id="@+id/sndpf_location"
         android:title="@string/open_snpdf_file"/>
-    
     <item
         android:id="@+id/about"
         android:title="about"/>
-    
-     <item
+    <item
         android:id="@+id/faq"
-        android:title="faqs"/>
-    
+        android:title="important tips and faqs"/>
 
 </menu>

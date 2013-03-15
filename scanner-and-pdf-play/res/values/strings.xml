@@ -40,7 +40,7 @@
     <string name="select_copyProtectedPDF">copy encrypted pdf content to new</string>
     <string name="title_activity_open_snpdffolder">snpdf folder view</string>
     <string name="title_activity_picked_pdf">chosen pdf</string>
-    <string name="title_activity_faq">faqs</string>
+    <string name="title_activity_faq">important tips and faqs</string>
     <string name="motivation">Motivation and Resources</string>
     <string name="developer">Developer</string>
     <string name="aahuti">Aahuti Ghosh</string>
