@@ -95,14 +95,14 @@
             android:onClick="convertTXTFile"
             android:text="@string/select_txtconvert" />
         
-         <Button
+        <Button
             style="@style/ButtonText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/snpdf_button"
             android:gravity="center"
-            android:onClick="addWatermark"
-            android:text="@string/select_addwatermark" />
+            android:onClick="copyProtectedPDF"
+            android:text="@string/select_copyProtectedPDF" />
 
         <View
             android:layout_width="match_parent"
@@ -124,6 +124,15 @@
             android:gravity="center"
             android:onClick="pdfToText"
             android:text="@string/select_pdfToText" />
+
+        <Button
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/snpdf_button"
+            android:gravity="center"
+            android:onClick="addWatermark"
+            android:text="@string/select_addwatermark" />
 
         <Button
             style="@style/ButtonText"

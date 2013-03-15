@@ -139,6 +139,12 @@
             android:screenOrientation="nosensor"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name="com.snpdfp.activity.CopyEncryptedActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="@string/title_activity_copy_encrypted"
+            android:screenOrientation="nosensor" >
+        </activity>
     </application>
 
 </manifest>

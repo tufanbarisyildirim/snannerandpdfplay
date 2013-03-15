@@ -1,72 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.google.ads.AdView
-        android:id="@+id/adView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
-
-    <TextView
-        android:id="@+id/app_name"
-        style="@style/HeadTextLeft"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/app_home"
-        style="@style/HeadTextLeft"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_home" />
+        <com.google.ads.AdView
+            android:id="@+id/adView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
-    <TextView
-        android:id="@+id/motivation"
-        style="@style/HeadTextLeft"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/motivation" />
+        <TextView
+            android:id="@+id/app_name"
+            style="@style/HeadTextLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name" />
 
-    <TextView
-        android:id="@+id/aahuti"
-        style="@style/AnswerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/aahuti" />
+        <TextView
+            android:id="@+id/app_home"
+            style="@style/HeadTextLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/app_home" />
 
-    <TextView
-        android:id="@+id/developer"
-        style="@style/HeadTextLeft"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/developer" />
+        <TextView
+            android:id="@+id/motivation"
+            style="@style/HeadTextLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/motivation" />
 
-    <TextView
-        android:id="@+id/shikhar"
-        style="@style/AnswerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/shikhar"
-        android:visibility="visible" />
+        <TextView
+            android:id="@+id/aahuti"
+            style="@style/AnswerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aahuti" />
 
-    <com.google.ads.AdView
-        android:id="@+id/adView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+        <TextView
+            android:id="@+id/developer"
+            style="@style/HeadTextLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/developer" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/shikhar"
+            style="@style/AnswerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shikhar"
+            android:visibility="visible" />
+
+        <com.google.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+    </LinearLayout>
+
+</ScrollView>

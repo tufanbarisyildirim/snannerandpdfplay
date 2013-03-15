@@ -112,6 +112,12 @@ public class MainActivity extends SNPDFActivity {
 		startActivity(filePick);
 	}
 
+	public void copyProtectedPDF(View view) {
+		logger.info("*************** starting to copy encrypted PDF **************");
+		Intent copyIntent = new Intent(this, CopyEncryptedActivity.class);
+		startActivity(copyIntent);
+	}
+
 	public void addWatermark(View view) {
 		logger.info("*************** starting to add watermark to PDF **************");
 		Intent waterMarkIntent = new Intent(this, WatermarkActivity.class);
