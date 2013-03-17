@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import com.snpdfp.utils.SAPDFCContstants;
 import com.snpdfp.utils.SAPDFPathManager;
@@ -236,17 +237,8 @@ public class MainActivity extends SNPDFActivity {
 		} else {
 			// We are not calling operationCancelled as this activity should not
 			// be finished
-			getAlertDialog()
-					.setTitle("Operation cancelled!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									return;
-								}
-
-							}).show();
+			Toast.makeText(this, "Operation cancelled", Toast.LENGTH_SHORT)
+					.show();
 		}
 
 	}
