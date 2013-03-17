@@ -218,4 +218,18 @@ public class SNPDFActivity extends Activity {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
+
+	protected void operationCancelled() {
+		getAlertDialog().setTitle("Operation cancelled!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						finish();
+						return;
+					}
+
+				}).show();
+
+	}
+
 }

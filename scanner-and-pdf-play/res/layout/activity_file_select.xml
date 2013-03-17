@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Path"
-        android:textColor="#ffffff" >
+        android:textColor="#FF8000" >
     </TextView>
 
     <ListView

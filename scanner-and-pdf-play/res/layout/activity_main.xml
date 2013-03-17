@@ -24,124 +24,234 @@
             ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
         <TextView
-            style="@style/HeadText"
+            style="@style/HeadTextLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#2f6699"
-            android:paddingTop="10dp" />
+            android:layout_height="1dp"
+            android:background="#FFFFFF"
+            android:paddingTop="5dp" />
 
         <TextView
-            style="@style/AnswerText"
+            style="@style/HeadTextLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Core Options" />
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="scan"
-            android:text="@string/select_scanner" />
+            android:orientation="horizontal" >
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="convertImage"
-            android:text="@string/select_imageconvert" />
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_scanner" />
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="lockPDF"
-            android:text="@string/select_lockpdf" />
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="scan"
+                android:text="scan-now" />
+        </LinearLayout>
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="concatenatePDF"
-            android:text="@string/concatenate_pdf" />
+            android:orientation="horizontal" >
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="extractPDF"
-            android:text="@string/extract_pdf" />
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_imageconvert" />
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="convertImage"
+                android:text="imgae-to-pdf" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="convertTXTFile"
-            android:text="@string/select_txtconvert" />
-        
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_lockpdf" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="lockPDF"
+                android:text="lock-pdf" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="copyProtectedPDF"
-            android:text="@string/select_copyProtectedPDF" />
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/concatenate_pdf" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="concatenatePDF"
+                android:text="concatenate-pdfs" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/extract_pdf" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="extractPDF"
+                android:text="extract-pdf-pages" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_txtconvert" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="convertTXTFile"
+                android:text="txt-to-pdf" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_copyProtectedPDF" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="copyProtectedPDF"
+                android:text="copy-protected" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#2f6699"
-            android:paddingTop="10dp" />
+            android:layout_height="1dp"
+            android:background="#FFFFFF"
+            android:paddingTop="5dp" />
 
         <TextView
-            style="@style/AnswerText"
+            style="@style/HeadTextLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Non-Core Options" />
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="pdfToText"
-            android:text="@string/select_pdfToText" />
+            android:orientation="horizontal" >
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="addWatermark"
-            android:text="@string/select_addwatermark" />
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_pdfToText" />
 
-        <Button
-            style="@style/ButtonText"
-            android:layout_width="fill_parent"
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="pdfToText"
+                android:text="pdf-to-text" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/snpdf_button"
-            android:gravity="center"
-            android:onClick="convertHTMLFile"
-            android:text="@string/select_htmlconvert" />
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_addwatermark" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="addWatermark"
+                android:text="add-watermark" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/select_htmlconvert" />
+
+            <Button
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="convertHTMLFile"
+                android:text="html-to-pdf" />
+        </LinearLayout>
 
         <com.google.ads.AdView
             android:id="@+id/adView2"
