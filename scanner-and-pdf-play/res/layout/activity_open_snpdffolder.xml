@@ -15,6 +15,14 @@
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
+    <TextView
+        style="@style/HeadTextLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List of prepared files"
+        android:textColor="#FFFFFF" >
+    </TextView>
+
     <ListView
         android:id="@+id/list_snpdf_files"
         android:layout_width="match_parent"

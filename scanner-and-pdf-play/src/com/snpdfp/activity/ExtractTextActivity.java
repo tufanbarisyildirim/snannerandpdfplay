@@ -13,7 +13,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.itextpdf.text.Rectangle;
@@ -216,8 +216,8 @@ public class ExtractTextActivity extends SNPDFActivity implements
 		setContentView(R.layout.activity_file_to_pdf);
 
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		protect_button.setVisibility(View.GONE);
+		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
+		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
 			SAPDFUtils.setErrorText(

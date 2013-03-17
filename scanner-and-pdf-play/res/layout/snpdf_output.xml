@@ -70,6 +70,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/protect_pdf_layout"
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"

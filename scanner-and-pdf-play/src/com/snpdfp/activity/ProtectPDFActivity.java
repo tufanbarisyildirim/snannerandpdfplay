@@ -13,7 +13,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.itextpdf.text.DocumentException;
@@ -171,9 +171,9 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		setContentView(R.layout.activity_protect_pdf);
 
 		TextView textView = (TextView) findViewById(R.id.message);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
+		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
 		// Disable the already protected pdf
-		protect_button.setVisibility(View.GONE);
+		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
 			SAPDFUtils.setErrorText(textView,
