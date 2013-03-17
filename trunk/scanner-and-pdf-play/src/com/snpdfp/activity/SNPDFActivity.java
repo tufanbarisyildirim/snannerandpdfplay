@@ -220,15 +220,8 @@ public class SNPDFActivity extends Activity {
 	}
 
 	protected void operationCancelled() {
-		getAlertDialog().setTitle("Operation cancelled!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						finish();
-						return;
-					}
-
-				}).show();
+		Toast.makeText(this, "Operation cancelled", Toast.LENGTH_SHORT).show();
+		finish();
 
 	}
 
