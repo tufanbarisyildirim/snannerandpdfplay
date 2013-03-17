@@ -191,7 +191,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 
 		} else {
 			SAPDFUtils.setSuccessText(textView,
-					"TXT file successfully created: " + mainFile.getName());
+					"TXT file successfully created.", mainFile);
 		}
 	}
 

@@ -12,7 +12,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.itextpdf.text.Document;
@@ -214,7 +213,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			disableButtons();
 		} else {
 			SAPDFUtils.setSuccessText(textView,
-					"PDF file successfully created: " + mainFile.getName());
+					"PDF file successfully created.", mainFile);
 		}
 	}
 

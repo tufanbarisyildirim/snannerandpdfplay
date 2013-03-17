@@ -144,8 +144,8 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			SAPDFUtils.setErrorText(textView, "Unable to create PDF");
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView,
-					"Created PDF File: " + mainFile.getName());
+			SAPDFUtils.setSuccessText(textView, "PDF successfully created.",
+					mainFile);
 		}
 	}
 

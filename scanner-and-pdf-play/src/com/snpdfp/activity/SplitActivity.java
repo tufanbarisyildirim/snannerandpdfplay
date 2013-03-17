@@ -319,11 +319,9 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView,
-					"PDF " + srcPDF.getName()
-							+ " successfully extracted  from page "
-							+ fromPageNumber + " to page " + toPageNumber
-							+ " into PDF file:" + mainFile.getName());
+			SAPDFUtils.setSuccessText(textView, "PDF " + srcPDF.getName()
+					+ " successfully extracted  from page " + fromPageNumber
+					+ " to page " + toPageNumber, mainFile);
 		}
 	}
 
