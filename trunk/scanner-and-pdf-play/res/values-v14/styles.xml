@@ -6,8 +6,10 @@
         res/values-v11/styles.xml on API 14+ devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <item name="android:windowBackground">@color/custom_theme_color</item>
-        <item name="android:colorBackground">@color/custom_theme_color</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:gravity">left</item>
+        <item name="android:windowBackground">@color/custom_theme_color_start</item>
+        <item name="android:colorBackground">@color/custom_theme_color_end</item>
     </style>
 
 </resources>

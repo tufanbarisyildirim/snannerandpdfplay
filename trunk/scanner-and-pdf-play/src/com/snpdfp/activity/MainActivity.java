@@ -234,8 +234,10 @@ public class MainActivity extends SNPDFActivity {
 			}
 
 		} else {
+			// We are not calling operationCancelled as this activity should not
+			// be finished
 			getAlertDialog()
-					.setTitle("Operation Cancelled!")
+					.setTitle("Operation cancelled!")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,

@@ -237,18 +237,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 			}
 
 		} else {
-			getAlertDialog()
-					.setTitle("Operation Cancelled!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									finish();
-									return;
-								}
-
-							}).show();
+			operationCancelled();
 		}
 	}
 
