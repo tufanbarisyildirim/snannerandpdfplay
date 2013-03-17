@@ -1,18 +1,30 @@
 package com.snpdfp.utils;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.widget.TextView;
 
 public class SAPDFUtils {
 
 	public static void setErrorText(TextView textView, String message) {
-		// textView.setBackgroundColor(-65536);
 		textView.setText(message);
 		textView.setTextColor(-65536);
 	}
 
-	public static void setSuccessText(TextView textView, String message) {
-		// textView.setBackgroundColor(-16711936);
-		textView.setText(message);
+	public static void setSuccessText(TextView textView, String message,
+			File file) {
+		String fileDetails = "Filename:"
+				+ file.getName()
+				+ "\nSize:"
+				+ SAPDFUtils.getSizeText(file.length())
+				+ "\nDate Modified:"
+				+ new SimpleDateFormat(SAPDFCContstants.DATE_FORMAT,
+						Locale.getDefault()).format(new Date(file
+						.lastModified()));
+		textView.setText(message + "\n" + fileDetails);
 		textView.setTextColor(-16711936);
 	}
 

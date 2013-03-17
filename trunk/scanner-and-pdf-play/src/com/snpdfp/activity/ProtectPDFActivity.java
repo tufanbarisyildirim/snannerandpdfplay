@@ -180,8 +180,8 @@ public class ProtectPDFActivity extends SNPDFActivity {
 					"Unable to lock file: " + srcFile.getName());
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView, "PDF successfully protected: "
-					+ mainFile.getName());
+			SAPDFUtils.setSuccessText(textView, "PDF successfully protected.",
+					mainFile);
 		}
 	}
 

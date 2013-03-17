@@ -81,7 +81,7 @@ public class RenameActivity extends SNPDFActivity {
 
 			} else {
 				SAPDFUtils.setSuccessText(textView,
-						"File successfully renamed to: " + mainFile.getName());
+						"File successfully renamed.", mainFile);
 			}
 		}
 

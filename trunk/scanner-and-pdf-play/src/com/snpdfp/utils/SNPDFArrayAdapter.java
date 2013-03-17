@@ -37,12 +37,10 @@ public class SNPDFArrayAdapter extends ArrayAdapter<File> {
 
 		File file = files.get(position);
 		fileNameView.setText(file.getName());
-		fileDetailView
-				.setText(SAPDFUtils.getSizeText(file.length())
-						+ ", "
-						+ new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale
-								.getDefault()).format(new Date(file
-								.lastModified())));
+		fileDetailView.setText(SAPDFUtils.getSizeText(file.length())
+				+ ", "
+				+ new SimpleDateFormat(SAPDFCContstants.DATE_FORMAT, Locale
+						.getDefault()).format(new Date(file.lastModified())));
 
 		return rowView;
 	}

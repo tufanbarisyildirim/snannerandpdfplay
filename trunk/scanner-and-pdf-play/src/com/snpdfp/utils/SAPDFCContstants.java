@@ -40,4 +40,6 @@ public class SAPDFCContstants {
 
 	public static final String TO_NUMBER = "TO_NUMBER";
 
+	public static final String DATE_FORMAT = "MMM dd,yyyy HH:mm";
+
 }

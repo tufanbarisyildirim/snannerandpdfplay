@@ -194,7 +194,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 		} else {
 			SAPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
 					+ " and " + secondFile.getName()
-					+ " successfully concatenated to: " + mainFile.getName());
+					+ " successfully concatenated.", mainFile);
 		}
 
 	}

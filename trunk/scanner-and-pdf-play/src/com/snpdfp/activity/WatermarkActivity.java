@@ -247,10 +247,8 @@ public class WatermarkActivity extends SNPDFActivity implements
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(
-					textView,
-					"Watermark successfully added, pdf created: "
-							+ mainFile.getName());
+			SAPDFUtils.setSuccessText(textView,
+					"Watermark successfully added.", mainFile);
 		}
 	}
 
