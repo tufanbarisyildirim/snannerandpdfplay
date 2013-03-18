@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class RenameActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(RenameActivity.class.getName());
@@ -23,15 +23,15 @@ public class RenameActivity extends SNPDFActivity {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 
-		file = new File(intent.getStringExtra(SAPDFCContstants.FILE_URI));
+		file = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
 		tryRename();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_NAME_REQUEST) {
-				renameFile(data.getStringExtra(SAPDFCContstants.TEXT));
+			if (requestCode == SNPDFCContstants.PICK_NAME_REQUEST) {
+				renameFile(data.getStringExtra(SNPDFCContstants.TEXT));
 			}
 		} else {
 			operationCancelled();
@@ -76,7 +76,7 @@ public class RenameActivity extends SNPDFActivity {
 			TextView textView = (TextView) findViewById(R.id.message);
 
 			if (!success) {
-				SAPDFUtils.setErrorText(textView, "Unable to rename file: "
+				SNPDFUtils.setErrorText(textView, "Unable to rename file: "
 						+ file.getName());
 				disableButtons();
 
@@ -87,7 +87,7 @@ public class RenameActivity extends SNPDFActivity {
 						"File successfully renamed from " + file.getName()
 								+ " to " + mainFile.getName(),
 						Toast.LENGTH_SHORT).show();
-				SAPDFUtils.setSuccessText(textView,
+				SNPDFUtils.setSuccessText(textView,
 						"File successfully renamed.", mainFile);
 			}
 		}
@@ -96,9 +96,9 @@ public class RenameActivity extends SNPDFActivity {
 
 	private void tryRename() {
 		Intent pickName = new Intent(this, PickStringActivity.class);
-		pickName.putExtra(SAPDFCContstants.TEXT,
+		pickName.putExtra(SNPDFCContstants.TEXT,
 				file.getName().substring(0, file.getName().lastIndexOf(".")));
-		startActivityForResult(pickName, SAPDFCContstants.PICK_NAME_REQUEST);
+		startActivityForResult(pickName, SNPDFCContstants.PICK_NAME_REQUEST);
 
 	}
 

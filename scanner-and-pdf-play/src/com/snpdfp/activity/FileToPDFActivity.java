@@ -20,9 +20,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class FileToPDFActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -30,7 +30,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 
 	File srcFile = null;
 	FolderLayout localFolders;
-	String fileType = SAPDFCContstants.FILE_TYPE_TXT;
+	String fileType = SNPDFCContstants.FILE_TYPE_TXT;
 
 	/** Called when the activity is first created. */
 
@@ -38,8 +38,8 @@ public class FileToPDFActivity extends SNPDFActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		if (getIntent().getStringExtra(SAPDFCContstants.FILE_TYPE) != null) {
-			fileType = getIntent().getStringExtra(SAPDFCContstants.FILE_TYPE);
+		if (getIntent().getStringExtra(SNPDFCContstants.FILE_TYPE) != null) {
+			fileType = getIntent().getStringExtra(SNPDFCContstants.FILE_TYPE);
 		}
 
 		setContentView(R.layout.folders);
@@ -63,7 +63,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 	// Your stuff here for file Click
 	public void OnFileClicked(File file) {
 		srcFile = file;
-		if (SAPDFCContstants.FILE_TYPE_TXT.equals(fileType)) {
+		if (SNPDFCContstants.FILE_TYPE_TXT.equals(fileType)) {
 			if (!file.getName().toLowerCase().endsWith(".txt")
 					&& !file.getName().toLowerCase().endsWith(".log")
 					&& !file.getName().toLowerCase().endsWith(".csv")) {
@@ -83,7 +83,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 				new FileConverter().execute();
 			}
 
-		} else if (SAPDFCContstants.FILE_TYPE_HTML.equals(fileType)) {
+		} else if (SNPDFCContstants.FILE_TYPE_HTML.equals(fileType)) {
 			if (!file.getName().toLowerCase().endsWith(".htm")
 					&& !file.getName().toLowerCase().endsWith(".html")) {
 				getAlertDialog()
@@ -133,7 +133,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			String fileName = srcFile.getName().substring(0,
 					srcFile.getName().lastIndexOf("."))
 					+ ".pdf";
-			mainFile = SAPDFPathManager.getSavePDFPath(fileName);
+			mainFile = SNPDFPathManager.getSavePDFPath(fileName);
 
 			// create a new document
 			Document document = new Document();
@@ -208,11 +208,11 @@ public class FileToPDFActivity extends SNPDFActivity implements
 		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SAPDFUtils.setErrorText(textView, "Unable to convert file "
+			SNPDFUtils.setErrorText(textView, "Unable to convert file "
 					+ srcFile.getName() + " to PDF!");
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView,
+			SNPDFUtils.setSuccessText(textView,
 					"PDF file successfully created.", mainFile);
 		}
 	}

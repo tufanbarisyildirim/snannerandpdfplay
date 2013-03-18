@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.snpdfp.menu.About;
 import com.snpdfp.menu.FAQActivity;
-import com.snpdfp.utils.SAPDFCContstants;
+import com.snpdfp.utils.SNPDFCContstants;
 
 public class SNPDFActivity extends Activity {
 
@@ -95,7 +95,7 @@ public class SNPDFActivity extends Activity {
 							}).show();
 		} else {
 			Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
-			pdfintent.putExtra(SAPDFCContstants.FILE_URI,
+			pdfintent.putExtra(SNPDFCContstants.FILE_URI,
 					mainFile.getAbsolutePath());
 			startActivity(pdfintent);
 		}
@@ -161,7 +161,7 @@ public class SNPDFActivity extends Activity {
 
 	private void renameFile(File mainFile) {
 		Intent intent = new Intent(this, RenameActivity.class);
-		intent.putExtra(SAPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
+		intent.putExtra(SNPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
 		startActivity(intent);
 	}
 
@@ -215,7 +215,7 @@ public class SNPDFActivity extends Activity {
 			return true;
 		case R.id.facebook:
 			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse(SAPDFCContstants.FACEBOOK_URL)));
+					Uri.parse(SNPDFCContstants.FACEBOOK_URL)));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

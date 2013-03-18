@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.snpdfp.utils.SAPDFCContstants;
+import com.snpdfp.utils.SNPDFCContstants;
 
 public class PickStringActivity extends SNPDFActivity {
 
@@ -20,7 +20,7 @@ public class PickStringActivity extends SNPDFActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pick_string);
 
-		String name = getIntent().getStringExtra(SAPDFCContstants.TEXT);
+		String name = getIntent().getStringExtra(SNPDFCContstants.TEXT);
 		EditText editText = (EditText) findViewById(R.id.name);
 		editText.setText(name);
 	}
@@ -46,7 +46,7 @@ public class PickStringActivity extends SNPDFActivity {
 
 		// Create intent to deliver some kind of result data
 		Intent result = new Intent();
-		result.putExtra(SAPDFCContstants.TEXT, name);
+		result.putExtra(SNPDFCContstants.TEXT, name);
 		setResult(Activity.RESULT_OK, result);
 		finish();
 	}

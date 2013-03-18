@@ -15,9 +15,9 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class ImageToPDFActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(ImageToPDFActivity.class.getName());
@@ -39,7 +39,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		String fileName = input.getName().substring(0,
 				input.getName().lastIndexOf("."))
 				+ ".pdf";
-		File pdf = SAPDFPathManager.getSavePDFPath(fileName);
+		File pdf = SNPDFPathManager.getSavePDFPath(fileName);
 
 		logger.info("Intended PDF file path:" + pdf);
 
@@ -115,7 +115,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			boolean error = false;
 			Intent intent = getIntent();
 			String imagePath = intent
-					.getStringExtra(SAPDFCContstants.IMAGE_URI);
+					.getStringExtra(SNPDFCContstants.IMAGE_URI);
 
 			try {
 				File file = new File(imagePath);
@@ -126,7 +126,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 				logger.log(Level.SEVERE, "Unable to create PDF", e);
 				error = true;
 			} finally {
-				SAPDFPathManager.getSNPDFPicFile().delete();
+				SNPDFPathManager.getSNPDFPicFile().delete();
 			}
 
 			return error;
@@ -141,10 +141,10 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SAPDFUtils.setErrorText(textView, "Unable to create PDF");
+			SNPDFUtils.setErrorText(textView, "Unable to create PDF");
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView, "PDF successfully created.",
+			SNPDFUtils.setSuccessText(textView, "PDF successfully created.",
 					mainFile);
 		}
 	}

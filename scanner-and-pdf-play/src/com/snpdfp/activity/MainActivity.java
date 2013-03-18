@@ -12,8 +12,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
 
 public class MainActivity extends SNPDFActivity {
 
@@ -33,7 +33,7 @@ public class MainActivity extends SNPDFActivity {
 		if (Intent.ACTION_SEND.equals(action) && type != null) {
 			if (type.startsWith("image/")) {
 				getAlertDialog()
-						.setTitle(SAPDFCContstants.APP_TITLE)
+						.setTitle(SNPDFCContstants.APP_TITLE)
 						.setMessage(
 								"Are you sure you want to convert the selected image into PDF?")
 						.setPositiveButton("Yes",
@@ -58,7 +58,7 @@ public class MainActivity extends SNPDFActivity {
 
 			} else if (type.equals("application/pdf")) {
 				getAlertDialog()
-						.setTitle(SAPDFCContstants.APP_TITLE)
+						.setTitle(SNPDFCContstants.APP_TITLE)
 						.setMessage(
 								"Are you sure you want to protect the selected PDF with a password?")
 						.setPositiveButton("Yes",
@@ -90,8 +90,8 @@ public class MainActivity extends SNPDFActivity {
 	public void lockPDF(View view) {
 		logger.info("*************** starting to lock pdf **************");
 		Intent filePick = new Intent(this, BrowsePDFActivity.class);
-		filePick.putExtra(SAPDFCContstants.PDF_REQUEST_TYPE,
-				SAPDFCContstants.PDF_REQUEST_LOCK);
+		filePick.putExtra(SNPDFCContstants.PDF_REQUEST_TYPE,
+				SNPDFCContstants.PDF_REQUEST_LOCK);
 		startActivity(filePick);
 	}
 
@@ -141,8 +141,8 @@ public class MainActivity extends SNPDFActivity {
 
 	private void convertTXTFile() {
 		Intent filePick = new Intent(this, FileToPDFActivity.class);
-		filePick.putExtra(SAPDFCContstants.FILE_TYPE,
-				SAPDFCContstants.FILE_TYPE_TXT);
+		filePick.putExtra(SNPDFCContstants.FILE_TYPE,
+				SNPDFCContstants.FILE_TYPE_TXT);
 		startActivity(filePick);
 
 	}
@@ -165,8 +165,8 @@ public class MainActivity extends SNPDFActivity {
 
 	private void convertHTMLFile() {
 		Intent filePick = new Intent(this, FileToPDFActivity.class);
-		filePick.putExtra(SAPDFCContstants.FILE_TYPE,
-				SAPDFCContstants.FILE_TYPE_HTML);
+		filePick.putExtra(SNPDFCContstants.FILE_TYPE,
+				SNPDFCContstants.FILE_TYPE_HTML);
 		startActivity(filePick);
 	}
 
@@ -175,12 +175,12 @@ public class MainActivity extends SNPDFActivity {
 		logger.info("*************** starting scanner **************");
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		File file = SAPDFPathManager.getSNPDFPicFile();
+		File file = SNPDFPathManager.getSNPDFPicFile();
 
 		output = Uri.fromFile(file);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
 		startActivityForResult(intent,
-				SAPDFCContstants.PICK_CAMERA_IMAGE_REQUEST);
+				SNPDFCContstants.PICK_CAMERA_IMAGE_REQUEST);
 	}
 
 	/** Called when the user clicks the ConvertImage button */
@@ -189,13 +189,13 @@ public class MainActivity extends SNPDFActivity {
 		Intent imagePick = new Intent(Intent.ACTION_PICK,
 				MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(imagePick,
-				SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
+				SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
 	}
 
 	private void convertImage(Intent intent) {
 		logger.info("*************** starting image to pdf **************");
 		Intent pdfintent = new Intent(this, ImageToPDFActivity.class);
-		pdfintent.putExtra(SAPDFCContstants.IMAGE_URI,
+		pdfintent.putExtra(SNPDFCContstants.IMAGE_URI,
 				getImagePathFromURI((Uri) intent
 						.getParcelableExtra(Intent.EXTRA_STREAM)));
 		startActivity(pdfintent);
@@ -205,7 +205,7 @@ public class MainActivity extends SNPDFActivity {
 	private void lockPDF(Intent intent) {
 		logger.info("*************** starting protect pdf **************");
 		Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
-		pdfintent.putExtra(SAPDFCContstants.FILE_URI,
+		pdfintent.putExtra(SNPDFCContstants.FILE_URI,
 				getFilePathFromURI((Uri) intent
 						.getParcelableExtra(Intent.EXTRA_STREAM)));
 		startActivity(pdfintent);
@@ -219,16 +219,16 @@ public class MainActivity extends SNPDFActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_CAMERA_IMAGE_REQUEST) {
+			if (requestCode == SNPDFCContstants.PICK_CAMERA_IMAGE_REQUEST) {
 				logger.info("Image picked:" + output);
 				Intent intent = new Intent(this, ImageToPDFActivity.class);
-				intent.putExtra(SAPDFCContstants.IMAGE_URI, output.getPath());
+				intent.putExtra(SNPDFCContstants.IMAGE_URI, output.getPath());
 				startActivity(intent);
 
-			} else if (requestCode == SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
+			} else if (requestCode == SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
 				logger.info("image loaded: " + data.getData());
 				Intent intent = new Intent(this, ImageToPDFActivity.class);
-				intent.putExtra(SAPDFCContstants.IMAGE_URI,
+				intent.putExtra(SNPDFCContstants.IMAGE_URI,
 						getImagePathFromURI(data.getData()));
 				startActivity(intent);
 

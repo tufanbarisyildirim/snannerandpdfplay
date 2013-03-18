@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import android.widget.TextView;
 
-public class SAPDFUtils {
+public class SNPDFUtils {
 
 	public static void setErrorText(TextView textView, String message) {
 		textView.setText(message);
@@ -19,9 +19,9 @@ public class SAPDFUtils {
 		String fileDetails = "Filename:"
 				+ file.getName()
 				+ "\nSize:"
-				+ SAPDFUtils.getSizeText(file.length())
+				+ SNPDFUtils.getSizeText(file.length())
 				+ "\nDate Modified:"
-				+ new SimpleDateFormat(SAPDFCContstants.DATE_FORMAT,
+				+ new SimpleDateFormat(SNPDFCContstants.DATE_FORMAT,
 						Locale.getDefault()).format(new Date(file
 						.lastModified()));
 		textView.setText(message + "\n" + fileDetails);

@@ -16,8 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFArrayAdapter;
 
 public class OpenSNPDFFolderActivity extends SNPDFActivity {
@@ -27,7 +27,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_open_snpdffolder);
 
-		File root = SAPDFPathManager.getRootDirectory();
+		File root = SNPDFPathManager.getRootDirectory();
 		File[] snpdfFiles = root.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
@@ -66,7 +66,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 					public void onItemClick(AdapterView<?> parent, View v,
 							int position, long id) {
 						mainFile = new File(
-								SAPDFPathManager.getRootDirectory(),
+								SNPDFPathManager.getRootDirectory(),
 								(String) ((TextView) v
 										.findViewById(R.id.rowtext)).getText());
 
@@ -83,7 +83,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 
 	private void showIntentForPickedPDF() {
 		Intent filePick = new Intent(this, PickedPDFActivity.class);
-		filePick.putExtra(SAPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
+		filePick.putExtra(SNPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
 		startActivity(filePick);
 	}
 

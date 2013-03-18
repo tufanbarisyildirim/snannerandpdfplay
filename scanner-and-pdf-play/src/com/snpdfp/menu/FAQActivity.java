@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.snpdfp.activity.R;
 import com.snpdfp.activity.SNPDFActivity;
-import com.snpdfp.utils.SAPDFPathManager;
+import com.snpdfp.utils.SNPDFPathManager;
 
 public class FAQActivity extends SNPDFActivity {
 
@@ -18,7 +18,7 @@ public class FAQActivity extends SNPDFActivity {
 		question1.setText("Where can I find all the prepared PDFs?");
 
 		TextView answer1 = (TextView) findViewById(R.id.answer1);
-		answer1.setText(SAPDFPathManager.getRootDirectory().getAbsolutePath());
+		answer1.setText(SNPDFPathManager.getRootDirectory().getAbsolutePath());
 
 		TextView question2 = (TextView) findViewById(R.id.question2);
 		question2.setText("How can I add text to existing PDF?");
