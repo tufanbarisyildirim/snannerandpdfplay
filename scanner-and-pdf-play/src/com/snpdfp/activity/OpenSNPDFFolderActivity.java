@@ -2,6 +2,7 @@ package com.snpdfp.activity;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,20 +54,29 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 			});
 
 			ListView lv = (ListView) findViewById(R.id.list_snpdf_files);
-			lv.setAdapter(new SNPDFArrayAdapter(this, files));
+			if (files.size() == 0) {
+				List<String> none = new ArrayList<String>();
+				none.add("NONE");
+				lv.setAdapter(new ArrayAdapter<String>(this, R.layout.row, none));
 
-			lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View v,
-						int position, long id) {
-					mainFile = new File(SAPDFPathManager.getRootDirectory(),
-							(String) ((TextView) v.findViewById(R.id.rowtext))
-									.getText());
+			} else {
+				lv.setAdapter(new SNPDFArrayAdapter(this, files));
 
-					showIntentForPickedPDF();
+				lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					public void onItemClick(AdapterView<?> parent, View v,
+							int position, long id) {
+						mainFile = new File(
+								SAPDFPathManager.getRootDirectory(),
+								(String) ((TextView) v
+										.findViewById(R.id.rowtext)).getText());
 
-				}
+						showIntentForPickedPDF();
 
-			});
+					}
+
+				});
+			}
+
 		}
 
 	}

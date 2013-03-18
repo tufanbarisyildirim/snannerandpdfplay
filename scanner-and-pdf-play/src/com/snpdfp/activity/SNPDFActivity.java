@@ -166,7 +166,12 @@ public class SNPDFActivity extends Activity {
 	}
 
 	private void delete(File file) {
-		file.delete();
+		boolean success = file.delete();
+		String message = "Unable to delete file " + file.getName();
+		if (success)
+			message = "File " + file.getName() + " successfully deleted!";
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
 		startActivity(new Intent(this, MainActivity.class));
 	}
 
