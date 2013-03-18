@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.snpdfp.menu.About;
@@ -33,8 +34,8 @@ public class SNPDFActivity extends Activity {
 		super.onPostCreate(savedInstanceState);
 		if (mainFile != null
 				&& mainFile.getName().toLowerCase().endsWith(".txt")) {
-			Button protect_button = (Button) findViewById(R.id.protectPDF);
-			protect_button.setVisibility(View.GONE);
+			LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
+			protect_pdf_layout.setVisibility(View.GONE);
 		}
 
 	}
