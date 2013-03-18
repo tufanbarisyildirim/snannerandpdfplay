@@ -152,8 +152,11 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 			PdfReader reader2 = null;
 			PdfCopyFields copy = null;
 
-			mainFile = SAPDFPathManager.getSavePDFPath(firstFile.getName()
-					+ "_" + secondFile.getName() + ".pdf");
+			mainFile = SAPDFPathManager.getSavePDFPath(SAPDFPathManager
+					.getFileNameWithoutExtn(firstFile.getName())
+					+ "_"
+					+ SAPDFPathManager.getFileNameWithoutExtn(secondFile
+							.getName()) + ".pdf");
 
 			try {
 				reader1 = new PdfReader(firstFile.getAbsolutePath());

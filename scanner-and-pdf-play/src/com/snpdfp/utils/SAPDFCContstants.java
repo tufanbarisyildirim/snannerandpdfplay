@@ -42,4 +42,6 @@ public class SAPDFCContstants {
 
 	public static final String DATE_FORMAT = "MMM dd,yyyy HH:mm";
 
+	public static final String FACEBOOK_URL = "http://www.facebook.com/pages/Scanner-N-PDF-Play/424603937631594";
+
 }

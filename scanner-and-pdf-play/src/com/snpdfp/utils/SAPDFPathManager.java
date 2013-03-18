@@ -68,10 +68,13 @@ public class SAPDFPathManager {
 			file.mkdirs();
 		}
 
-		file = getFile(file,
-				pdfFileName.substring(0, pdfFileName.lastIndexOf(".")) + ".txt");
+		file = getFile(file, getFileNameWithoutExtn(pdfFileName) + ".txt");
 
 		return file;
+	}
+
+	public static String getFileNameWithoutExtn(String filename) {
+		return filename.substring(0, filename.lastIndexOf("."));
 	}
 
 }

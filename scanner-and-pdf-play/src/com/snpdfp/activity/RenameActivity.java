@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.snpdfp.utils.SAPDFCContstants;
 import com.snpdfp.utils.SAPDFUtils;
@@ -80,6 +81,12 @@ public class RenameActivity extends SNPDFActivity {
 				disableButtons();
 
 			} else {
+
+				Toast.makeText(
+						this,
+						"File successfully renamed from " + file.getName()
+								+ " to " + mainFile.getName(),
+						Toast.LENGTH_SHORT).show();
 				SAPDFUtils.setSuccessText(textView,
 						"File successfully renamed.", mainFile);
 			}
