@@ -91,17 +91,18 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 
 		// Display all directories first
 		for (File file : fileList) {
-			path.add(file.getPath());
-			if (file.isDirectory())
+			if (file.isDirectory()) {
+				path.add(file.getPath());
 				item.add(file.getName() + "/");
-
+			}
 		}
 
 		// Display files now
 		for (File file : fileList) {
-			path.add(file.getPath());
-			if (file.isFile())
+			if (file.isFile()) {
+				path.add(file.getPath());
 				item.add(file.getName());
+			}
 		}
 
 		Log.i("Folders", files.length + "");
