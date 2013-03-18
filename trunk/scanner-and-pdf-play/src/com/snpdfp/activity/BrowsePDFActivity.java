@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class BrowsePDFActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -24,11 +24,11 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestType = getIntent().getStringExtra(
-				SAPDFCContstants.PDF_REQUEST_TYPE);
+				SNPDFCContstants.PDF_REQUEST_TYPE);
 
 		if (requestType == null) {
 			TextView textView = new TextView(this);
-			SAPDFUtils.setErrorText(textView, "Invalid request!!!");
+			SNPDFUtils.setErrorText(textView, "Invalid request!!!");
 			setContentView(textView);
 
 		} else {
@@ -97,9 +97,9 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			if (SAPDFCContstants.PDF_REQUEST_LOCK.equals(requestType)) {
+			if (SNPDFCContstants.PDF_REQUEST_LOCK.equals(requestType)) {
 				Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
-				pdfintent.putExtra(SAPDFCContstants.FILE_URI,
+				pdfintent.putExtra(SNPDFCContstants.FILE_URI,
 						file.getAbsolutePath());
 				startActivity(pdfintent);
 			}

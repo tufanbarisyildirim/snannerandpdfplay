@@ -24,7 +24,7 @@
             ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
         <TextView
-            style="@style/HeadTextLeft"
+            style="@style/HeadText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/snpdf_button"
                 android:onClick="convertImage"
-                android:text="imgae-to-pdf" />
+                android:text="image-to-pdf" />
         </LinearLayout>
 
         <LinearLayout

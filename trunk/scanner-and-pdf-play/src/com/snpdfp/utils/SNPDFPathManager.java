@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import android.os.Environment;
 
-public class SAPDFPathManager {
+public class SNPDFPathManager {
 
 	private static final String DATE_FORMAT = "yyyyMMddHHmmss";
 

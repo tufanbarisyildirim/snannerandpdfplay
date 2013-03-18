@@ -15,8 +15,8 @@ import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class ConcatenatePDFActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -152,10 +152,10 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 			PdfReader reader2 = null;
 			PdfCopyFields copy = null;
 
-			mainFile = SAPDFPathManager.getSavePDFPath(SAPDFPathManager
+			mainFile = SNPDFPathManager.getSavePDFPath(SNPDFPathManager
 					.getFileNameWithoutExtn(firstFile.getName())
 					+ "_"
-					+ SAPDFPathManager.getFileNameWithoutExtn(secondFile
+					+ SNPDFPathManager.getFileNameWithoutExtn(secondFile
 							.getName()) + ".pdf");
 
 			try {
@@ -191,11 +191,11 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SAPDFUtils.setErrorText(textView, "Unable to concatenate PDFs "
+			SNPDFUtils.setErrorText(textView, "Unable to concatenate PDFs "
 					+ firstFile.getName() + " and " + secondFile.getName());
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
+			SNPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
 					+ " and " + secondFile.getName()
 					+ " successfully concatenated.", mainFile);
 		}

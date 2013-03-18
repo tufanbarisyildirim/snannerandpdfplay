@@ -21,9 +21,9 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class WatermarkActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -87,7 +87,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 				Intent pickPassword = new Intent(this,
 						PickPasswordActivity.class);
 				startActivityForResult(pickPassword,
-						SAPDFCContstants.PICK_PASSWORD_REQUEST);
+						SNPDFCContstants.PICK_PASSWORD_REQUEST);
 
 			} else {
 				pickImage();
@@ -107,7 +107,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 									dialog.dismiss();
 									startActivityForResult(
 											pickPassword,
-											SAPDFCContstants.PICK_PASSWORD_REQUEST);
+											SNPDFCContstants.PICK_PASSWORD_REQUEST);
 								}
 
 							})
@@ -137,7 +137,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 						Intent imagePick = new Intent(Intent.ACTION_PICK,
 								MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 						startActivityForResult(imagePick,
-								SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
+								SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
 					}
 				}).show();
 
@@ -146,10 +146,10 @@ public class WatermarkActivity extends SNPDFActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SAPDFCContstants.TEXT);
+			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
+				password = data.getStringExtra(SNPDFCContstants.TEXT);
 				pickImage();
-			} else if (requestCode == SAPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
+			} else if (requestCode == SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
 				image = new File(getImagePathFromURI(data.getData()));
 				new WatermarkExecutor().execute();
 			}
@@ -188,7 +188,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 
 			PdfReader pdfReader = null;
 			PdfStamper stamp = null;
-			mainFile = SAPDFPathManager.getSavePDFPath(selectedFile.getName());
+			mainFile = SNPDFPathManager.getSavePDFPath(selectedFile.getName());
 			try {
 				if (password != null) {
 					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
@@ -241,13 +241,13 @@ public class WatermarkActivity extends SNPDFActivity implements
 
 		TextView textView = (TextView) findViewById(R.id.message);
 		if (error) {
-			SAPDFUtils
+			SNPDFUtils
 					.setErrorText(textView, "Unable to add watermark to PDF: "
 							+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView,
+			SNPDFUtils.setSuccessText(textView,
 					"Watermark successfully added.", mainFile);
 		}
 	}

@@ -18,9 +18,9 @@ import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class CopyEncryptedActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -82,7 +82,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 				Intent pickPassword = new Intent(this,
 						PickPasswordActivity.class);
 				startActivityForResult(pickPassword,
-						SAPDFCContstants.PICK_PASSWORD_REQUEST);
+						SNPDFCContstants.PICK_PASSWORD_REQUEST);
 
 			} else {
 				new CopyPDFExecutor().execute();
@@ -91,7 +91,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 		} catch (Exception e) {
 			Intent pickPassword = new Intent(this, PickPasswordActivity.class);
 			startActivityForResult(pickPassword,
-					SAPDFCContstants.PICK_PASSWORD_REQUEST);
+					SNPDFCContstants.PICK_PASSWORD_REQUEST);
 
 		} finally {
 			if (pdfReader != null)
@@ -103,8 +103,8 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SAPDFCContstants.TEXT);
+			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
+				password = data.getStringExtra(SNPDFCContstants.TEXT);
 				new CopyPDFExecutor().execute();
 			}
 
@@ -145,7 +145,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 			PdfReader pdfReader = null;
 			PdfCopyFields copy = null;
 
-			mainFile = SAPDFPathManager.getSavePDFPath("COPY_"
+			mainFile = SNPDFPathManager.getSavePDFPath("COPY_"
 					+ selectedFile.getName());
 			try {
 				if (password != null) {
@@ -183,14 +183,14 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SAPDFUtils.setErrorText(
+			SNPDFUtils.setErrorText(
 					textView,
 					"Unable to extract text from file "
 							+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView,
+			SNPDFUtils.setSuccessText(textView,
 					"TXT file successfully created.", mainFile);
 		}
 	}

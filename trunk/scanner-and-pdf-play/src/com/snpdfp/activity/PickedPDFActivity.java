@@ -5,8 +5,8 @@ import java.io.File;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class PickedPDFActivity extends SNPDFActivity {
 
@@ -14,11 +14,11 @@ public class PickedPDFActivity extends SNPDFActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainFile = new File(getIntent().getStringExtra(
-				SAPDFCContstants.FILE_URI));
+				SNPDFCContstants.FILE_URI));
 
 		setContentView(R.layout.snpdf_output);
 		TextView textView = (TextView) findViewById(R.id.message);
-		SAPDFUtils.setSuccessText(textView, "File chosen:", mainFile);
+		SNPDFUtils.setSuccessText(textView, "File chosen:", mainFile);
 	}
 
 }

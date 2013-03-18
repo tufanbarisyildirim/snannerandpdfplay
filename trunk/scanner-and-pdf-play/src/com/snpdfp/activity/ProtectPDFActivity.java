@@ -20,9 +20,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class ProtectPDFActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(ProtectPDFActivity.class.getName());
@@ -35,7 +35,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		super.onCreate(savedInstanceState);
 
 		Intent intent = getIntent();
-		srcFile = new File(intent.getStringExtra(SAPDFCContstants.FILE_URI));
+		srcFile = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
 
 		// Check if already encrypted
 		PdfReader pdfReader = null;
@@ -91,14 +91,14 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		logger.info("Taking the password...");
 		Intent pickPassword = new Intent(this, PickPasswordActivity.class);
 		startActivityForResult(pickPassword,
-				SAPDFCContstants.PICK_PASSWORD_REQUEST);
+				SNPDFCContstants.PICK_PASSWORD_REQUEST);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SAPDFCContstants.TEXT);
+			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
+				password = data.getStringExtra(SNPDFCContstants.TEXT);
 				new PDFProtect().execute();
 			}
 
@@ -136,7 +136,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			String fileName = "PROTECTED_"
 					+ srcFile.getName().substring(0,
 							srcFile.getName().lastIndexOf(".")) + ".pdf";
-			mainFile = SAPDFPathManager.getSavePDFPath(fileName);
+			mainFile = SNPDFPathManager.getSavePDFPath(fileName);
 
 			PdfReader reader = null;
 			PdfStamper stamper = null;
@@ -176,11 +176,11 @@ public class ProtectPDFActivity extends SNPDFActivity {
 		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
-			SAPDFUtils.setErrorText(textView,
+			SNPDFUtils.setErrorText(textView,
 					"Unable to lock file: " + srcFile.getName());
 			disableButtons();
 		} else {
-			SAPDFUtils.setSuccessText(textView, "PDF successfully protected.",
+			SNPDFUtils.setSuccessText(textView, "PDF successfully protected.",
 					mainFile);
 		}
 	}

@@ -28,6 +28,12 @@
             android:text="@string/app_name" />
 
         <TextView
+            android:id="@+id/app_detail"
+            style="@style/AnswerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:id="@+id/app_home"
             style="@style/HeadTextLeft"
             android:layout_width="match_parent"

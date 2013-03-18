@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.snpdfp.utils.SAPDFCContstants;
+import com.snpdfp.utils.SNPDFCContstants;
 
 public class PickNumberActivity extends SNPDFActivity {
 
@@ -25,7 +25,7 @@ public class PickNumberActivity extends SNPDFActivity {
 		setContentView(R.layout.activity_pick_number);
 		TextView textView = (TextView) findViewById(R.id.message);
 		Intent intent = getIntent();
-		maxNum = intent.getIntExtra(SAPDFCContstants.NUMBER, 0);
+		maxNum = intent.getIntExtra(SNPDFCContstants.NUMBER, 0);
 		textView.setText("Maximum number of pages in selected PDF is " + maxNum
 				+ ".\nSo FROM cannot be less than 1 and TO cannot exceed "
 				+ (maxNum - 1));
@@ -73,9 +73,9 @@ public class PickNumberActivity extends SNPDFActivity {
 		} else {
 			// Create intent to deliver some kind of result data
 			Intent result = new Intent();
-			result.putExtra(SAPDFCContstants.FROM_NUMBER,
+			result.putExtra(SNPDFCContstants.FROM_NUMBER,
 					Integer.parseInt(from));
-			result.putExtra(SAPDFCContstants.TO_NUMBER, Integer.parseInt(to));
+			result.putExtra(SNPDFCContstants.TO_NUMBER, Integer.parseInt(to));
 			setResult(Activity.RESULT_OK, result);
 			finish();
 		}

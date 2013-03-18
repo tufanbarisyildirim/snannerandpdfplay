@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.snpdfp.utils.SAPDFCContstants;
+import com.snpdfp.utils.SNPDFCContstants;
 
 public class PickPasswordActivity extends SNPDFActivity {
 
@@ -48,7 +48,7 @@ public class PickPasswordActivity extends SNPDFActivity {
 
 		// Create intent to deliver some kind of result data
 		Intent result = new Intent();
-		result.putExtra(SAPDFCContstants.TEXT, password);
+		result.putExtra(SNPDFCContstants.TEXT, password);
 		setResult(Activity.RESULT_OK, result);
 		finish();
 	}

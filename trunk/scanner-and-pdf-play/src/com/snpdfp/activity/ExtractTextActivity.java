@@ -26,9 +26,9 @@ import com.itextpdf.text.pdf.parser.RenderFilter;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class ExtractTextActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -91,7 +91,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 				Intent pickPassword = new Intent(this,
 						PickPasswordActivity.class);
 				startActivityForResult(pickPassword,
-						SAPDFCContstants.PICK_PASSWORD_REQUEST);
+						SNPDFCContstants.PICK_PASSWORD_REQUEST);
 
 			} else {
 				new TextExtractor().execute();
@@ -111,7 +111,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 									dialog.dismiss();
 									startActivityForResult(
 											pickPassword,
-											SAPDFCContstants.PICK_PASSWORD_REQUEST);
+											SNPDFCContstants.PICK_PASSWORD_REQUEST);
 								}
 
 							})
@@ -135,8 +135,8 @@ public class ExtractTextActivity extends SNPDFActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SAPDFCContstants.TEXT);
+			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
+				password = data.getStringExtra(SNPDFCContstants.TEXT);
 				new TextExtractor().execute();
 			}
 
@@ -174,7 +174,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 			PrintWriter out = null;
 			PdfReader pdfReader = null;
-			mainFile = SAPDFPathManager.getTextFileForPDF(selectedFile);
+			mainFile = SNPDFPathManager.getTextFileForPDF(selectedFile);
 			try {
 				if (password != null) {
 					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
@@ -220,14 +220,14 @@ public class ExtractTextActivity extends SNPDFActivity implements
 		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
-			SAPDFUtils.setErrorText(
+			SNPDFUtils.setErrorText(
 					textView,
 					"Unable to extract text from file "
 							+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView,
+			SNPDFUtils.setSuccessText(textView,
 					"TXT file successfully created.", mainFile);
 		}
 	}

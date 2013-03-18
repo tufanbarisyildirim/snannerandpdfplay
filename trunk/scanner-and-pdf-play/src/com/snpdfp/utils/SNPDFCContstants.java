@@ -1,6 +1,6 @@
 package com.snpdfp.utils;
 
-public class SAPDFCContstants {
+public class SNPDFCContstants {
 
 	public static final int PICK_CAMERA_IMAGE_REQUEST = 1;
 

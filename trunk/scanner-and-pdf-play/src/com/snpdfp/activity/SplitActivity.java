@@ -20,9 +20,9 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
-import com.snpdfp.utils.SAPDFCContstants;
-import com.snpdfp.utils.SAPDFPathManager;
-import com.snpdfp.utils.SAPDFUtils;
+import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
+import com.snpdfp.utils.SNPDFUtils;
 
 public class SplitActivity extends SNPDFActivity implements IFolderItemListener {
 
@@ -112,7 +112,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 				Intent pickPassword = new Intent(this,
 						PickPasswordActivity.class);
 				startActivityForResult(pickPassword,
-						SAPDFCContstants.PICK_PASSWORD_REQUEST);
+						SNPDFCContstants.PICK_PASSWORD_REQUEST);
 			} else {
 				startPickPageNumberActivity();
 			}
@@ -131,7 +131,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 									dialog.dismiss();
 									startActivityForResult(
 											pickPassword,
-											SAPDFCContstants.PICK_PASSWORD_REQUEST);
+											SNPDFCContstants.PICK_PASSWORD_REQUEST);
 								}
 
 							})
@@ -178,9 +178,9 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 								}).show();
 			} else {
 				Intent pickPage = new Intent(this, PickNumberActivity.class);
-				pickPage.putExtra(SAPDFCContstants.NUMBER, numberOfPages);
+				pickPage.putExtra(SNPDFCContstants.NUMBER, numberOfPages);
 				startActivityForResult(pickPage,
-						SAPDFCContstants.PICK_NUMBER_REQUEST);
+						SNPDFCContstants.PICK_NUMBER_REQUEST);
 
 			}
 
@@ -222,16 +222,16 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SAPDFCContstants.PICK_NUMBER_REQUEST) {
-				fromPageNumber = data.getIntExtra(SAPDFCContstants.FROM_NUMBER,
+			if (requestCode == SNPDFCContstants.PICK_NUMBER_REQUEST) {
+				fromPageNumber = data.getIntExtra(SNPDFCContstants.FROM_NUMBER,
 						0);
-				toPageNumber = data.getIntExtra(SAPDFCContstants.TO_NUMBER,
+				toPageNumber = data.getIntExtra(SNPDFCContstants.TO_NUMBER,
 						numberOfPages);
 
 				new SplitPDF().execute();
 			} else {
-				if (requestCode == SAPDFCContstants.PICK_PASSWORD_REQUEST) {
-					password = data.getStringExtra(SAPDFCContstants.TEXT);
+				if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
+					password = data.getStringExtra(SNPDFCContstants.TEXT);
 					startPickPageNumberActivity();
 				}
 			}
@@ -266,7 +266,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 		protected Boolean doInBackground(String... params) {
 			boolean error = false;
 
-			mainFile = SAPDFPathManager.getSavePDFPath("EXTRACTED_"
+			mainFile = SNPDFPathManager.getSavePDFPath("EXTRACTED_"
 					+ srcPDF.getName() + ".pdf");
 
 			Document document = new Document();
@@ -313,13 +313,13 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SAPDFUtils.setErrorText(textView, "Unable to extract PDF " + srcPDF
+			SNPDFUtils.setErrorText(textView, "Unable to extract PDF " + srcPDF
 					+ " from page " + fromPageNumber + " to page "
 					+ toPageNumber);
 			disableButtons();
 
 		} else {
-			SAPDFUtils.setSuccessText(textView, "PDF " + srcPDF.getName()
+			SNPDFUtils.setSuccessText(textView, "PDF " + srcPDF.getName()
 					+ " successfully extracted  from page " + fromPageNumber
 					+ " to page " + toPageNumber, mainFile);
 		}
