@@ -8,17 +8,20 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.snpdfp.utils.SNPDFArrayAdapter;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
-import com.snpdfp.utils.SNPDFArrayAdapter;
 
 public class OpenSNPDFFolderActivity extends SNPDFActivity {
 
@@ -58,6 +61,9 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 				List<String> none = new ArrayList<String>();
 				none.add("NONE");
 				lv.setAdapter(new ArrayAdapter<String>(this, R.layout.row, none));
+				
+				Button button = (Button) findViewById(R.id.deleteAll);
+				button.setVisibility(View.GONE);
 
 			} else {
 				lv.setAdapter(new SNPDFArrayAdapter(this, files));
@@ -85,6 +91,42 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 		Intent filePick = new Intent(this, PickedPDFActivity.class);
 		filePick.putExtra(SNPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
 		startActivity(filePick);
+	}
+
+	public void deleteAll(View view) {
+		getAlertDialog()
+				.setTitle("Delete all files?")
+				.setMessage("Are you sure to delete all prepared files?")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						deleteAll();
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						}).show();
+	}
+
+	private void deleteAll() {
+		File snpdf = SNPDFPathManager.getRootDirectory();
+		File[] list = snpdf.listFiles();
+
+		if (list != null && list.length > 0) {
+			for (File file : list) {
+				file.delete();
+			}
+		}
+
+		Toast.makeText(this, "All snpdf prepared files deleted!",
+				Toast.LENGTH_SHORT).show();
+
+		startActivity(new Intent(this, MainActivity.class));
 	}
 
 }
