@@ -37,6 +37,12 @@
             android:text="delete-all" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF"
+        android:paddingTop="5dp" />
+
     <ListView
         android:id="@+id/list_snpdf_files"
         android:layout_width="match_parent"
