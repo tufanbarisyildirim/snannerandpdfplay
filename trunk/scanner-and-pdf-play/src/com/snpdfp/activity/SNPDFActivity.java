@@ -210,6 +210,13 @@ public class SNPDFActivity extends Activity {
 		case R.id.faq:
 			startActivity(new Intent(this, FAQActivity.class));
 			return true;
+		case R.id.home:
+			startActivity(new Intent(this, MainActivity.class));
+			return true;
+		case R.id.facebook:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse(SAPDFCContstants.FACEBOOK_URL)));
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
