@@ -5,6 +5,7 @@
             <solid android:color="#000000" />
         </shape></item>
     <item><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+        	<solid android:color="#585858" />
             <padding android:bottom="5dip" android:top="5dip" />
         </shape></item>
 

@@ -15,13 +15,30 @@
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
-    <TextView
-        style="@style/HeadTextLeft"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        style="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List of prepared files"
-        android:textColor="#FFFFFF" >
-    </TextView>
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/HeadTextLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="List of prepared files"
+            android:textColor="#FFFFFF" >
+        </TextView>
+
+        <Button
+            android:id="@+id/deleteAll"
+            style="@style/ButtonText"
+            android:layout_weight="1"
+            android:background="@drawable/snpdf_button"
+            android:onClick="deleteAll"
+            android:text="delete-all" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list_snpdf_files"
