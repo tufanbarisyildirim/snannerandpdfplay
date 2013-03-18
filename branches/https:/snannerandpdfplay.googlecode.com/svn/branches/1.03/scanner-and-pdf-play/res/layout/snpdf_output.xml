@@ -1,0 +1,146 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.google.ads.AdView
+            android:id="@+id/adView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+
+        <TextView
+            android:id="@+id/message"
+            style="@style/MessageText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/open_pdf" />
+
+            <Button
+                android:id="@+id/openPDF"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="openPDF"
+                android:text="open-file" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/share_pdf" />
+
+            <Button
+                android:id="@+id/sharePDF"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="sharePDF"
+                android:text="share-file" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/protect_pdf_layout"
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/protect_pdf" />
+
+            <Button
+                android:id="@+id/protectPDF"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="protectPDF"
+                android:text="protect-pdf" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/rename_pdf" />
+
+            <Button
+                android:id="@+id/renamePDF"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="renamePDF"
+                android:text="rename-file" />
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AnswerText"
+                android:layout_weight="1"
+                android:text="@string/delete_pdf" />
+
+            <Button
+                android:id="@+id/deletePDF"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="deletePDF"
+                android:text="delete-file" />
+        </LinearLayout>
+
+        <com.google.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+    </LinearLayout>
+
+</ScrollView>
