@@ -52,7 +52,6 @@ public class ProtectPDFActivity extends SNPDFActivity {
 											int which) {
 										dialog.dismiss();
 										finish();
-										return;
 									}
 
 								}).show();

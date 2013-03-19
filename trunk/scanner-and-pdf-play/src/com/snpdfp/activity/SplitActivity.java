@@ -54,8 +54,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								finish();
-								return;
+								operationCancelled();
 							}
 
 						}).show();
@@ -133,8 +132,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.dismiss();
-									finish();
-									return;
+									operationCancelled();
 								}
 
 							}).show();
@@ -159,7 +157,7 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 								"The selected PDF just has just "
 										+ numberOfPages
 										+ " pages, so cannot be split further!!!")
-						.setPositiveButton("Yes",
+						.setPositiveButton("OK",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {

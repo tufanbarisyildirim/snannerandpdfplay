@@ -87,7 +87,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
-
+										dialog.dismiss();
 									}
 
 								}).show();

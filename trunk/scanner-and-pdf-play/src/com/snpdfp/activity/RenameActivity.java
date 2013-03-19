@@ -57,13 +57,12 @@ public class RenameActivity extends SNPDFActivity {
 								}
 
 							})
-					.setNegativeButton("cancel",
+					.setNegativeButton("Cancel",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.dismiss();
-									finish();
-									return;
+									operationCancelled();
 								}
 
 							}).show();
