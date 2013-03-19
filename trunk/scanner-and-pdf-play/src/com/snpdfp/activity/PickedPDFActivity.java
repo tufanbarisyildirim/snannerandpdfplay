@@ -21,4 +21,9 @@ public class PickedPDFActivity extends SNPDFActivity {
 		SNPDFUtils.setSuccessText(textView, "File chosen:", mainFile);
 	}
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+	}
+
 }

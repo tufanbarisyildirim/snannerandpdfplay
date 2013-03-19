@@ -233,9 +233,13 @@ public class SNPDFActivity extends Activity {
 	}
 
 	protected void operationCancelled() {
-		Toast.makeText(this, "Operation cancelled", Toast.LENGTH_SHORT).show();
+		showCancelledMsg();
 		finish();
 
+	}
+
+	protected void showCancelledMsg() {
+		Toast.makeText(this, "Operation cancelled", Toast.LENGTH_SHORT).show();
 	}
 
 	protected void showCannotReadFileDialog(File file) {

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Toast;
 
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -75,7 +74,7 @@ public class MainActivity extends SNPDFActivity {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										operationCancelled();
+										showCancelledMsg();
 									}
 
 								}).show();
@@ -123,7 +122,7 @@ public class MainActivity extends SNPDFActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								operationCancelled();
+								showCancelledMsg();
 							}
 
 						}).show();
@@ -153,7 +152,7 @@ public class MainActivity extends SNPDFActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								operationCancelled();
+								showCancelledMsg();
 							}
 
 						}).show();
@@ -183,7 +182,7 @@ public class MainActivity extends SNPDFActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								operationCancelled();
+								showCancelledMsg();
 							}
 
 						}).show();
@@ -213,7 +212,7 @@ public class MainActivity extends SNPDFActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								operationCancelled();
+								showCancelledMsg();
 							}
 
 						}).show();
@@ -246,7 +245,7 @@ public class MainActivity extends SNPDFActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
-								operationCancelled();
+								showCancelledMsg();
 							}
 
 						}).show();
@@ -325,10 +324,7 @@ public class MainActivity extends SNPDFActivity {
 			}
 
 		} else {
-			// We are not calling operationCancelled as this activity should not
-			// be finished
-			Toast.makeText(this, "Operation cancelled", Toast.LENGTH_SHORT)
-					.show();
+			showCancelledMsg();
 		}
 
 	}

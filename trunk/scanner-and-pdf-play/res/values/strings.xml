@@ -36,7 +36,7 @@
     <string name="enter_topgnumber">enter to page Number</string>
     <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
     <string name="title_about">about scanner and pdf play</string>
-    <string name="open_snpdf_file">open prepared files</string>
+    <string name="open_snpdf_file">my prepared files</string>
     <string name="select_copyProtectedPDF">copy encrypted pdf content to new</string>
     <string name="title_activity_open_snpdffolder">snpdf folder view</string>
     <string name="title_activity_picked_pdf">chosen pdf</string>
