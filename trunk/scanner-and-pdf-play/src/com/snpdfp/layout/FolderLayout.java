@@ -145,7 +145,6 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 	}
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
 		onListItemClick((ListView) arg0, arg0, arg2, arg3);
 	}
 }
