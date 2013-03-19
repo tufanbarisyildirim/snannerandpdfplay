@@ -75,8 +75,7 @@ public class MainActivity extends SNPDFActivity {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										finish();
-										return;
+										operationCancelled();
 									}
 
 								}).show();
@@ -109,25 +108,98 @@ public class MainActivity extends SNPDFActivity {
 
 	public void pdfToText(View view) {
 		logger.info("*************** starting to extract text from PDF **************");
+		getAlertDialog()
+				.setTitle("File select")
+				.setMessage("Select the PDF to extract text from...")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						pdfToText();
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								operationCancelled();
+							}
+
+						}).show();
+
+	}
+
+	private void pdfToText() {
 		Intent filePick = new Intent(this, ExtractTextActivity.class);
 		startActivity(filePick);
+
 	}
 
 	public void copyProtectedPDF(View view) {
 		logger.info("*************** starting to copy encrypted PDF **************");
+		getAlertDialog()
+				.setTitle("File select")
+				.setMessage("Select the protected PDF to copy...")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						copyProtectedPDF();
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								operationCancelled();
+							}
+
+						}).show();
+
+	}
+
+	private void copyProtectedPDF() {
 		Intent copyIntent = new Intent(this, CopyEncryptedActivity.class);
 		startActivity(copyIntent);
+
 	}
 
 	public void addWatermark(View view) {
 		logger.info("*************** starting to add watermark to PDF **************");
+		getAlertDialog()
+				.setTitle("File select")
+				.setMessage("Select the PDF to add watermark to...")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						addWatermark();
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								operationCancelled();
+							}
+
+						}).show();
+
+	}
+
+	private void addWatermark() {
 		Intent waterMarkIntent = new Intent(this, WatermarkActivity.class);
 		startActivity(waterMarkIntent);
+
 	}
 
 	public void convertTXTFile(View view) {
 		logger.info("*************** starting converting TXT to pdf **************");
-		getAlertDialog().setTitle("File select")
+		getAlertDialog()
+				.setTitle("File select")
 				.setMessage("Select the TXT File to convert to PDF...")
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -135,7 +207,16 @@ public class MainActivity extends SNPDFActivity {
 						convertTXTFile();
 					}
 
-				}).show();
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								operationCancelled();
+							}
+
+						}).show();
 
 	}
 
@@ -159,7 +240,16 @@ public class MainActivity extends SNPDFActivity {
 						convertHTMLFile();
 					}
 
-				}).show();
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								operationCancelled();
+							}
+
+						}).show();
 
 	}
 

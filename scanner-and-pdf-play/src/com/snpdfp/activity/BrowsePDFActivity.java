@@ -49,8 +49,7 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.dismiss();
-									finish();
-									return;
+									operationCancelled();
 								}
 
 							}).show();
