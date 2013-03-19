@@ -31,9 +31,9 @@
     <string name="title_activity_lock_pdf">lock pdf</string>
     <string name="title_activity_concatenate_pdf">concatenate pdf</string>
     <string name="title_activity_split">split pdf</string>
-    <string name="title_activity_pick_number">enter Number</string>
-    <string name="enter_frompgnumber">enter from page Number</string>
-    <string name="enter_topgnumber">enter to page Number</string>
+    <string name="title_activity_pick_number">enter number</string>
+    <string name="enter_frompgnumber">from page number</string>
+    <string name="enter_topgnumber">to page number</string>
     <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
     <string name="title_about">about scanner and pdf play</string>
     <string name="open_snpdf_file">my prepared files</string>

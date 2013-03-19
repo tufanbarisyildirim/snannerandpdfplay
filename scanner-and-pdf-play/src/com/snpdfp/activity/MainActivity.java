@@ -49,8 +49,7 @@ public class MainActivity extends SNPDFActivity {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										finish();
-										return;
+										operationCancelled();
 									}
 
 								}).show();
@@ -74,7 +73,7 @@ public class MainActivity extends SNPDFActivity {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										showCancelledMsg();
+										operationCancelled();
 									}
 
 								}).show();
