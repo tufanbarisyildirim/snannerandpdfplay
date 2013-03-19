@@ -27,6 +27,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <View style="@style/line" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -70,8 +72,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/protect_pdf_layout"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/protect_pdf_layout"
             style="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

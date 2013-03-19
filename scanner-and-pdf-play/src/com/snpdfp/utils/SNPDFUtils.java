@@ -5,13 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.graphics.Color;
 import android.widget.TextView;
 
 public class SNPDFUtils {
 
 	public static void setErrorText(TextView textView, String message) {
 		textView.setText(message);
-		textView.setTextColor(-65536);
+		textView.setTextColor(Color.parseColor("#FF0040"));
 	}
 
 	public static void setSuccessText(TextView textView, String message,
@@ -25,7 +26,7 @@ public class SNPDFUtils {
 						Locale.getDefault()).format(new Date(file
 						.lastModified()));
 		textView.setText(message + "\n" + fileDetails);
-		textView.setTextColor(-16711936);
+		textView.setTextColor(Color.parseColor("#298A08"));
 	}
 
 	public static String getSizeText(long length) {

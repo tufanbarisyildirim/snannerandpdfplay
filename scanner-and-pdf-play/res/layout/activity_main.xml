@@ -29,11 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#FFFFFF"
-            android:paddingTop="5dp" />
+        <View style="@style/line" />
 
         <TextView
             style="@style/HeadTextLeft"
@@ -181,11 +177,7 @@
                 android:text="copy-protected" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#FFFFFF"
-            android:paddingTop="5dp" />
+        <View style="@style/line" />
 
         <TextView
             style="@style/HeadTextLeft"

@@ -3,4 +3,4 @@
     android:id="@+id/rowtext"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:textSize="16sp" android:textColor="#FF8000" android:background="@drawable/select_file"/>
+    android:textSize="16sp" android:textColor="#013ADF" android:background="@drawable/select_file"/>
