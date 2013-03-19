@@ -43,14 +43,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 
 	// Your stuff here for Cannot open Folder
 	public void OnCannotFileRead(File file) {
-		getAlertDialog().setTitle("Invalid selection")
-				.setMessage("[" + file.getName() + "] folder can't be read!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
-
+		showCannotReadFileDialog(file);
 	}
 
 	// Your stuff here for file Click

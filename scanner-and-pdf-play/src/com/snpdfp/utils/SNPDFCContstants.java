@@ -30,7 +30,7 @@ public class SNPDFCContstants {
 
 	public static final String FILE_URI = "FILE_URI";
 
-	public static final CharSequence APP_TITLE = "Scanner N' PDF Play";
+	public static final CharSequence APP_TITLE = "Scanner and PDF Play";
 
 	public static final int PICK_NUMBER_REQUEST = 5;
 
