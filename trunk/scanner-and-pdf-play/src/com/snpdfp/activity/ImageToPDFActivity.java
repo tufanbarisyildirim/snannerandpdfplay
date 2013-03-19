@@ -53,13 +53,14 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			document.open();
 			Image image = Image.getInstance(input.getAbsolutePath());
 
-			if (image.getHeight() / image.getWidth() == PageSize.A4.getHeight()
-					/ PageSize.A4.getWidth()) {
+			float imageRatio = image.getHeight() / image.getWidth();
+			float a4Ratio = PageSize.A4.getHeight() / PageSize.A4.getWidth();
+
+			if (imageRatio == a4Ratio) {
 				image.scaleToFit(PageSize.A4.getWidth(),
 						PageSize.A4.getHeight());
 
-			} else if (image.getHeight() / image.getWidth() < PageSize.A4
-					.getHeight() / PageSize.A4.getWidth()) {
+			} else if (imageRatio < a4Ratio) {
 				image.scaleToFit(
 						PageSize.A4.getWidth(),
 						(PageSize.A4.getWidth() / image.getWidth())

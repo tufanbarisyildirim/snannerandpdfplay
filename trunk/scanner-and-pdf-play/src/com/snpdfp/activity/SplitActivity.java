@@ -258,7 +258,8 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 			boolean error = false;
 
 			mainFile = SNPDFPathManager.getSavePDFPath("EXTRACTED_"
-					+ srcPDF.getName() + ".pdf");
+					+ srcPDF.getName() + "_" + fromPageNumber + "-"
+					+ toPageNumber + ".pdf");
 
 			Document document = new Document();
 			PdfReader inputPDF = null;
