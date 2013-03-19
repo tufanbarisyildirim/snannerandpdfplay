@@ -8,11 +8,10 @@
         android:title="about"/>
     <item
         android:id="@+id/faq"
-        android:title="important tips and faqs"/>
+        android:title="tips and faqs"/>
     <item
         android:id="@+id/home"
         android:title="home"/>
-    
     <item
         android:id="@+id/facebook"
         android:title="connect on facebook"/>
