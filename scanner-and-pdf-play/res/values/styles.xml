@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
@@ -54,11 +54,26 @@
         <item name="android:textColor">#F7819F</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="MessageText">
         <item name="android:textColor">#013ADF</item>
         <item name="android:gravity">left</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SNPDFFolderText">
+        <item name="android:textColor">#013ADF</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SNPDFFolderDetail">
+        <item name="android:textColor">#013ADF</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="AnswerText">
@@ -66,15 +81,16 @@
         <item name="android:gravity">left</item>
         <item name="android:textStyle">italic</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="line">
         <item name="android:background">#D8D8D8</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5sp</item>
+        <item name="android:paddingBottom">5sp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_height">2sp</item>
     </style>
 
 </resources>
