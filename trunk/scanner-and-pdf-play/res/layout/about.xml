@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/app_name"
-            style="@style/HeadTextLeft"
+            style="@style/HeadText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name" />

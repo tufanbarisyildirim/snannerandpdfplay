@@ -19,15 +19,10 @@
         style="@style/HeadTextLeft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Path"
-        android:textColor="#FFFFFF" >
+        android:text="Path" >
     </TextView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#FFFFFF"
-        android:paddingTop="5dp" />
+    <View style="@style/line" />
 
     <ListView
         android:id="@+id/list"
