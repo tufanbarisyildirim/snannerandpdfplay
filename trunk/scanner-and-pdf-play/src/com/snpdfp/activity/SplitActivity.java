@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -302,16 +301,15 @@ public class SplitActivity extends SNPDFActivity implements IFolderItemListener 
 
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_split);
-		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SNPDFUtils.setErrorText(textView, "Unable to extract PDF " + srcPDF
+			SNPDFUtils.setErrorText(this, "Unable to extract PDF " + srcPDF
 					+ " from page " + fromPageNumber + " to page "
 					+ toPageNumber);
 			disableButtons();
 
 		} else {
-			SNPDFUtils.setSuccessText(textView, "PDF " + srcPDF.getName()
+			SNPDFUtils.setSuccessText(this, "PDF " + srcPDF.getName()
 					+ " successfully extracted  from page " + fromPageNumber
 					+ " to page " + toPageNumber, mainFile);
 		}

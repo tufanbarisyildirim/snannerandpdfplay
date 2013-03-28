@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.widget.TextView;
 
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
@@ -231,16 +230,14 @@ public class WatermarkActivity extends SNPDFActivity implements
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_file_to_pdf);
 
-		TextView textView = (TextView) findViewById(R.id.message);
 		if (error) {
-			SNPDFUtils
-					.setErrorText(textView, "Unable to add watermark to PDF: "
-							+ selectedFile.getName());
+			SNPDFUtils.setErrorText(this, "Unable to add watermark to PDF: "
+					+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SNPDFUtils.setSuccessText(textView,
-					"Watermark successfully added.", mainFile);
+			SNPDFUtils.setSuccessText(this, "Watermark successfully added.",
+					mainFile);
 		}
 	}
 

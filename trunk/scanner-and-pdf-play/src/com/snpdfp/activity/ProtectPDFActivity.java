@@ -14,7 +14,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
@@ -169,17 +168,16 @@ public class ProtectPDFActivity extends SNPDFActivity {
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_protect_pdf);
 
-		TextView textView = (TextView) findViewById(R.id.message);
 		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
 		// Disable the already protected pdf
 		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
-			SNPDFUtils.setErrorText(textView,
+			SNPDFUtils.setErrorText(this,
 					"Unable to lock file: " + srcFile.getName());
 			disableButtons();
 		} else {
-			SNPDFUtils.setSuccessText(textView, "PDF successfully protected.",
+			SNPDFUtils.setSuccessText(this, "PDF successfully protected.",
 					mainFile);
 		}
 	}

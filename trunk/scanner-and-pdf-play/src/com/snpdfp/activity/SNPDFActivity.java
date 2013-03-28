@@ -177,8 +177,7 @@ public class SNPDFActivity extends Activity {
 	}
 
 	public android.app.AlertDialog.Builder getAlertDialog() {
-		return new AlertDialog.Builder(new ContextThemeWrapper(this,
-				android.R.style.Theme_Dialog));
+		return new AlertDialog.Builder(this);
 	}
 
 	protected String getImagePathFromURI(Uri contentUri) {
