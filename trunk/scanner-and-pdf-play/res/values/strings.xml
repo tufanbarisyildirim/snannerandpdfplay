@@ -3,6 +3,7 @@
 
     <string name="app_name">scanner and pdf play</string>
     <string name="hello_world">welcome to scanner and pdf play!</string>
+    <string name="what_it_does">It is a PDF utility which can be used to:\n1. Scan/Convert any image to PDF\n2. Extract pages from PDF\n3. Concatenate two PDFs\n4. Protect a PDF with password\n5. Convert a TXT/HTML file to PDF\n6. Extract text from PDF\n7. Add watermark to PDF\n8. Copy an encrypted PDF to a non-encrypted one\n9. Change PDF password\netc...\n\nYou can create PDF in 4 different sizes A1, A2, A3 and A4</string>
     <string name="menu_settings">settings</string>
     <string name="select_scanner">open scanner</string>
     <string name="select_imageconvert">convert image to pdf</string>
@@ -35,14 +36,16 @@
     <string name="enter_frompgnumber">from page number</string>
     <string name="enter_topgnumber">to page number</string>
     <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
+    <string name="app_type">open source</string>
+    <string name="app_url">http://code.google.com/p/snannerandpdfplay</string>
     <string name="title_about">about scanner and pdf play</string>
     <string name="open_snpdf_file">my prepared files</string>
     <string name="select_copyProtectedPDF">copy encrypted pdf content to new</string>
     <string name="title_activity_open_snpdffolder">snpdf folder view</string>
     <string name="title_activity_picked_pdf">chosen pdf</string>
     <string name="title_activity_faq">important tips and faqs</string>
-    <string name="motivation">Motivation and Resources</string>
-    <string name="developer">Developer</string>
+    <string name="motivation">motivation and resources</string>
+    <string name="developer">developer</string>
     <string name="aahuti">Aahuti Ghosh</string>
     <string name="shikhar">Kumar Shikhar</string>
     <string name="title_activity_extract_text">extract text from pdf</string>
@@ -53,5 +56,6 @@
     <string name="title_activity_pick_string">enter name</string>
     <string name="title_activity_copy_encrypted">copy encrypted pdf</string>
     <string name="yes">yes please</string>
+    <string name="title_activity_snpdfsettings">SNPDF Settings</string>
 
 </resources>

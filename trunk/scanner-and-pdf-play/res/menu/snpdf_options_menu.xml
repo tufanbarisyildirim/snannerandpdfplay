@@ -4,14 +4,17 @@
         android:id="@+id/sndpf_location"
         android:title="@string/open_snpdf_file"/>
     <item
-        android:id="@+id/about"
-        android:title="about"/>
+        android:id="@+id/settings"
+        android:title="settings"/>
     <item
         android:id="@+id/faq"
         android:title="tips and faqs"/>
     <item
         android:id="@+id/home"
         android:title="home"/>
+    <item
+        android:id="@+id/about"
+        android:title="about"/>
     <item
         android:id="@+id/facebook"
         android:title="connect on facebook"/>

@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 
 import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -194,8 +193,8 @@ public class WatermarkActivity extends SNPDFActivity implements
 				int i = 0;
 				Image watermark_image = Image.getInstance(image
 						.getAbsolutePath());
-				watermark_image.scaleToFit(PageSize.A4.getWidth(),
-						PageSize.A4.getHeight());
+				watermark_image.scaleToFit(pdfReader.getPageSize(1).getWidth(),
+						pdfReader.getPageSize(1).getHeight());
 				watermark_image.setAbsolutePosition(0, 0);
 				PdfContentByte add_watermark = null;
 				while (i < number_of_pages) {

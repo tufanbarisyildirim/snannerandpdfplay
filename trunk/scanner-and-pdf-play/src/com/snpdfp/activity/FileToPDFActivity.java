@@ -128,7 +128,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			mainFile = SNPDFPathManager.getSavePDFPath(fileName);
 
 			// create a new document
-			Document document = new Document();
+			Document document = new Document(SNPDFCContstants.PAGE_SIZE);
 
 			PdfWriter pdfWriter = null;
 

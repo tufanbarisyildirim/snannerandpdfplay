@@ -12,15 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <com.google.ads.AdView
-            android:id="@+id/adView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/adUnitId"
-            ads:loadAdOnCreate="true"
-            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
-
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -31,7 +22,7 @@
             <ImageView
                 android:id="@+id/imageOP"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center|center_vertical"
                 android:layout_weight="3" />
 
@@ -154,7 +145,7 @@
 
         <com.google.ads.AdView
             android:id="@+id/adView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
             ads:adUnitId="@string/adUnitId"
