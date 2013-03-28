@@ -4,12 +4,15 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -17,6 +20,7 @@ import com.snpdfp.utils.SNPDFPathManager;
 public class MainActivity extends SNPDFActivity {
 
 	Logger logger = Logger.getLogger(MainActivity.class.getName());
+	private static boolean welcomeShown = false;
 
 	Uri output = null;
 
@@ -83,8 +87,33 @@ public class MainActivity extends SNPDFActivity {
 			}
 
 		} else {
+			if (!welcomeShown) {
+				showWelcomeMessage();
+				welcomeShown = true;
+			}
+
 			setContentView(R.layout.activity_main);
 		}
+	}
+
+	private void showWelcomeMessage() {
+		AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+		LayoutInflater inflater = (LayoutInflater) this
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+		View layout = inflater.inflate(R.layout.custom_fullimage_dialog,
+				(ViewGroup) findViewById(R.id.welcome_snpdf));
+		imageDialog.setView(layout);
+		imageDialog.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+
+				});
+
+		imageDialog.create();
+		imageDialog.show();
 	}
 
 	public void lockPDF(View view) {
