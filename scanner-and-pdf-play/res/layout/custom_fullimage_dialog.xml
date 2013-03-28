@@ -22,11 +22,10 @@
 
         <TextView
             android:id="@+id/welcome_message"
-            style="@style/HeadTextLeft"
+            style="@style/AnswerText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="left|center_vertical"
-            android:background="@color/custom_theme_color_start"
             android:text="@string/what_it_does" >
         </TextView>
     </LinearLayout>

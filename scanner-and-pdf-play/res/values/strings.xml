@@ -23,9 +23,9 @@
     <string name="rename_pdf">rename this file</string>
     <string name="concatenate_pdf">concatenate two pdfs</string>
     <string name="extract_pdf">extract pages from a pdf</string>
-    <string name="enter_password">enter the password</string>
+    <string name="enter_password">enter password</string>
     <string name="enter_name">enter name</string>
-    <string name="confirm_password">confirm the password</string>
+    <string name="confirm_password">confirm password</string>
     <string name="title_activity_pick_password">enter password</string>
     <string name="ok">ok</string>
     <string name="cancel">cancel</string>
@@ -33,8 +33,8 @@
     <string name="title_activity_concatenate_pdf">concatenate pdf</string>
     <string name="title_activity_split">split pdf</string>
     <string name="title_activity_pick_number">enter number</string>
-    <string name="enter_frompgnumber">from page number</string>
-    <string name="enter_topgnumber">to page number</string>
+    <string name="enter_frompgnumber">from page#</string>
+    <string name="enter_topgnumber">to page#</string>
     <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
     <string name="app_type">open source</string>
     <string name="app_url">http://code.google.com/p/snannerandpdfplay</string>
@@ -56,6 +56,6 @@
     <string name="title_activity_pick_string">enter name</string>
     <string name="title_activity_copy_encrypted">copy encrypted pdf</string>
     <string name="yes">yes please</string>
-    <string name="title_activity_snpdfsettings">SNPDF Settings</string>
+    <string name="title_activity_snpdfsettings">snpdfp settings</string>
 
 </resources>
