@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
@@ -179,14 +178,13 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 	public void displayResult(Boolean error) {
 
 		setContentView(R.layout.activity_concatenate_pdf);
-		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SNPDFUtils.setErrorText(textView, "Unable to concatenate PDFs "
+			SNPDFUtils.setErrorText(this, "Unable to concatenate PDFs "
 					+ firstFile.getName() + " and " + secondFile.getName());
 			disableButtons();
 		} else {
-			SNPDFUtils.setSuccessText(textView, "PDFs " + firstFile.getName()
+			SNPDFUtils.setSuccessText(this, "PDFs " + firstFile.getName()
 					+ " and " + secondFile.getName()
 					+ " successfully concatenated.", mainFile);
 		}

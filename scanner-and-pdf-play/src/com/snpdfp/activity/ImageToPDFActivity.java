@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -139,13 +138,11 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		setContentView(R.layout.activity_image_to_pdf);
 
 		logger.info("****** starting to convert image to pdf **********");
-		TextView textView = (TextView) findViewById(R.id.message);
-
 		if (error) {
-			SNPDFUtils.setErrorText(textView, "Unable to create PDF");
+			SNPDFUtils.setErrorText(this, "Unable to create PDF");
 			disableButtons();
 		} else {
-			SNPDFUtils.setSuccessText(textView, "PDF successfully created.",
+			SNPDFUtils.setSuccessText(this, "PDF successfully created.",
 					mainFile);
 		}
 	}

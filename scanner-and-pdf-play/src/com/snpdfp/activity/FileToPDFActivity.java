@@ -12,7 +12,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -198,15 +197,13 @@ public class FileToPDFActivity extends SNPDFActivity implements
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_file_to_pdf);
 
-		TextView textView = (TextView) findViewById(R.id.message);
-
 		if (error) {
-			SNPDFUtils.setErrorText(textView, "Unable to convert file "
-					+ srcFile.getName() + " to PDF!");
+			SNPDFUtils.setErrorText(this,
+					"Unable to convert file " + srcFile.getName() + " to PDF!");
 			disableButtons();
 		} else {
-			SNPDFUtils.setSuccessText(textView,
-					"PDF file successfully created.", mainFile);
+			SNPDFUtils.setSuccessText(this, "PDF file successfully created.",
+					mainFile);
 		}
 	}
 

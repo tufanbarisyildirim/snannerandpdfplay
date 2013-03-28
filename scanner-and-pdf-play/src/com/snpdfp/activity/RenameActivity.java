@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snpdfp.utils.SNPDFCContstants;
@@ -72,11 +71,9 @@ public class RenameActivity extends SNPDFActivity {
 
 			setContentView(R.layout.activity_rename);
 
-			TextView textView = (TextView) findViewById(R.id.message);
-
 			if (!success) {
-				SNPDFUtils.setErrorText(textView, "Unable to rename file: "
-						+ file.getName());
+				SNPDFUtils.setErrorText(this,
+						"Unable to rename file: " + file.getName());
 				disableButtons();
 
 			} else {
@@ -86,8 +83,8 @@ public class RenameActivity extends SNPDFActivity {
 						"File successfully renamed from " + file.getName()
 								+ " to " + mainFile.getName(),
 						Toast.LENGTH_SHORT).show();
-				SNPDFUtils.setSuccessText(textView,
-						"File successfully renamed.", mainFile);
+				SNPDFUtils.setSuccessText(this, "File successfully renamed.",
+						mainFile);
 			}
 		}
 

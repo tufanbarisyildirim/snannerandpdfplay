@@ -14,7 +14,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfReader;
@@ -207,20 +206,17 @@ public class ExtractTextActivity extends SNPDFActivity implements
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_file_to_pdf);
 
-		TextView textView = (TextView) findViewById(R.id.message);
 		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
 		protect_pdf_layout.setVisibility(View.GONE);
 
 		if (error) {
-			SNPDFUtils.setErrorText(
-					textView,
-					"Unable to extract text from file "
-							+ selectedFile.getName());
+			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
+					+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SNPDFUtils.setSuccessText(textView,
-					"TXT file successfully created.", mainFile);
+			SNPDFUtils.setSuccessText(this, "TXT file successfully created.",
+					mainFile);
 		}
 	}
 

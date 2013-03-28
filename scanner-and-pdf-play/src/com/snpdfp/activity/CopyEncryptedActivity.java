@@ -12,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
@@ -173,18 +172,15 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 
 	public void displayResult(Boolean error) {
 		setContentView(R.layout.activity_copy_encrypted);
-		TextView textView = (TextView) findViewById(R.id.message);
 
 		if (error) {
-			SNPDFUtils.setErrorText(
-					textView,
-					"Unable to extract text from file "
-							+ selectedFile.getName());
+			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
+					+ selectedFile.getName());
 			disableButtons();
 
 		} else {
-			SNPDFUtils.setSuccessText(textView,
-					"TXT file successfully created.", mainFile);
+			SNPDFUtils.setSuccessText(this, "TXT file successfully created.",
+					mainFile);
 		}
 	}
 
