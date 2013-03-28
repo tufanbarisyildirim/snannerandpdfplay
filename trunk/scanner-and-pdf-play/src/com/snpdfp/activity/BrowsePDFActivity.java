@@ -3,15 +3,14 @@ package com.snpdfp.activity;
 import java.io.File;
 import java.util.logging.Logger;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SNPDFCContstants;
-import com.snpdfp.utils.SNPDFUtils;
 
 public class BrowsePDFActivity extends SNPDFActivity implements
 		IFolderItemListener {
@@ -23,39 +22,7 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestType = getIntent().getStringExtra(
-				SNPDFCContstants.PDF_REQUEST_TYPE);
-
-		if (requestType == null) {
-			TextView textView = new TextView(this);
-			SNPDFUtils.setErrorText(textView, "Invalid request!!!");
-			setContentView(textView);
-
-		} else {
-			getAlertDialog()
-					.setTitle("PDF select")
-					.setMessage("Select the PDF to protect...")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									browseFile();
-								}
-
-							})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									operationCancelled();
-								}
-
-							}).show();
-
-		}
-
+		browseFile();
 	}
 
 	private void browseFile() {
@@ -89,12 +56,10 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			if (SNPDFCContstants.PDF_REQUEST_LOCK.equals(requestType)) {
-				Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
-				pdfintent.putExtra(SNPDFCContstants.FILE_URI,
-						file.getAbsolutePath());
-				startActivity(pdfintent);
-			}
+			Intent result = new Intent();
+			result.putExtra(SNPDFCContstants.FILE_URI, file.getAbsolutePath());
+			setResult(Activity.RESULT_OK, result);
+			finish();
 		}
 
 	}

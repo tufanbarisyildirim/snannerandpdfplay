@@ -25,6 +25,8 @@ public class SNPDFCContstants {
 
 	public static final String TEXT = "TEXT";
 
+	public static final String PDF = "PDF";
+
 	public static final String FILE_TYPE = "FILE_TYPE";
 
 	public static final String FILE_TYPE_TXT = "TXT";
@@ -35,7 +37,7 @@ public class SNPDFCContstants {
 
 	public static final CharSequence APP_TITLE = "Scanner and PDF Play";
 
-	public static final int PICK_NUMBER_REQUEST = 5;
+	public static final int PICK_NUMBER_REQUEST = 6;
 
 	public static final String NUMBER = "NUMBER";
 
@@ -46,6 +48,12 @@ public class SNPDFCContstants {
 	public static final String DATE_FORMAT = "MMM dd,yyyy HH:mm";
 
 	public static final String FACEBOOK_URL = "http://www.facebook.com/pages/Scanner-N-PDF-Play/424603937631594";
+
+	public static final int PICK_FILE = 7;
+
+	public static final int PICK_FILE1 = 8;
+
+	public static final int PICK_FILE2 = 9;
 
 	public static Rectangle PAGE_SIZE = PageSize.A4;
 

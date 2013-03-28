@@ -1,6 +1,7 @@
 package com.snpdfp.activity;
 
 import java.io.File;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.menu.About;
 import com.snpdfp.menu.FAQActivity;
 import com.snpdfp.utils.SNPDFCContstants;
@@ -43,6 +45,13 @@ public class SNPDFActivity extends Activity {
 			protect_pdf_layout.setVisibility(View.GONE);
 		}
 
+	}
+
+	public void cancel(View view) {
+		showCancelledMsg();
+		Intent result = new Intent();
+		setResult(Activity.RESULT_CANCELED, result);
+		finish();
 	}
 
 	/** Called when the user clicks the SCAN button */
@@ -300,6 +309,43 @@ public class SNPDFActivity extends Activity {
 
 		}
 
+	}
+
+	protected boolean isProtected(File srcFile) {
+		PdfReader pdfReader = null;
+		boolean encrypted = false;
+		try {
+			pdfReader = new PdfReader(srcFile.getAbsolutePath());
+			if (pdfReader.isEncrypted()) {
+				encrypted = true;
+			}
+
+		} catch (IOException e) {
+			encrypted = true;
+		} finally {
+			if (pdfReader != null) {
+				pdfReader.close();
+			}
+		}
+
+		return encrypted;
+	}
+
+	protected boolean isPasswordCorrect(File srcFile, String password) {
+		PdfReader pdfReader = null;
+		try {
+			pdfReader = new PdfReader(srcFile.getAbsolutePath(),
+					password.getBytes());
+			return true;
+		} catch (IOException e) {
+
+		} finally {
+			if (pdfReader != null) {
+				pdfReader.close();
+			}
+		}
+
+		return false;
 	}
 
 }

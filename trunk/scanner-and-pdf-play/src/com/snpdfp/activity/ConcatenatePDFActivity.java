@@ -5,20 +5,23 @@ import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.layout.FolderLayout;
-import com.snpdfp.layout.IFolderItemListener;
+import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
-public class ConcatenatePDFActivity extends SNPDFActivity implements
-		IFolderItemListener {
+public class ConcatenatePDFActivity extends SNPDFActivity {
 
 	Logger logger = Logger.getLogger(ConcatenatePDFActivity.class.getName());
 
@@ -26,51 +29,112 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 	File firstFile;
 	File secondFile;
 
+	boolean password1_req = false;
+	boolean password2_req = false;
+
+	String password1 = null;
+	String password2 = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getAlertDialog()
-				.setTitle("PDF select")
-				.setMessage("Select the first PDF...")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						selectFile();
-					}
+		setContentView(R.layout.activity_concatenate_pdf);
 
-				})
-				.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-								operationCancelled();
-							}
+		EditText password1 = (EditText) findViewById(R.id.password1);
+		password1.setVisibility(View.GONE);
+		password1_req = false;
 
-						}).show();
-
+		EditText password2 = (EditText) findViewById(R.id.password2);
+		password2.setVisibility(View.GONE);
+		password2_req = false;
 	}
 
-	private void selectFile() {
-		setContentView(R.layout.folders);
+	public void pickFile1(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE1);
+	}
 
-		localFolders = (FolderLayout) findViewById(R.id.localfolders);
-		localFolders.setIFolderItemListener(this);
-
+	public void pickFile2(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE2);
 	}
 
 	@Override
-	public void OnCannotFileRead(File file) {
-		showCannotReadFileDialog(file);
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			if (requestCode == SNPDFCContstants.PICK_FILE1) {
+				firstFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				((EditText) findViewById(R.id.pdf_file1)).setText(firstFile
+						.getName());
+
+				if (isProtected(firstFile)) {
+					getAlertDialog()
+							.setTitle("PDF is encrypted!")
+							.setMessage(
+									"The selected PDF is protected, please enter it's password!")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											EditText password1 = (EditText) findViewById(R.id.password1);
+											password1
+													.setVisibility(View.VISIBLE);
+											password1_req = true;
+										}
+
+									}).show();
+
+				} else {
+					EditText password1 = (EditText) findViewById(R.id.password1);
+					password1.setVisibility(View.GONE);
+					password1_req = false;
+				}
+
+			} else if (requestCode == SNPDFCContstants.PICK_FILE2) {
+				secondFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				((EditText) findViewById(R.id.pdf_file2)).setText(secondFile
+						.getName());
+				if (isProtected(secondFile)) {
+					getAlertDialog()
+							.setTitle("PDF is encrypted!")
+							.setMessage(
+									"The selected PDF is protected, please enter it's password!")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											EditText password2 = (EditText) findViewById(R.id.password2);
+											password2
+													.setVisibility(View.VISIBLE);
+											password2_req = true;
+
+										}
+
+									}).show();
+				} else {
+					EditText password2 = (EditText) findViewById(R.id.password2);
+					password2.setVisibility(View.GONE);
+					password2_req = false;
+				}
+			}
+
+		} else {
+			operationCancelled();
+		}
 	}
 
-	@Override
-	public void OnFileClicked(File file) {
-		if (!file.getName().endsWith(".pdf")) {
+	public void concatenate(View view) {
+		if (firstFile == null || !firstFile.exists() || secondFile == null
+				|| !secondFile.exists()) {
 			getAlertDialog()
-					.setTitle("Invalid selection")
-					.setMessage(
-							"You can only select a .pdf file for this request!")
+					.setTitle("Incomplete details")
+					.setMessage("Please provide both the PDF files!")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -80,37 +144,65 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			if (firstFile == null) {
-				firstFile = file;
+			if (!firstPDFDetailsComplete()) {
 				getAlertDialog()
-						.setTitle("PDF select")
-						.setMessage(
-								"First PDF selected! Now select the second PDF to concatenate...")
+						.setTitle("First PDF password")
+						.setMessage("Please enter valid password for first PDF")
 						.setPositiveButton("OK",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										selectFile();
 									}
 
-								})
-						.setNegativeButton("Cancel",
+								}).show();
+			} else if (!secondPDFDetailsComplete()) {
+				getAlertDialog()
+						.setTitle("Second PDF password")
+						.setMessage(
+								"Please enter valid password for second PDF")
+						.setPositiveButton("OK",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
-										operationCancelled();
 									}
 
 								}).show();
-
 			} else {
-				secondFile = file;
 				new Concatenate().execute();
+			}
+
+		}
+
+	}
+
+	private boolean secondPDFDetailsComplete() {
+		if (password2_req) {
+			password2 = ((EditText) findViewById(R.id.password2)).getText()
+					.toString();
+
+			if (password2 == null || password2.equals("")
+					|| !isPasswordCorrect(secondFile, password2)) {
+				return false;
 			}
 		}
 
+		return true;
+	}
+
+	private boolean firstPDFDetailsComplete() {
+		if (password1_req) {
+			password1 = ((EditText) findViewById(R.id.password1)).getText()
+					.toString();
+
+			if (password1 == null || password1.equals("")
+					|| !isPasswordCorrect(firstFile, password1)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private class Concatenate extends AsyncTask<String, Void, Boolean> {
@@ -149,8 +241,20 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 							.getName()) + ".pdf");
 
 			try {
-				reader1 = new PdfReader(firstFile.getAbsolutePath());
-				reader2 = new PdfReader(secondFile.getAbsolutePath());
+				if (password1_req) {
+					reader1 = new PdfReader(firstFile.getAbsolutePath(),
+							password1.getBytes());
+				} else {
+					reader1 = new PdfReader(firstFile.getAbsolutePath());
+				}
+
+				if (password2_req) {
+					reader2 = new PdfReader(secondFile.getAbsolutePath(),
+							password2.getBytes());
+				} else {
+					reader2 = new PdfReader(secondFile.getAbsolutePath());
+				}
+
 				copy = new PdfCopyFields(new FileOutputStream(mainFile));
 				copy.addDocument(reader1);
 				copy.addDocument(reader2);
@@ -172,12 +276,11 @@ public class ConcatenatePDFActivity extends SNPDFActivity implements
 
 			return error;
 		}
-
 	}
 
 	public void displayResult(Boolean error) {
 
-		setContentView(R.layout.activity_concatenate_pdf);
+		setContentView(R.layout.snpdf_output);
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to concatenate PDFs "
