@@ -1,5 +1,8 @@
 package com.snpdfp.utils;
 
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
+
 public class SNPDFCContstants {
 
 	public static final int PICK_CAMERA_IMAGE_REQUEST = 1;
@@ -43,5 +46,7 @@ public class SNPDFCContstants {
 	public static final String DATE_FORMAT = "MMM dd,yyyy HH:mm";
 
 	public static final String FACEBOOK_URL = "http://www.facebook.com/pages/Scanner-N-PDF-Play/424603937631594";
+
+	public static Rectangle PAGE_SIZE = PageSize.A4;
 
 }

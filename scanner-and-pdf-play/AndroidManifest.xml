@@ -154,6 +154,10 @@
             android:label="@string/title_activity_copy_encrypted"
             android:screenOrientation="nosensor" >
         </activity>
+        <activity
+            android:name="com.snpdfp.activity.SNPDFSettings"
+            android:label="@string/title_activity_snpdfsettings" >
+        </activity>
     </application>
 
 </manifest>

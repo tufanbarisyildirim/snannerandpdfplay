@@ -28,6 +28,9 @@ public class MainActivity extends SNPDFActivity {
 		String action = intent.getAction();
 		String type = intent.getType();
 
+		// setup page size
+		setUpPageSize();
+
 		logger.info(action + "  " + type);
 		if (Intent.ACTION_SEND.equals(action) && type != null) {
 			if (type.startsWith("image/")) {

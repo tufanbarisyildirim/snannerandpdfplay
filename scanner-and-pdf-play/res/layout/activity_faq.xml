@@ -13,19 +13,10 @@
         android:orientation="vertical"
         tools:context=".FAQActivity" >
 
-        <com.google.ads.AdView
-            android:id="@+id/adView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/adUnitId"
-            ads:loadAdOnCreate="true"
-            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
-
         <TextView
             android:id="@+id/question1"
             style="@style/HeadTextLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -37,7 +28,7 @@
         <TextView
             android:id="@+id/question2"
             style="@style/HeadTextLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -49,7 +40,7 @@
         <TextView
             android:id="@+id/question3"
             style="@style/HeadTextLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -61,7 +52,7 @@
         <TextView
             android:id="@+id/question4"
             style="@style/HeadTextLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -73,7 +64,7 @@
         <TextView
             android:id="@+id/question5"
             style="@style/HeadTextLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -84,11 +75,12 @@
 
         <com.google.ads.AdView
             android:id="@+id/adView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
             ads:adUnitId="@string/adUnitId"
             ads:loadAdOnCreate="true"
             ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
     </LinearLayout>
-</ScrollView>
+
+</ScrollView>

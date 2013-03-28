@@ -8,11 +8,12 @@ import android.content.ActivityNotFoundException;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,11 +22,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.itextpdf.text.PageSize;
 import com.snpdfp.menu.About;
 import com.snpdfp.menu.FAQActivity;
 import com.snpdfp.utils.SNPDFCContstants;
 
 public class SNPDFActivity extends Activity {
+
+	SharedPreferences mPrefs;
+	final String snpdfPageSize = "SNPDF_PAGE_SIZE";
 
 	protected File mainFile = null;
 
@@ -217,6 +222,9 @@ public class SNPDFActivity extends Activity {
 			startActivity(new Intent(Intent.ACTION_VIEW,
 					Uri.parse(SNPDFCContstants.FACEBOOK_URL)));
 			return true;
+		case R.id.settings:
+			startActivity(new Intent(this, SNPDFSettings.class));
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -249,6 +257,30 @@ public class SNPDFActivity extends Activity {
 						dialog.dismiss();
 					}
 				}).show();
+
+	}
+
+	protected void setUpPageSize() {
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		String pageSize = mPrefs.getString(snpdfPageSize, "A4");
+		setPageSize(pageSize);
+
+	}
+
+	protected void setPageSize(String size) {
+		if ("A4".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.A4;
+
+		} else if ("A3".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.A3;
+
+		} else if ("A2".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.A2;
+
+		} else if ("A1".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.A1;
+
+		}
 
 	}
 

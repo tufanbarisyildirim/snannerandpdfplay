@@ -12,7 +12,6 @@ import android.os.Bundle;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -42,7 +41,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
 		logger.info("Intended PDF file path:" + pdf);
 
-		Document document = new Document(PageSize.A4);
+		Document document = new Document(SNPDFCContstants.PAGE_SIZE);
 		document.setMargins(0, 0, 0, 0);
 		PdfWriter writer = null;
 		try {
@@ -53,21 +52,22 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			Image image = Image.getInstance(input.getAbsolutePath());
 
 			float imageRatio = image.getHeight() / image.getWidth();
-			float a4Ratio = PageSize.A4.getHeight() / PageSize.A4.getWidth();
+			float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight()
+					/ SNPDFCContstants.PAGE_SIZE.getWidth();
 
-			if (imageRatio == a4Ratio) {
-				image.scaleToFit(PageSize.A4.getWidth(),
-						PageSize.A4.getHeight());
+			if (imageRatio == aspectRatio) {
+				image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
+						SNPDFCContstants.PAGE_SIZE.getHeight());
 
-			} else if (imageRatio < a4Ratio) {
+			} else if (imageRatio < aspectRatio) {
 				image.scaleToFit(
-						PageSize.A4.getWidth(),
-						(PageSize.A4.getWidth() / image.getWidth())
-								* image.getHeight());
+						SNPDFCContstants.PAGE_SIZE.getWidth(),
+						(SNPDFCContstants.PAGE_SIZE.getWidth() / image
+								.getWidth()) * image.getHeight());
 			} else {
-				image.scaleToFit(
-						(PageSize.A4.getHeight() / image.getHeight() * image
-								.getWidth()), PageSize.A4.getHeight());
+				image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight()
+						/ image.getHeight() * image.getWidth()),
+						SNPDFCContstants.PAGE_SIZE.getHeight());
 			}
 
 			document.add(image);
@@ -139,7 +139,9 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
 		logger.info("****** starting to convert image to pdf **********");
 		if (error) {
-			SNPDFUtils.setErrorText(this, "Unable to create PDF");
+			SNPDFUtils
+					.setErrorText(this,
+							"Unable to create PDF (Was the selected image just a stream?");
 			disableButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF successfully created.",
