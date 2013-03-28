@@ -33,16 +33,10 @@ public class FAQActivity extends SNPDFActivity {
 		answer3.setText("1. Core Options are the application capabilities which provide perfect results.\n2. Non-Core Options are the application capabilities which does not provide perfect, but more than workable results.");
 
 		TextView question4 = (TextView) findViewById(R.id.question4);
-		question4.setText("How can I concatenate encrypted PDFs?");
+		question4.setText("How can I change a PDF password?");
 
 		TextView answer4 = (TextView) findViewById(R.id.answer4);
-		answer4.setText("First copy the encrypted ones to non-encrypted PDFs and then concatenate.");
-
-		TextView question5 = (TextView) findViewById(R.id.question5);
-		question5.setText("How can I change a PDF password?");
-
-		TextView answer5 = (TextView) findViewById(R.id.answer5);
-		answer5.setText("First copy the encrypted PDF to non-encrypted one and then protect it with a new password.");
+		answer4.setText("First copy the encrypted PDF to non-encrypted one and then protect it with a new password.");
 	}
 
 }

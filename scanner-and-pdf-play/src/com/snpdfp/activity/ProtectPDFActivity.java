@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.itextpdf.text.DocumentException;
@@ -32,76 +33,95 @@ public class ProtectPDFActivity extends SNPDFActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_protect_pdf);
 
 		Intent intent = getIntent();
-		srcFile = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
-
-		// Check if already encrypted
-		PdfReader pdfReader = null;
-		try {
-			pdfReader = new PdfReader(srcFile.getAbsolutePath());
-			if (pdfReader.isEncrypted()) {
-				getAlertDialog()
-						.setTitle("Invalid selection")
-						.setMessage(
-								"The PDF is already protected, cannot process further!")
-						.setPositiveButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-										finish();
-									}
-
-								}).show();
-			} else {
-				pickPassword();
-			}
-
-		} catch (IOException e) {
-			logger.log(
-					Level.SEVERE,
-					"It seems the PDF is already protected with a password, cannot process further!",
-					e);
-			getAlertDialog()
-					.setTitle("ERROR")
-					.setMessage(
-							"It seems the PDF is already protected with a password, cannot process further!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									finish();
-									return;
-								}
-
-							}).show();
-
-		} finally {
-			if (pdfReader != null) {
-				pdfReader.close();
-			}
+		if (intent.getStringExtra(SNPDFCContstants.FILE_URI) != null) {
+			srcFile = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
+			setName();
 		}
+
 	}
 
-	private void pickPassword() {
-		logger.info("Taking the password...");
-		Intent pickPassword = new Intent(this, PickPasswordActivity.class);
-		startActivityForResult(pickPassword,
-				SNPDFCContstants.PICK_PASSWORD_REQUEST);
+	public void pickFile(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SNPDFCContstants.TEXT);
-				new PDFProtect().execute();
+			if (requestCode == SNPDFCContstants.PICK_FILE) {
+				srcFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				setName();
 			}
 
 		} else {
 			operationCancelled();
+		}
+	}
+
+	private void setName() {
+		EditText editText = (EditText) findViewById(R.id.pdf_file);
+		editText.setText(srcFile.getName());
+
+	}
+
+	public void protect(View view) {
+		if (srcFile == null || !srcFile.exists()) {
+			getAlertDialog()
+					.setTitle("Incomplete details")
+					.setMessage("Please select a PDF file!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+
+							}).show();
+		} else {
+			password = ((EditText) findViewById(R.id.password)).getText()
+					.toString();
+			String confirmPassword = ((EditText) findViewById(R.id.confirm_password))
+					.getText().toString();
+
+			if (password == null || confirmPassword == null
+					|| "".equals(password) || "".equals(confirmPassword)
+					|| !password.equals(confirmPassword)) {
+				getAlertDialog()
+						.setTitle("Incomplete details")
+						.setMessage(
+								"Password and Confirm Password fields are required, and they must match!")
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+									}
+
+								}).show();
+
+			} else {
+				if (isProtected(srcFile)) {
+					getAlertDialog()
+							.setTitle("Invalid selection")
+							.setMessage(
+									"The PDF is already protected, cannot process further!")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+										}
+
+									}).show();
+				} else {
+					new PDFProtect().execute();
+				}
+			}
 		}
 	}
 
@@ -166,7 +186,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 	}
 
 	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_protect_pdf);
+		setContentView(R.layout.snpdf_output);
 
 		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
 		// Disable the already protected pdf

@@ -118,10 +118,8 @@ public class MainActivity extends SNPDFActivity {
 
 	public void lockPDF(View view) {
 		logger.info("*************** starting to lock pdf **************");
-		Intent filePick = new Intent(this, BrowsePDFActivity.class);
-		filePick.putExtra(SNPDFCContstants.PDF_REQUEST_TYPE,
-				SNPDFCContstants.PDF_REQUEST_LOCK);
-		startActivity(filePick);
+		Intent intent = new Intent(this, ProtectPDFActivity.class);
+		startActivity(intent);
 	}
 
 	public void concatenatePDF(View view) {
