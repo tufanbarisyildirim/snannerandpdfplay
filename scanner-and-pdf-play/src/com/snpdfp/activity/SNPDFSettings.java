@@ -1,11 +1,12 @@
 package com.snpdfp.activity;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SNPDFSettings extends SNPDFActivity {
@@ -19,28 +20,23 @@ public class SNPDFSettings extends SNPDFActivity {
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String pageSize = mPrefs.getString(snpdfPageSize, "A4");
 
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioPageSize);
-		int length = radioGroup.getChildCount();
-		for (int i = 0; i < length; i++) {
-			RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
-			if (pageSize.equalsIgnoreCase(radioButton.getText().toString())) {
-				radioButton.setChecked(true);
-				break;
+		TextView textView = (TextView) findViewById(R.id.pageSize);
+		textView.setText(pageSize);
+
+		textView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				selectPageSize(v);
 			}
-		}
+		});
 
 	}
 
 	public void save(View view) {
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioPageSize);
-
-		int selectedId = radioGroup.getCheckedRadioButtonId();
-		RadioButton radioButton = (RadioButton) findViewById(selectedId);
-
-		String size = radioButton.getText().toString();
-
+		TextView textView = (TextView) findViewById(R.id.pageSize);
+		String size = textView.getText().toString();
 		setPageSize(size);
 
 		SharedPreferences.Editor editor = mPrefs.edit();
@@ -52,4 +48,26 @@ public class SNPDFSettings extends SNPDFActivity {
 		onBackPressed();
 	}
 
+	public void selectPageSize(View view) {
+
+		final TextView textView = (TextView) findViewById(R.id.pageSize);
+
+		final TypedArray pageSizes = getResources().obtainTypedArray(
+				R.array.page_size_array);
+
+		getAlertDialog()
+				.setTitle("Select the page size")
+				.setItems(R.array.page_size_array,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								textView.setText(pageSizes.getText(which));
+								dialog.dismiss();
+							}
+						}).show();
+	}
+
+	public void cancel(View view) {
+		onBackPressed();
+	}
 }
