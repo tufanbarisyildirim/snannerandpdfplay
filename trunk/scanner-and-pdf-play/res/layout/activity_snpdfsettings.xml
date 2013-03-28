@@ -14,6 +14,8 @@
 
     <View style="@style/line" />
 
+    <View style="@style/gap" />
+
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         style="http://schemas.android.com/apk/res/android"
@@ -27,21 +29,19 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|center_vertical"
             android:layout_weight="1"
-            android:text="PDF page size"
-            android:textSize="20sp" />
+            android:text="PDF page size" />
 
         <TextView
             android:id="@+id/pageSize"
             style="@style/AnswerText"
             android:layout_gravity="left|center_vertical"
             android:layout_weight="1"
-            android:textSize="22sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <View style="@style/line" />
-
     <View style="@style/gap" />
+
+    <View style="@style/line" />
 
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -68,6 +68,8 @@
             android:onClick="cancel"
             android:text="cancel" />
     </LinearLayout>
+
+    <View style="@style/gap" />
 
     <com.google.ads.AdView
         android:id="@+id/adView2"

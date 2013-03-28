@@ -25,6 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/gap" />
+
         <TextView
             android:id="@+id/question2"
             style="@style/HeadTextLeft"
@@ -36,6 +38,8 @@
             style="@style/AnswerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <View style="@style/gap" />
 
         <TextView
             android:id="@+id/question3"
@@ -49,6 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/gap" />
+
         <TextView
             android:id="@+id/question4"
             style="@style/HeadTextLeft"
@@ -61,6 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/gap" />
+
         <TextView
             android:id="@+id/question5"
             style="@style/HeadTextLeft"
@@ -72,6 +80,8 @@
             style="@style/AnswerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <View style="@style/gap" />
 
         <com.google.ads.AdView
             android:id="@+id/adView2"

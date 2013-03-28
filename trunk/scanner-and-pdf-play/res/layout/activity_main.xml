@@ -48,6 +48,8 @@
                 android:text="scan-now" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -67,6 +69,8 @@
                 android:onClick="convertImage"
                 android:text="image-to-pdf" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -88,6 +92,8 @@
                 android:text="lock-pdf" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -107,6 +113,8 @@
                 android:onClick="concatenatePDF"
                 android:text="concatenate-pdfs" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -128,6 +136,8 @@
                 android:text="extract-pdf-pages" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -148,6 +158,8 @@
                 android:text="txt-to-pdf" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -167,6 +179,8 @@
                 android:onClick="copyProtectedPDF"
                 android:text="copy-protected" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <View style="@style/line" />
 
@@ -196,6 +210,8 @@
                 android:text="pdf-to-text" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -216,6 +232,8 @@
                 android:text="add-watermark" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -235,6 +253,8 @@
                 android:onClick="convertHTMLFile"
                 android:text="html-to-pdf" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <com.google.ads.AdView
             android:id="@+id/adView2"

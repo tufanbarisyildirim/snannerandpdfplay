@@ -37,6 +37,8 @@
 
         <View style="@style/line" />
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -58,6 +60,8 @@
                 android:text="open-file" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -78,6 +82,8 @@
                 android:onClick="sharePDF"
                 android:text="share-file" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -101,6 +107,8 @@
                 android:text="protect-pdf" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -122,6 +130,8 @@
                 android:text="rename-file" />
         </LinearLayout>
 
+        <View style="@style/gap" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -142,6 +152,8 @@
                 android:onClick="deletePDF"
                 android:text="delete-file" />
         </LinearLayout>
+
+        <View style="@style/gap" />
 
         <com.google.ads.AdView
             android:id="@+id/adView2"
