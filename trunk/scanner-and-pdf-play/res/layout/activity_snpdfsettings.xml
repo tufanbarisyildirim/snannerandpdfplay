@@ -22,55 +22,50 @@
 
         <TextView
             style="@style/AnswerText"
-            android:layout_weight="1"
-            android:text="PDF page size" />
-
-        <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:text="PDF page size"
+            android:textSize="20sp" />
 
-            <RadioGroup
-                android:id="@+id/radioPageSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/A4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="A4" />
-
-                <RadioButton
-                    android:id="@+id/A3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="A3" />
-
-                <RadioButton
-                    android:id="@+id/A2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="A2" />
-
-                <RadioButton
-                    android:id="@+id/A1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="A1" />
-            </RadioGroup>
-        </ScrollView>
+        <TextView
+            android:id="@+id/pageSize"
+            style="@style/AnswerText"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <View style="@style/line" />
 
-    <Button
-        android:id="@+id/save_settings_button"
-        style="@style/ButtonText"
+    <View style="@style/gap" />
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        style="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:background="@drawable/snpdf_button"
-        android:onClick="save"
-        android:text="save" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/save_settings_button"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/snpdf_button"
+            android:onClick="save"
+            android:text="save" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/snpdf_button"
+            android:onClick="cancel"
+            android:text="cancel" />
+    </LinearLayout>
 
 </LinearLayout>

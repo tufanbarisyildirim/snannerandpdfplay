@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="page_size_array">
+        <item><name>A4</name></item>
+        <item><name>A3</name></item>
+        <item><name>A2</name></item>
+        <item><name>A1</name></item>
+        <item><name>A0</name></item>
+        <item><name>B4</name></item>
+        <item><name>B3</name></item>
+        <item><name>B2</name></item>
+        <item><name>B1</name></item>
+        <item><name>B0</name></item>
+    </string-array>
+
+</resources>

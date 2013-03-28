@@ -280,6 +280,24 @@ public class SNPDFActivity extends Activity {
 		} else if ("A1".equalsIgnoreCase(size)) {
 			SNPDFCContstants.PAGE_SIZE = PageSize.A1;
 
+		} else if ("A0".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.A0;
+
+		} else if ("B4".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.B4;
+
+		} else if ("B3".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.B3;
+
+		} else if ("B2".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.B2;
+
+		} else if ("B1".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.B1;
+
+		} else if ("B0".equalsIgnoreCase(size)) {
+			SNPDFCContstants.PAGE_SIZE = PageSize.B0;
+
 		}
 
 	}
