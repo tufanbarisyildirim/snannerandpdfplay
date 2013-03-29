@@ -68,7 +68,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 				((EditText) findViewById(R.id.pdf_file1)).setText(firstFile
 						.getName());
 
-				if (isProtected(firstFile)) {
+				if (SNPDFUtils.isProtected(firstFile)) {
 					getAlertDialog()
 							.setTitle("PDF is encrypted!")
 							.setMessage(
@@ -83,6 +83,8 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 											password1
 													.setVisibility(View.VISIBLE);
 											password1_req = true;
+											password1.setText("");
+
 										}
 
 									}).show();
@@ -91,6 +93,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 					EditText password1 = (EditText) findViewById(R.id.password1);
 					password1.setVisibility(View.GONE);
 					password1_req = false;
+					password1.setText("");
 				}
 
 			} else if (requestCode == SNPDFCContstants.PICK_FILE2) {
@@ -98,7 +101,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 						data.getStringExtra(SNPDFCContstants.FILE_URI));
 				((EditText) findViewById(R.id.pdf_file2)).setText(secondFile
 						.getName());
-				if (isProtected(secondFile)) {
+				if (SNPDFUtils.isProtected(secondFile)) {
 					getAlertDialog()
 							.setTitle("PDF is encrypted!")
 							.setMessage(
@@ -113,6 +116,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 											password2
 													.setVisibility(View.VISIBLE);
 											password2_req = true;
+											password2.setText("");
 
 										}
 
@@ -121,6 +125,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 					EditText password2 = (EditText) findViewById(R.id.password2);
 					password2.setVisibility(View.GONE);
 					password2_req = false;
+					password2.setText("");
 				}
 			}
 
@@ -183,7 +188,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 					.toString();
 
 			if (password2 == null || password2.equals("")
-					|| !isPasswordCorrect(secondFile, password2)) {
+					|| !SNPDFUtils.isPasswordCorrect(secondFile, password2)) {
 				return false;
 			}
 		}
@@ -197,7 +202,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 					.toString();
 
 			if (password1 == null || password1.equals("")
-					|| !isPasswordCorrect(firstFile, password1)) {
+					|| !SNPDFUtils.isPasswordCorrect(firstFile, password1)) {
 				return false;
 			}
 		}
