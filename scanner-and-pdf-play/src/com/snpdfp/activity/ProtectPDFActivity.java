@@ -104,7 +104,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 								}).show();
 
 			} else {
-				if (isProtected(srcFile)) {
+				if (SNPDFUtils.isProtected(srcFile)) {
 					getAlertDialog()
 							.setTitle("Invalid selection")
 							.setMessage(

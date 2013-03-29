@@ -1,6 +1,7 @@
 package com.snpdfp.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.activity.R;
 
 public class SNPDFUtils {
@@ -55,6 +57,55 @@ public class SNPDFUtils {
 	public static void setErrorText(TextView textView, String message) {
 		textView.setText(message);
 		textView.setTextColor(Color.parseColor("#FF0040"));
+	}
+
+	public static boolean isPDFPasswordCorrect(boolean password_req,
+			String password, File file) {
+		if (password_req) {
+			if (password == null || password.equals("")
+					|| !isPasswordCorrect(file, password)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static boolean isProtected(File srcFile) {
+		PdfReader pdfReader = null;
+		boolean encrypted = false;
+		try {
+			pdfReader = new PdfReader(srcFile.getAbsolutePath());
+			if (pdfReader.isEncrypted()) {
+				encrypted = true;
+			}
+
+		} catch (IOException e) {
+			encrypted = true;
+		} finally {
+			if (pdfReader != null) {
+				pdfReader.close();
+			}
+		}
+
+		return encrypted;
+	}
+
+	public static boolean isPasswordCorrect(File srcFile, String password) {
+		PdfReader pdfReader = null;
+		try {
+			pdfReader = new PdfReader(srcFile.getAbsolutePath(),
+					password.getBytes());
+			return true;
+		} catch (IOException e) {
+
+		} finally {
+			if (pdfReader != null) {
+				pdfReader.close();
+			}
+		}
+
+		return false;
 	}
 
 }

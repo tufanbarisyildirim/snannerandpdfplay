@@ -311,41 +311,4 @@ public class SNPDFActivity extends Activity {
 
 	}
 
-	protected boolean isProtected(File srcFile) {
-		PdfReader pdfReader = null;
-		boolean encrypted = false;
-		try {
-			pdfReader = new PdfReader(srcFile.getAbsolutePath());
-			if (pdfReader.isEncrypted()) {
-				encrypted = true;
-			}
-
-		} catch (IOException e) {
-			encrypted = true;
-		} finally {
-			if (pdfReader != null) {
-				pdfReader.close();
-			}
-		}
-
-		return encrypted;
-	}
-
-	protected boolean isPasswordCorrect(File srcFile, String password) {
-		PdfReader pdfReader = null;
-		try {
-			pdfReader = new PdfReader(srcFile.getAbsolutePath(),
-					password.getBytes());
-			return true;
-		} catch (IOException e) {
-
-		} finally {
-			if (pdfReader != null) {
-				pdfReader.close();
-			}
-		}
-
-		return false;
-	}
-
 }
