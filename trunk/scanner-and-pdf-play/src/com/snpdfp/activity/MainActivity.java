@@ -225,30 +225,6 @@ public class MainActivity extends SNPDFActivity {
 	}
 
 	public void convertTXTFile(View view) {
-		logger.info("*************** starting converting TXT to pdf **************");
-		getAlertDialog()
-				.setTitle("File select")
-				.setMessage("Select the TXT File to convert to PDF...")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						convertTXTFile();
-					}
-
-				})
-				.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-								showCancelledMsg();
-							}
-
-						}).show();
-
-	}
-
-	private void convertTXTFile() {
 		Intent filePick = new Intent(this, FileToPDFActivity.class);
 		filePick.putExtra(SNPDFCContstants.FILE_TYPE,
 				SNPDFCContstants.FILE_TYPE_TXT);
@@ -257,31 +233,6 @@ public class MainActivity extends SNPDFActivity {
 	}
 
 	public void convertHTMLFile(View view) {
-		logger.info("*************** starting converting HTML to pdf **************");
-		getAlertDialog()
-				.setTitle("NOTE")
-				.setMessage(
-						"Only strict HTML files are capable for conversion. The conversion may not work on distorted HTMLs!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						convertHTMLFile();
-					}
-
-				})
-				.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-								showCancelledMsg();
-							}
-
-						}).show();
-
-	}
-
-	private void convertHTMLFile() {
 		Intent filePick = new Intent(this, FileToPDFActivity.class);
 		filePick.putExtra(SNPDFCContstants.FILE_TYPE,
 				SNPDFCContstants.FILE_TYPE_HTML);

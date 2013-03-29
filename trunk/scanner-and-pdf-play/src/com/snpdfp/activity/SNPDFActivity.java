@@ -1,7 +1,6 @@
 package com.snpdfp.activity;
 
 import java.io.File;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.menu.About;
 import com.snpdfp.menu.FAQActivity;
 import com.snpdfp.utils.SNPDFCContstants;
@@ -35,6 +33,8 @@ public class SNPDFActivity extends Activity {
 	final String snpdfPageSize = "SNPDF_PAGE_SIZE";
 
 	protected File mainFile = null;
+
+	protected String errorMessage = "";
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {

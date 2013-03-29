@@ -167,7 +167,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to lock PDF", e);
 				error = true;
-
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				try {
 					stamper.close();
@@ -194,7 +194,8 @@ public class ProtectPDFActivity extends SNPDFActivity {
 
 		if (error) {
 			SNPDFUtils.setErrorText(this,
-					"Unable to lock file: " + srcFile.getName());
+					"Unable to lock file: " + srcFile.getName() + " ("
+							+ errorMessage + ")");
 			disableButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF successfully protected.",

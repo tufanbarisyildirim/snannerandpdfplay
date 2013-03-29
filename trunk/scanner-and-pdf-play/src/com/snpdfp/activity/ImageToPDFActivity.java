@@ -125,6 +125,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to create PDF", e);
 				error = true;
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				SNPDFPathManager.getSNPDFPicFile().delete();
 			}
@@ -139,9 +140,8 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
 		logger.info("****** starting to convert image to pdf **********");
 		if (error) {
-			SNPDFUtils
-					.setErrorText(this,
-							"Unable to create PDF (Was the selected image just a stream?");
+			SNPDFUtils.setErrorText(this, "Unable to create PDF ("
+					+ errorMessage + ")");
 			disableButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF successfully created.",

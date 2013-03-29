@@ -77,6 +77,8 @@
                 android:paddingRight="16sp"
                 android:text="protect" />
 
+            <View style="@style/gap_horizontal" />
+
             <Button
                 android:id="@+id/button2"
                 style="@style/ButtonText"

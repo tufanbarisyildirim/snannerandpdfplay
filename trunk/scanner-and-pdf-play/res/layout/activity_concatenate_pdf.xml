@@ -105,6 +105,8 @@
                 android:paddingRight="16sp"
                 android:text="concatenate" />
 
+            <View style="@style/gap_horizontal" />
+
             <Button
                 android:id="@+id/button2"
                 style="@style/ButtonText"

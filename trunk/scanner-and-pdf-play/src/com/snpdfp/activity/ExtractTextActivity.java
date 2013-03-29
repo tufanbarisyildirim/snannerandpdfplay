@@ -188,6 +188,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to extract Text from PDF", e);
 				error = true;
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				// close the document
 				if (out != null)
@@ -211,7 +212,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
-					+ selectedFile.getName());
+					+ selectedFile.getName() + " (" + errorMessage + ")");
 			disableButtons();
 
 		} else {

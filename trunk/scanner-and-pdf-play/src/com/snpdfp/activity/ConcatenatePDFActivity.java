@@ -267,6 +267,8 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to concatenate PDFs", e);
 				error = true;
+				errorMessage = e.getLocalizedMessage();
+
 			} finally {
 				if (reader1 != null) {
 					reader1.close();
@@ -289,7 +291,8 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to concatenate PDFs "
-					+ firstFile.getName() + " and " + secondFile.getName());
+					+ firstFile.getName() + " and " + secondFile.getName()
+					+ " (" + errorMessage + ")");
 			disableButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDFs " + firstFile.getName()

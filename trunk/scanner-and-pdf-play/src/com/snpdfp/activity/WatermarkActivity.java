@@ -206,6 +206,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to add watermark to PDF", e);
 				error = true;
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				// close the document
 				if (stamp != null) {
@@ -231,7 +232,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to add watermark to PDF: "
-					+ selectedFile.getName());
+					+ selectedFile.getName() + " (" + errorMessage + ")");
 			disableButtons();
 
 		} else {

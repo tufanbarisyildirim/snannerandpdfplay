@@ -1,10 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FileToPDFActivity" >
 
-    <include layout="@layout/snpdf_output" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".FileToPDFActivity" >
 
-</LinearLayout>
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/file"
+                style="@style/AnswerText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:enabled="false"
+                android:hint="Select file to convert to PDF" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/find"
+                android:onClick="pickFile" />
+        </LinearLayout>
+
+        <View style="@style/gap" />
+
+        <View style="@style/gap" />
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button1"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="convert"
+                android:paddingLeft="16sp"
+                android:paddingRight="16sp"
+                android:text="convert-to-PDF" />
+
+            <View style="@style/gap_horizontal" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="cancel"
+                android:paddingLeft="16sp"
+                android:paddingRight="16sp"
+                android:text="@string/cancel" />
+        </LinearLayout>
+
+        <View style="@style/gap" />
+
+        <com.google.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/adUnitId"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+    </LinearLayout>
+
+</ScrollView>
