@@ -338,6 +338,7 @@ public class SplitActivity extends SNPDFActivity {
 
 			} catch (Exception e) {
 				error = true;
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				if (document.isOpen())
 					document.close();
@@ -360,7 +361,7 @@ public class SplitActivity extends SNPDFActivity {
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to extract PDF " + srcPDF
 					+ " from page " + fromPageNumber + " to page "
-					+ toPageNumber);
+					+ toPageNumber + " (" + errorMessage + ")");
 			disableButtons();
 
 		} else {

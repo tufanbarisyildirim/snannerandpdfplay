@@ -153,6 +153,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to extract Text from PDF", e);
 				error = true;
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				// close the writer
 				if (pdfReader != null)
@@ -175,7 +176,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
-					+ selectedFile.getName());
+					+ selectedFile.getName() + " (" + errorMessage + ")");
 			disableButtons();
 
 		} else {

@@ -8,27 +8,27 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.snpdfp.layout.FolderLayout;
-import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
-public class FileToPDFActivity extends SNPDFActivity implements
-		IFolderItemListener {
+public class FileToPDFActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(FileToPDFActivity.class.getName());
 
 	File srcFile = null;
-	FolderLayout localFolders;
 	String fileType = SNPDFCContstants.FILE_TYPE_TXT;
 
 	/** Called when the activity is first created. */
@@ -41,59 +41,51 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			fileType = getIntent().getStringExtra(SNPDFCContstants.FILE_TYPE);
 		}
 
-		setContentView(R.layout.folders);
+		setContentView(R.layout.activity_file_to_pdf);
 
-		localFolders = (FolderLayout) findViewById(R.id.localfolders);
-		localFolders.setIFolderItemListener(this);
 	}
 
-	// Your stuff here for Cannot open Folder
-	public void OnCannotFileRead(File file) {
-		showCannotReadFileDialog(file);
+	public void pickFile(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		filePick.putExtra(SNPDFCContstants.FILE_TYPE, fileType);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
 	}
 
-	// Your stuff here for file Click
-	public void OnFileClicked(File file) {
-		srcFile = file;
-		if (SNPDFCContstants.FILE_TYPE_TXT.equals(fileType)) {
-			if (!file.getName().toLowerCase().endsWith(".txt")
-					&& !file.getName().toLowerCase().endsWith(".log")
-					&& !file.getName().toLowerCase().endsWith(".csv")) {
-				getAlertDialog()
-						.setTitle("Invalid selection")
-						.setMessage(
-								"You can only select a .txt, .log or .csv file for this conversion!")
-						.setPositiveButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
+	public void convert(View view) {
+		if (srcFile == null || !srcFile.exists()) {
+			getAlertDialog()
+					.setTitle("Incomplete details")
+					.setMessage("Please select the file to convert to PDF!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
 
-									}
-
-								}).show();
-			} else {
-				new FileConverter().execute();
-			}
-
-		} else if (SNPDFCContstants.FILE_TYPE_HTML.equals(fileType)) {
-			if (!file.getName().toLowerCase().endsWith(".htm")
-					&& !file.getName().toLowerCase().endsWith(".html")) {
-				getAlertDialog()
-						.setTitle("Invalid selection")
-						.setMessage(
-								"You can only select a .htm OR .html file for this conversion!")
-						.setPositiveButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-									}
-
-								}).show();
-			} else {
-				new FileConverter().execute();
-			}
+							}).show();
+		} else {
+			new FileConverter().execute();
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			if (requestCode == SNPDFCContstants.PICK_FILE) {
+				srcFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				setName();
+			}
+
+		} else {
+			operationCancelled();
+		}
+	}
+
+	private void setName() {
+		EditText editText = (EditText) findViewById(R.id.file);
+		editText.setText(srcFile.getName());
 
 	}
 
@@ -178,7 +170,7 @@ public class FileToPDFActivity extends SNPDFActivity implements
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to create PDF", e);
 				error = true;
-
+				errorMessage = e.getLocalizedMessage();
 			} finally {
 				// close the document
 				if (document != null)
@@ -195,11 +187,12 @@ public class FileToPDFActivity extends SNPDFActivity implements
 	}
 
 	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_file_to_pdf);
+		setContentView(R.layout.snpdf_output);
 
 		if (error) {
 			SNPDFUtils.setErrorText(this,
-					"Unable to convert file " + srcFile.getName() + " to PDF!");
+					"Unable to convert file " + srcFile.getName() + " to PDF ("
+							+ errorMessage + ")");
 			disableButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF file successfully created.",
