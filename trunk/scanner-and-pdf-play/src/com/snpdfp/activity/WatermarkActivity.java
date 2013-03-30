@@ -12,141 +12,151 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.widget.EditText;
 
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.snpdfp.layout.FolderLayout;
-import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
-public class WatermarkActivity extends SNPDFActivity implements
-		IFolderItemListener {
+public class WatermarkActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(WatermarkActivity.class.getName());
 
-	FolderLayout localFolders;
 	File selectedFile;
 	File image;
 
+	boolean password_req = false;
 	String password;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_watermark);
 
-		setContentView(R.layout.folders);
-		localFolders = (FolderLayout) findViewById(R.id.localfolders);
-		localFolders.setIFolderItemListener(this);
-	}
-
-	// Your stuff here for Cannot open Folder
-	public void OnCannotFileRead(File file) {
-		showCannotReadFileDialog(file);
-	}
-
-	// Your stuff here for file Click
-	public void OnFileClicked(File file) {
-		selectedFile = file;
-		if (!file.getName().toLowerCase().endsWith(".pdf")) {
-			getAlertDialog()
-					.setTitle("Invalid selection")
-					.setMessage(
-							"Please select a valid .pdf file to add watermark to!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-								}
-
-							}).show();
-		} else {
-			addWatermark();
-		}
+		EditText password = (EditText) findViewById(R.id.password);
+		password.setVisibility(View.GONE);
+		password_req = false;
 
 	}
 
-	private void addWatermark() {
-		PdfReader pdfReader = null;
-		try {
-			pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-			if (pdfReader.isEncrypted()) {
-				Intent pickPassword = new Intent(this,
-						PickPasswordActivity.class);
-				startActivityForResult(pickPassword,
-						SNPDFCContstants.PICK_PASSWORD_REQUEST);
-
-			} else {
-				pickImage();
-			}
-
-		} catch (Exception e) {
-			final Intent pickPassword = new Intent(this,
-					PickPasswordActivity.class);
-			getAlertDialog()
-					.setTitle("Protected PDF")
-					.setMessage(
-							"Unable to read PDF, as it seems to be protected. You want to continue the add-watermark action by filling the password?")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									startActivityForResult(
-											pickPassword,
-											SNPDFCContstants.PICK_PASSWORD_REQUEST);
-								}
-
-							})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									operationCancelled();
-								}
-
-							}).show();
-		} finally {
-			if (pdfReader != null)
-				pdfReader.close();
-		}
-
+	public void pickFile(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
 	}
 
-	private void pickImage() {
-		getAlertDialog().setTitle("Pick Image")
-				.setMessage("Pick the image to add as watermark!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						Intent imagePick = new Intent(Intent.ACTION_PICK,
-								MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-						startActivityForResult(imagePick,
-								SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
-					}
-				}).show();
+	public void pickImage(View view) {
+		Intent imagePick = new Intent(Intent.ACTION_PICK,
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(imagePick,
+				SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
 
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SNPDFCContstants.TEXT);
-				pickImage();
+			if (requestCode == SNPDFCContstants.PICK_FILE) {
+				selectedFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				((EditText) findViewById(R.id.file)).setText(selectedFile
+						.getName());
+				if (SNPDFUtils.isProtected(selectedFile)) {
+					getAlertDialog()
+							.setTitle("PDF is encrypted!")
+							.setMessage(
+									"The selected PDF is protected, please enter it's password!")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											EditText password = (EditText) findViewById(R.id.password);
+											password.setVisibility(View.VISIBLE);
+											password_req = true;
+											password.setText("");
+										}
+
+									}).show();
+
+				} else {
+					EditText password = (EditText) findViewById(R.id.password);
+					password.setVisibility(View.GONE);
+					password_req = false;
+					password.setText("");
+				}
 			} else if (requestCode == SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST) {
 				image = new File(getImagePathFromURI(data.getData()));
-				new WatermarkExecutor().execute();
+				EditText imageFile = (EditText) findViewById(R.id.image);
+				imageFile.setText(image.getName());
 			}
 
 		} else {
 			operationCancelled();
 		}
+	}
+
+	public void addWatermark(View view) {
+		if (selectedFile == null || !selectedFile.exists()) {
+			getAlertDialog()
+					.setTitle("Incomplete details")
+					.setMessage(
+							"Please select the PDF file to add watermark to!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+
+							}).show();
+		} else if (image == null || !image.exists()) {
+			getAlertDialog()
+					.setTitle("Incomplete details")
+					.setMessage(
+							"Please select a valid image to add as watermark!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							}).show();
+		} else if (!arePDFDetailsComplete()) {
+			getAlertDialog()
+					.setTitle("PDF password required")
+					.setMessage(
+							"Please enter a valid password for the selected PDF")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+
+							}).show();
+		} else {
+			new WatermarkExecutor().execute();
+		}
+
+	}
+
+	private boolean arePDFDetailsComplete() {
+		if (password_req) {
+			password = ((EditText) findViewById(R.id.password)).getText()
+					.toString();
+
+			if (password == null || password.equals("")
+					|| !SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private class WatermarkExecutor extends AsyncTask<String, Void, Boolean> {
@@ -228,7 +238,7 @@ public class WatermarkActivity extends SNPDFActivity implements
 	}
 
 	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_file_to_pdf);
+		setContentView(R.layout.snpdf_output);
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to add watermark to PDF: "

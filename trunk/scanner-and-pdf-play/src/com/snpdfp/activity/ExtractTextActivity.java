@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.itextpdf.text.Rectangle;
@@ -23,44 +24,39 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.itextpdf.text.pdf.parser.RegionTextRenderFilter;
 import com.itextpdf.text.pdf.parser.RenderFilter;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
-import com.snpdfp.layout.FolderLayout;
-import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
-public class ExtractTextActivity extends SNPDFActivity implements
-		IFolderItemListener {
+public class ExtractTextActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(ExtractTextActivity.class.getName());
 
-	FolderLayout localFolders;
 	File selectedFile;
 
+	boolean password_req = false;
 	String password;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_pdf_to_text);
 
-		setContentView(R.layout.folders);
-		localFolders = (FolderLayout) findViewById(R.id.localfolders);
-		localFolders.setIFolderItemListener(this);
+		EditText password = (EditText) findViewById(R.id.password);
+		password.setVisibility(View.GONE);
+		password_req = false;
 	}
 
-	// Your stuff here for Cannot open Folder
-	public void OnCannotFileRead(File file) {
-		showCannotReadFileDialog(file);
+	public void pickFile(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
 	}
 
-	// Your stuff here for file Click
-	public void OnFileClicked(File file) {
-		selectedFile = file;
-		if (!file.getName().toLowerCase().endsWith(".pdf")) {
+	public void extractText(View view) {
+		if (selectedFile == null || !selectedFile.exists()) {
 			getAlertDialog()
-					.setTitle("Invalid selection")
+					.setTitle("Incomplete details")
 					.setMessage(
-							"Please select a valid .pdf file to extract text from!")
+							"Please select the PDF file to extract text from!")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -70,65 +66,74 @@ public class ExtractTextActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			extractText();
-		}
+			if (!arePDFDetailsComplete()) {
+				getAlertDialog()
+						.setTitle("PDF password required")
+						.setMessage(
+								"Please enter a valid password for the selected PDF")
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+									}
 
-	}
-
-	private void extractText() {
-		PdfReader pdfReader = null;
-		try {
-			pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-			if (pdfReader.isEncrypted()) {
-				Intent pickPassword = new Intent(this,
-						PickPasswordActivity.class);
-				startActivityForResult(pickPassword,
-						SNPDFCContstants.PICK_PASSWORD_REQUEST);
-
+								}).show();
 			} else {
 				new TextExtractor().execute();
 			}
 
-		} catch (Exception e) {
-			final Intent pickPassword = new Intent(this,
-					PickPasswordActivity.class);
-			getAlertDialog()
-					.setTitle("Protected PDF")
-					.setMessage(
-							"Unable to read PDF, as it seems to be protected. You want to continue the EXTRACT action by filling the password?")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									startActivityForResult(
-											pickPassword,
-											SNPDFCContstants.PICK_PASSWORD_REQUEST);
-								}
-
-							})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									operationCancelled();
-								}
-
-							}).show();
-		} finally {
-			if (pdfReader != null)
-				pdfReader.close();
 		}
 
+	}
+
+	private boolean arePDFDetailsComplete() {
+		if (password_req) {
+			password = ((EditText) findViewById(R.id.password)).getText()
+					.toString();
+
+			if (password == null || password.equals("")
+					|| !SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SNPDFCContstants.TEXT);
-				new TextExtractor().execute();
+			if (requestCode == SNPDFCContstants.PICK_FILE) {
+				selectedFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				((EditText) findViewById(R.id.file)).setText(selectedFile
+						.getName());
+				if (SNPDFUtils.isProtected(selectedFile)) {
+					getAlertDialog()
+							.setTitle("PDF is encrypted!")
+							.setMessage(
+									"The selected PDF is protected, please enter it's password!")
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.dismiss();
+											EditText password = (EditText) findViewById(R.id.password);
+											password.setVisibility(View.VISIBLE);
+											password_req = true;
+											password.setText("");
+										}
+
+									}).show();
+
+				} else {
+					EditText password = (EditText) findViewById(R.id.password);
+					password.setVisibility(View.GONE);
+					password_req = false;
+					password.setText("");
+				}
 			}
 
 		} else {
@@ -167,7 +172,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 			PdfReader pdfReader = null;
 			mainFile = SNPDFPathManager.getTextFileForPDF(selectedFile);
 			try {
-				if (password != null) {
+				if (password_req) {
 					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
 							password.getBytes());
 				} else {
@@ -205,7 +210,7 @@ public class ExtractTextActivity extends SNPDFActivity implements
 	}
 
 	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_file_to_pdf);
+		setContentView(R.layout.snpdf_output);
 
 		LinearLayout protect_pdf_layout = (LinearLayout) findViewById(R.id.protect_pdf_layout);
 		protect_pdf_layout.setVisibility(View.GONE);
