@@ -14,6 +14,10 @@
         android:orientation="vertical"
         tools:context=".FileToPDFActivity" >
 
+        <TextView
+            style="@style/IntroText"
+            android:text="@string/intro_filetopdf" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
