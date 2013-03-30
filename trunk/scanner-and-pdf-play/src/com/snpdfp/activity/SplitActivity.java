@@ -312,8 +312,8 @@ public class SplitActivity extends SNPDFActivity {
 			boolean error = false;
 
 			mainFile = SNPDFPathManager.getSavePDFPath("EXTRACTED_"
-					+ srcPDF.getName() + "_" + fromPageNumber + "-"
-					+ toPageNumber + ".pdf");
+					+ SNPDFPathManager.getFileNameWithoutExtn(srcPDF.getName())
+					+ "_" + fromPageNumber + "-" + toPageNumber + ".pdf");
 
 			Document document = new Document();
 			PdfReader inputPDF = null;
