@@ -14,6 +14,10 @@
         android:orientation="vertical"
         tools:context=".ProtectPDFActivity" >
 
+        <TextView
+            style="@style/IntroText"
+            android:text="@string/intro_protect" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"

@@ -14,6 +14,10 @@
         android:orientation="vertical"
         tools:context=".SplitActivity" >
 
+        <TextView
+            style="@style/IntroText"
+            android:text="@string/intro_split" />
+
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             style="http://schemas.android.com/apk/res/android"
@@ -60,7 +64,7 @@
             android:onClick="fillPageDetails"
             android:paddingLeft="16sp"
             android:paddingRight="16sp"
-            android:text="get page details" />
+            android:text="get-page-details" />
 
         <View style="@style/gap" />
 

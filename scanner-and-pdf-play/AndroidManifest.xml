@@ -69,13 +69,6 @@
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdfp.activity.PickPasswordActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:label="@string/title_activity_pick_password"
-            android:screenOrientation="nosensor"
-            android:theme="@android:style/Theme.Holo.Light.Dialog" >
-        </activity>
-        <activity
             android:name="com.snpdfp.activity.ProtectPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_lock_pdf"
