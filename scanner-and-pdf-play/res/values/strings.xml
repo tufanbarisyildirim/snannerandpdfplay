@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">scanner and pdf play</string>
-    <string name="hello_world">welcome to scanner and pdf play!</string>
+    <string name="app_name">scanner and pdf play!</string>
     <string name="what_it_does">It is a PDF utility which can be used to:\n1. Scan/Convert any image to PDF\n2. Extract pages from PDF\n3. Concatenate two PDFs\n4. Protect a PDF with password\n5. Convert a TXT/HTML file to PDF\n6. Extract text from PDF\n7. Add watermark to PDF\n8. Copy an encrypted PDF to a non-encrypted one\n9. Change PDF password\netc&#8230;\n\nYou can create PDF of following sizes: A0, A1, A2, A3, A4 (default), B0, B1, B2, B3 and B4</string>
     <string name="menu_settings">settings</string>
     <string name="select_scanner">open scanner</string>

@@ -18,7 +18,7 @@
             style="@style/HeadText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:text="@string/app_name" />
 
         <View style="@style/line" />
 
@@ -36,7 +36,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_scanner" />
 
@@ -58,7 +58,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_imageconvert" />
 
@@ -80,7 +80,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_lockpdf" />
 
@@ -102,7 +102,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/concatenate_pdf" />
 
@@ -124,7 +124,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/extract_pdf" />
 
@@ -146,7 +146,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_txtconvert" />
 
@@ -168,7 +168,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_copyProtectedPDF" />
 
@@ -198,7 +198,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_pdfToText" />
 
@@ -220,7 +220,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_addwatermark" />
 
@@ -242,7 +242,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                style="@style/AnswerText"
+                style="@style/OptionText"
                 android:layout_weight="1"
                 android:text="@string/select_htmlconvert" />
 

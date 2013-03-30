@@ -28,6 +28,13 @@
             android:layout_gravity="left|center_vertical"
             android:text="@string/what_it_does" >
         </TextView>
+
+        <CheckBox
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK, please do not show again." >
+        </CheckBox>
     </LinearLayout>
 
 </ScrollView>

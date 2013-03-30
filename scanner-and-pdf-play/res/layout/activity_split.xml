@@ -45,6 +45,7 @@
 
         <EditText
             android:id="@+id/password"
+            style="@style/AnswerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
@@ -68,8 +69,6 @@
 
         <View style="@style/gap" />
 
-        <View style="@style/gap" />
-
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/page_detail_layout"
@@ -89,6 +88,7 @@
 
             <EditText
                 android:id="@+id/from_number"
+                style="@style/AnswerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_frompgnumber"
@@ -97,6 +97,7 @@
 
             <EditText
                 android:id="@+id/to_number"
+                style="@style/AnswerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_topgnumber"

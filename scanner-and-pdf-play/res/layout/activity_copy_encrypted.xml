@@ -47,6 +47,7 @@
 
         <EditText
             android:id="@+id/password"
+            style="@style/AnswerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
