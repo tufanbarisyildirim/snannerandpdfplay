@@ -78,9 +78,9 @@ public class SNPDFActivity extends Activity {
 		Uri path = Uri.fromFile(mainFile);
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		if (mainFile.getName().toLowerCase().endsWith(".txt")) {
-			intent.setDataAndType(path, "text/plain");
+			intent.setType("text/plain");
 		} else {
-			intent.setDataAndType(path, "application/pdf");
+			intent.setType("application/pdf");
 		}
 		String shareBody = "Emailing " + mainFile.getName();
 		intent.putExtra(Intent.EXTRA_TEXT, shareBody);
