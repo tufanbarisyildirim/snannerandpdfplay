@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
@@ -116,6 +116,11 @@
     <style name="gap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">10sp</item>
+    </style>
+
+    <style name="gap_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35sp</item>
     </style>
 
     <style name="gap_horizontal">
