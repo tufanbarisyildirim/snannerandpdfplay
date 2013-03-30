@@ -62,6 +62,6 @@
     <string name="intro_filetopdf">This option let\'s you convert a file to PDF.\n1. Select the file\n2. Click convert-to-PDF\nNOTE: For HTML conversions, only strict HTML files get converted properly!</string>
     <string name="intro_copy">This option let\'s you copy a password protected PDF into a new non-encrypted PDF file.\n1. Select the PDF\n2. Enter it\'s password\n3. Click copy</string>
     <string name="intro_pdftotext">This option let\'s you to extract out text from a PDF file.\n1. Select the PDF\n2. Enter it\'s password, if protected\n3. Click extract-text</string>
-    <string name="intro_watermark">This option let\'s you add an image to an existing PDF file.\n1. Select the PDF\n2. Enter it\'s password, if protected\n3. Pick the image to add as watermark\n4. Click add-watermark</string>
+    <string name="intro_watermark">This option let\'s you add an image as watermark to an existing PDF file.\n1. Select the PDF\n2. Enter it\'s password, if protected\n3. Pick the image to add as watermark\n4. Click add-watermark</string>
 
 </resources>
