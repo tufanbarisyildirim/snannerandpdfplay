@@ -31,6 +31,7 @@ public class SNPDFActivity extends Activity {
 
 	SharedPreferences mPrefs;
 	final String snpdfPageSize = "SNPDF_PAGE_SIZE";
+	final String snpdfSkipIntro = "SNPDF_SKIP_INTRO";
 
 	protected File mainFile = null;
 
@@ -225,7 +226,10 @@ public class SNPDFActivity extends Activity {
 			startActivity(new Intent(this, FAQActivity.class));
 			return true;
 		case R.id.home:
-			startActivity(new Intent(this, MainActivity.class));
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			return true;
 		case R.id.facebook:
 			startActivity(new Intent(Intent.ACTION_VIEW,
@@ -241,11 +245,11 @@ public class SNPDFActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		finish();
 		Intent intent = new Intent(this, MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+		finish();
 	}
 
 	protected void operationCancelled() {

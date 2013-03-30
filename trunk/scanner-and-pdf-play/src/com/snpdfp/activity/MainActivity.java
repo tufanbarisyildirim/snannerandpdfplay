@@ -7,12 +7,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -97,23 +100,35 @@ public class MainActivity extends SNPDFActivity {
 	}
 
 	private void showWelcomeMessage() {
-		AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
-		LayoutInflater inflater = (LayoutInflater) this
-				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		View layout = inflater.inflate(R.layout.custom_fullimage_dialog,
-				(ViewGroup) findViewById(R.id.welcome_snpdf));
-		imageDialog.setView(layout);
-		imageDialog.setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
+		if (!mPrefs.getBoolean(snpdfSkipIntro, false)) {
+			AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+			LayoutInflater inflater = (LayoutInflater) this
+					.getSystemService(LAYOUT_INFLATER_SERVICE);
+			final View layout = inflater.inflate(
+					R.layout.custom_fullimage_dialog,
+					(ViewGroup) findViewById(R.id.welcome_snpdf));
+			imageDialog.setView(layout);
+			imageDialog.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							CheckBox dontShowAgain = (CheckBox) layout
+									.findViewById(R.id.skip);
+							if (dontShowAgain.isChecked()) {
+								SharedPreferences.Editor editor = mPrefs.edit();
+								editor.putBoolean(snpdfSkipIntro, true);
+								editor.commit();
+							}
+						}
 
-				});
+					});
 
-		imageDialog.create();
-		imageDialog.show();
+			imageDialog.create();
+			imageDialog.show();
+		}
+
 	}
 
 	public void lockPDF(View view) {

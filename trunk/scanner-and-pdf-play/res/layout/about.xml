@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name" />
 
+        <View style="@style/line" />
+
         <TextView
             android:id="@+id/app_detail"
             style="@style/AnswerText"
