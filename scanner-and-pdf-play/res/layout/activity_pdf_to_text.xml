@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WatermarkActivity" >
+    tools:context=".FileToPDFActivity" >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".WatermarkActivity" >
+        tools:context=".FileToPDFActivity" >
 
         <LinearLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:enabled="false"
-                android:hint="Select PDF to add watermark to" />
+                android:hint="Select PDF" />
 
             <Button
                 android:layout_width="0dp"
@@ -49,33 +49,6 @@
 
         <View style="@style/gap" />
 
-        <LinearLayout
-            xmlns:tools="http://schemas.android.com/tools"
-            style="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/image"
-                style="@style/AnswerText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:enabled="false"
-                android:hint="Pick image" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/find"
-                android:onClick="pickImage" />
-        </LinearLayout>
-
-        <View style="@style/gap" />
-
         <View style="@style/gap" />
 
         <LinearLayout
@@ -90,10 +63,10 @@
                 style="@style/ButtonText"
                 android:layout_weight="1"
                 android:background="@drawable/snpdf_button"
-                android:onClick="addWatermark"
+                android:onClick="extractText"
                 android:paddingLeft="16sp"
                 android:paddingRight="16sp"
-                android:text="add-watermark" />
+                android:text="extract-text" />
 
             <View style="@style/gap_horizontal" />
 

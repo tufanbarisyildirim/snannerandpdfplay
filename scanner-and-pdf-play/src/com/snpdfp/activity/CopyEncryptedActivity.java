@@ -12,46 +12,38 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.itextpdf.text.pdf.PdfCopyFields;
 import com.itextpdf.text.pdf.PdfReader;
-import com.snpdfp.layout.FolderLayout;
-import com.snpdfp.layout.IFolderItemListener;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
-public class CopyEncryptedActivity extends SNPDFActivity implements
-		IFolderItemListener {
+public class CopyEncryptedActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(CopyEncryptedActivity.class.getName());
 
-	FolderLayout localFolders;
 	File selectedFile;
 
 	String password;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.folders);
-		localFolders = (FolderLayout) findViewById(R.id.localfolders);
-		localFolders.setIFolderItemListener(this);
+		setContentView(R.layout.activity_copy_encrypted);
 	}
 
-	// Your stuff here for Cannot open Folder
-	public void OnCannotFileRead(File file) {
-		showCannotReadFileDialog(file);
+	public void pickFile(View view) {
+		Intent filePick = new Intent(this, BrowsePDFActivity.class);
+		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
 	}
 
-	// Your stuff here for file Click
-	public void OnFileClicked(File file) {
-		selectedFile = file;
-		if (!file.getName().toLowerCase().endsWith(".pdf")) {
+	public void copyPDF(View view) {
+		if (selectedFile == null || !selectedFile.exists()) {
 			getAlertDialog()
-					.setTitle("Invalid selection")
-					.setMessage("Please select a valid protected .pdf file!")
+					.setTitle("Incomplete details")
+					.setMessage("Please select a protected PDF file!")
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -61,48 +53,61 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 
 							}).show();
 		} else {
-			copyPDF();
-		}
+			password = ((EditText) findViewById(R.id.password)).getText()
+					.toString();
 
-	}
+			if (password == null || "".equals(password)) {
+				getAlertDialog()
+						.setTitle("Incomplete details")
+						.setMessage(
+								"Please enter the password of the encrypted file!")
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+									}
 
-	private void copyPDF() {
-		PdfReader pdfReader = null;
-		try {
-			pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-			if (pdfReader.isEncrypted()) {
-				Intent pickPassword = new Intent(this,
-						PickPasswordActivity.class);
-				startActivityForResult(pickPassword,
-						SNPDFCContstants.PICK_PASSWORD_REQUEST);
+								}).show();
+
+			} else if (!SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
+				getAlertDialog()
+						.setTitle("Incorrect password!")
+						.setMessage(
+								"Please enter the correct password for selected PDF!")
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+									}
+
+								}).show();
 
 			} else {
 				new CopyPDFExecutor().execute();
 			}
-
-		} catch (Exception e) {
-			Intent pickPassword = new Intent(this, PickPasswordActivity.class);
-			startActivityForResult(pickPassword,
-					SNPDFCContstants.PICK_PASSWORD_REQUEST);
-
-		} finally {
-			if (pdfReader != null)
-				pdfReader.close();
 		}
-
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_PASSWORD_REQUEST) {
-				password = data.getStringExtra(SNPDFCContstants.TEXT);
-				new CopyPDFExecutor().execute();
+			if (requestCode == SNPDFCContstants.PICK_FILE) {
+				selectedFile = new File(
+						data.getStringExtra(SNPDFCContstants.FILE_URI));
+				setName();
+				((EditText) findViewById(R.id.password)).setText("");
 			}
 
 		} else {
 			operationCancelled();
 		}
+	}
+
+	private void setName() {
+		EditText editText = (EditText) findViewById(R.id.pdf_file);
+		editText.setText(selectedFile.getName());
 	}
 
 	private class CopyPDFExecutor extends AsyncTask<String, Void, Boolean> {
@@ -172,7 +177,7 @@ public class CopyEncryptedActivity extends SNPDFActivity implements
 	}
 
 	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_copy_encrypted);
+		setContentView(R.layout.snpdf_output);
 
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
