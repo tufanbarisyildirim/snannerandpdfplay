@@ -1,53 +1,63 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".OpenSNPDFFolderActivity" >
-
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        style="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/HeadTextLeft"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:text="List of prepared files" >
-        </TextView>
-
-        <Button
-            android:id="@+id/deleteAll"
-            style="@style/ButtonText"
-            android:layout_weight="1"
-            android:background="@drawable/snpdf_button"
-            android:onClick="deleteAll"
-            android:text="delete-all" />
-    </LinearLayout>
-
-    <View style="@style/line" />
-
-    <ListView
-        android:id="@+id/list_snpdf_files"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <View style="@style/gap" />
+    android:layout_height="match_parent" >
 
     <com.google.ads.AdView
-        android:id="@+id/adView2"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
-</LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/adView"
+        android:orientation="vertical"
+        tools:context=".OpenSNPDFFolderActivity" >
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            style="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/HeadTextLeft"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="List of prepared files" >
+            </TextView>
+
+            <Button
+                android:id="@+id/deleteAll"
+                style="@style/ButtonText"
+                android:layout_weight="1"
+                android:background="@drawable/snpdf_button"
+                android:onClick="deleteAll"
+                android:text="delete-all" />
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <ListView
+            android:id="@+id/list_snpdf_files"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+        <View style="@style/gap" />
+    </LinearLayout>
+
+</RelativeLayout>
