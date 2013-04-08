@@ -214,6 +214,28 @@
             </LinearLayout>
 
             <View style="@style/gap" />
+            
+             <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/OptionText"
+                    android:layout_weight="1"
+                    android:text="@string/select_docconvert" />
+
+                <Button
+                    style="@style/ButtonText"
+                    android:layout_weight="1"
+                    android:background="@drawable/snpdf_button"
+                    android:onClick="convertDocFile"
+                    android:text="doc-to-pdf" />
+            </LinearLayout>
+
+            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"

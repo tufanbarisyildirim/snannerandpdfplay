@@ -8,6 +8,10 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -48,6 +52,10 @@ public class FileToPDFActivity extends SNPDFActivity {
 			TextView textView = (TextView) findViewById(R.id.intro_ftp);
 			textView.setText(textView.getText()
 					+ "\nOnly strict HTML files get converted properly!");
+		} else if (SNPDFCContstants.FILE_TYPE_DOC.equals(fileType)) {
+			TextView textView = (TextView) findViewById(R.id.intro_ftp);
+			textView.setText(textView.getText()
+					+ "\nOnly text from DOC file gets converted to PDF. Images and formatting (including table structure) will be lost.");
 		}
 
 	}
@@ -172,6 +180,29 @@ public class FileToPDFActivity extends SNPDFActivity {
 							fis.close();
 						}
 					}
+				} else if (srcFile.getName().toLowerCase().endsWith(".doc")) {
+					FileInputStream fis = null;
+					POIFSFileSystem fs = null;
+					try {
+						fis = new FileInputStream(srcFile);
+						fs = new POIFSFileSystem(fis);
+						HWPFDocument doc = new HWPFDocument(fs);
+						WordExtractor we = new WordExtractor(doc);
+						String[] para = we.getParagraphText();
+						if (para != null) {
+							String text = null;
+							for (int i = 0; i < para.length; i++) {
+								text = para[i];
+								if (text != null) {
+									document.add(new Paragraph(text.trim()));
+								}
+							}
+						}
+					} finally {
+						if (fis != null) {
+							fis.close();
+						}
+					}
 				}
 
 			} catch (Exception e) {
@@ -190,7 +221,6 @@ public class FileToPDFActivity extends SNPDFActivity {
 			return error;
 
 		}
-
 	}
 
 	public void displayResult(Boolean error) {
