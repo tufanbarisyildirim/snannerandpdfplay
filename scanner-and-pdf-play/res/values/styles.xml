@@ -2,11 +2,11 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
-    <color name="yellow">#FFFF00</color>
+    <color name="pink">#FFD700</color>
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <item name="android:scrollbars">vertical</item>
@@ -45,11 +45,11 @@
     </style>
 
     <style name="HeadText">
-        <item name="android:textColor">#008000</item>
+        <item name="android:textColor">#8B0000</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@color/yellow</item>
+        <item name="android:background">@color/pink</item>
     </style>
 
     <style name="HeadTextLeft">
@@ -57,6 +57,7 @@
         <item name="android:gravity">left</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:background">#D1FFA3</item>
     </style>
 
     <style name="MessageText">
@@ -96,13 +97,13 @@
     </style>
 
     <style name="IntroText">
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">#008000</item>
         <item name="android:gravity">left</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:background">@color/yellow</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">#D1FFA3</item>
     </style>
 
     <style name="line">

@@ -33,8 +33,11 @@
             tools:context=".FileToPDFActivity" >
 
             <TextView
+                android:id="@+id/intro_ftp"
                 style="@style/IntroText"
                 android:text="@string/intro_filetopdf" />
+
+            <View style="@style/line" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"

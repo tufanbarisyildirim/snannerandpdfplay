@@ -43,7 +43,7 @@
                 style="@style/HeadTextLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Core Options" />
+                android:text="image options" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -89,27 +89,13 @@
 
             <View style="@style/gap" />
 
-            <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                style="http://schemas.android.com/apk/res/android"
+            <View style="@style/line" />
+
+            <TextView
+                style="@style/HeadTextLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_lockpdf" />
-
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
-                    android:onClick="lockPDF"
-                    android:text="lock-pdf" />
-            </LinearLayout>
-
-            <View style="@style/gap" />
+                android:text="options on existing pdfs" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -165,6 +151,58 @@
                 <TextView
                     style="@style/OptionText"
                     android:layout_weight="1"
+                    android:text="@string/select_pdfToText" />
+
+                <Button
+                    style="@style/ButtonText"
+                    android:layout_weight="1"
+                    android:background="@drawable/snpdf_button"
+                    android:onClick="pdfToText"
+                    android:text="pdf-to-text" />
+            </LinearLayout>
+
+            <View style="@style/gap" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/OptionText"
+                    android:layout_weight="1"
+                    android:text="@string/select_lockpdf" />
+
+                <Button
+                    style="@style/ButtonText"
+                    android:layout_weight="1"
+                    android:background="@drawable/snpdf_button"
+                    android:onClick="lockPDF"
+                    android:text="lock-pdf" />
+            </LinearLayout>
+
+            <View style="@style/gap" />
+
+            <View style="@style/line" />
+
+            <TextView
+                style="@style/HeadTextLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="file conversion options" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/OptionText"
+                    android:layout_weight="1"
                     android:text="@string/select_txtconvert" />
 
                 <Button
@@ -187,14 +225,14 @@
                 <TextView
                     style="@style/OptionText"
                     android:layout_weight="1"
-                    android:text="@string/select_copyProtectedPDF" />
+                    android:text="@string/select_htmlconvert" />
 
                 <Button
                     style="@style/ButtonText"
                     android:layout_weight="1"
                     android:background="@drawable/snpdf_button"
-                    android:onClick="copyProtectedPDF"
-                    android:text="copy-protected" />
+                    android:onClick="convertHTMLFile"
+                    android:text="html-to-pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -205,7 +243,7 @@
                 style="@style/HeadTextLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Non-Core Options" />
+                android:text="miscellaneous options" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -217,14 +255,14 @@
                 <TextView
                     style="@style/OptionText"
                     android:layout_weight="1"
-                    android:text="@string/select_pdfToText" />
+                    android:text="@string/select_copyProtectedPDF" />
 
                 <Button
                     style="@style/ButtonText"
                     android:layout_weight="1"
                     android:background="@drawable/snpdf_button"
-                    android:onClick="pdfToText"
-                    android:text="pdf-to-text" />
+                    android:onClick="copyProtectedPDF"
+                    android:text="copy-protected" />
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -251,27 +289,7 @@
 
             <View style="@style/gap" />
 
-            <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_htmlconvert" />
-
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
-                    android:onClick="convertHTMLFile"
-                    android:text="html-to-pdf" />
-            </LinearLayout>
-
-            <View style="@style/gap" />
+            <View style="@style/line" />
         </LinearLayout>
     </ScrollView>
 

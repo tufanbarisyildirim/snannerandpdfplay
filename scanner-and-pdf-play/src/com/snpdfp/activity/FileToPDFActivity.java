@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -42,6 +43,12 @@ public class FileToPDFActivity extends SNPDFActivity {
 		}
 
 		setContentView(R.layout.activity_file_to_pdf);
+
+		if (SNPDFCContstants.FILE_TYPE_HTML.equals(fileType)) {
+			TextView textView = (TextView) findViewById(R.id.intro_ftp);
+			textView.setText(textView.getText()
+					+ "\nOnly strict HTML files get converted properly!");
+		}
 
 	}
 

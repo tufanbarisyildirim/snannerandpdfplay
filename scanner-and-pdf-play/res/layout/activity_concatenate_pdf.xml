@@ -36,6 +36,8 @@
                 style="@style/IntroText"
                 android:text="@string/intro_concatenate" />
 
+            <View style="@style/line" />
+
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
                 style="http://schemas.android.com/apk/res/android"
