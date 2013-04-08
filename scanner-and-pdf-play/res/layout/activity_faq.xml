@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/question1"
-                style="@style/HeadTextLeft"
+                style="@style/FAQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/question2"
-                style="@style/HeadTextLeft"
+                style="@style/FAQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -67,7 +67,7 @@
 
             <TextView
                 android:id="@+id/question3"
-                style="@style/HeadTextLeft"
+                style="@style/FAQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -83,7 +83,7 @@
 
             <TextView
                 android:id="@+id/question4"
-                style="@style/HeadTextLeft"
+                style="@style/FAQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
