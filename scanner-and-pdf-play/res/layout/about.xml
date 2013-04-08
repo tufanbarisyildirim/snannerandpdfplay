@@ -90,8 +90,6 @@
                 android:visibility="visible" />
 
             <View style="@style/gap" />
-
-            <View style="@style/line" />
         </LinearLayout>
     </ScrollView>
 

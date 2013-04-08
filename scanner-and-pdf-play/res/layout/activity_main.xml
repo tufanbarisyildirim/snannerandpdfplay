@@ -214,8 +214,8 @@
             </LinearLayout>
 
             <View style="@style/gap" />
-            
-             <LinearLayout
+
+            <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -310,8 +310,6 @@
             </LinearLayout>
 
             <View style="@style/gap" />
-
-            <View style="@style/line" />
         </LinearLayout>
     </ScrollView>
 

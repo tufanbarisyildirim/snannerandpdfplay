@@ -7,16 +7,18 @@
 
     <ImageView
         android:id="@+id/rowthumbnail"
-        android:contentDescription="thumbnail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
-    <TextView
+        android:layout_weight="1"
+        android:contentDescription="thumbnail" />
+
+    <TextView
         android:id="@+id/rowtext"
         style="@style/SNPDFFolderText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="6" />
+        android:layout_weight="6"
+        android:paddingLeft="2sp" />
 
     <TextView
         android:id="@+id/rowdetail"
