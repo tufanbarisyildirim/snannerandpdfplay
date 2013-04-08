@@ -5,7 +5,13 @@
     android:background="@drawable/select_file"
     android:orientation="horizontal" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/rowthumbnail"
+        android:contentDescription="thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+    <TextView
         android:id="@+id/rowtext"
         style="@style/SNPDFFolderText"
         android:layout_width="0dp"
@@ -17,6 +23,6 @@
         style="@style/SNPDFFolderDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="4" />
+        android:layout_weight="3" />
 
 </LinearLayout>

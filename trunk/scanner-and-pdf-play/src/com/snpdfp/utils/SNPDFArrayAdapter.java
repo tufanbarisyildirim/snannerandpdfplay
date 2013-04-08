@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snpdfp.activity.R;
@@ -41,7 +45,12 @@ public class SNPDFArrayAdapter extends ArrayAdapter<File> {
 				+ ", "
 				+ new SimpleDateFormat(SNPDFCContstants.DATE_FORMAT, Locale
 						.getDefault()).format(new Date(file.lastModified())));
-
+		ImageView imageView = (ImageView) rowView
+				.findViewById(R.id.rowthumbnail);
+		imageView.setBackgroundResource(R.drawable.pdf);
+		if (!file.getName().toLowerCase().endsWith(".pdf")) {
+			imageView.setBackgroundResource(R.drawable.txt);
+		}
 		return rowView;
 	}
 
