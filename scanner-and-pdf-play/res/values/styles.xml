@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
@@ -53,11 +53,10 @@
     </style>
 
     <style name="HeadTextLeft">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#800000</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:background">#800000</item>
         <item name="android:paddingBottom">10sp</item>
     </style>
 
@@ -101,7 +100,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="IntroText">

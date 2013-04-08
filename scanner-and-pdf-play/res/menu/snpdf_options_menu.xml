@@ -16,6 +16,9 @@
         android:id="@+id/home"
         android:title="home"/>
     <item
+        android:id="@+id/share"
+        android:title="share"/>
+    <item
         android:id="@+id/facebook"
         android:title="connect on facebook"/>
 
