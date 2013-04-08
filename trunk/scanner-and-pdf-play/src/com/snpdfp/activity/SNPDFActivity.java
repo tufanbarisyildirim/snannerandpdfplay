@@ -238,6 +238,18 @@ public class SNPDFActivity extends Activity {
 		case R.id.settings:
 			startActivity(new Intent(this, SNPDFSettings.class));
 			return true;
+		case R.id.share:
+			Intent shareintent = new Intent(Intent.ACTION_SEND);
+			shareintent.setType("text/plain");
+			shareintent.putExtra(Intent.EXTRA_TEXT, SNPDFCContstants.APP_URL);
+
+			try {
+				startActivity(Intent.createChooser(shareintent, "Share via..."));
+			} catch (ActivityNotFoundException e) {
+				Toast.makeText(this, "No application available to share",
+						Toast.LENGTH_SHORT).show();
+			}
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
