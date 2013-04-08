@@ -55,6 +55,8 @@ public class SNPDFCContstants {
 
 	public static final int PICK_FILE2 = 9;
 
+	public static final String FILE_TYPE_DOC = "DOC";
+
 	public static Rectangle PAGE_SIZE = PageSize.A4;
 
 }

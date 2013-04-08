@@ -8,6 +8,7 @@
     <string name="select_imageconvert">convert image to pdf</string>
     <string name="select_txtconvert">convert txt file to pdf</string>
     <string name="select_htmlconvert">convert html file to pdf</string>
+    <string name="select_docconvert">convert ms doc to pdf (only text)</string>
     <string name="select_unlockpdf">unlock pdf</string>
     <string name="select_lockpdf">protect pdf with password</string>
     <string name="select_pdfToText">extract text from pdf</string>

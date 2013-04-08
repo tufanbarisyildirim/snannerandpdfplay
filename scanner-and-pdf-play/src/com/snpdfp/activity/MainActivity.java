@@ -176,6 +176,14 @@ public class MainActivity extends SNPDFActivity {
 
 	}
 
+	public void convertDocFile(View view) {
+		Intent filePick = new Intent(this, FileToPDFActivity.class);
+		filePick.putExtra(SNPDFCContstants.FILE_TYPE,
+				SNPDFCContstants.FILE_TYPE_DOC);
+		startActivity(filePick);
+
+	}
+
 	public void convertHTMLFile(View view) {
 		Intent filePick = new Intent(this, FileToPDFActivity.class);
 		filePick.putExtra(SNPDFCContstants.FILE_TYPE,

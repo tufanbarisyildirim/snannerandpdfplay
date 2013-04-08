@@ -93,6 +93,21 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 								}
 
 							}).show();
+		} else if (fileType != null
+				&& SNPDFCContstants.FILE_TYPE_DOC.equals(fileType)
+				&& !file.getName().toLowerCase().endsWith(".doc")) {
+			getAlertDialog()
+					.setTitle("Invalid selection")
+					.setMessage(
+							"You can only select a .doc file for this conversion!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+
+							}).show();
 		} else {
 			Intent result = new Intent();
 			result.putExtra(SNPDFCContstants.FILE_URI, file.getAbsolutePath());
