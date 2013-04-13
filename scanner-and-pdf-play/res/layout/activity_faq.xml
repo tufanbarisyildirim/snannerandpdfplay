@@ -14,12 +14,21 @@
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
+    <TextView
+        android:id="@+id/app_faq"
+        style="@style/HeadText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="you know..." />
+
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
+        android:layout_below="@+id/app_faq"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -47,8 +56,6 @@
 
             <View style="@style/gap" />
 
-            <View style="@style/line" />
-
             <TextView
                 android:id="@+id/question2"
                 style="@style/FAQ"
@@ -62,8 +69,6 @@
                 android:layout_height="wrap_content" />
 
             <View style="@style/gap" />
-
-            <View style="@style/line" />
 
             <TextView
                 android:id="@+id/question3"
@@ -79,8 +84,6 @@
 
             <View style="@style/gap" />
 
-            <View style="@style/line" />
-
             <TextView
                 android:id="@+id/question4"
                 style="@style/FAQ"
@@ -94,8 +97,6 @@
                 android:layout_height="wrap_content" />
 
             <View style="@style/gap" />
-
-            <View style="@style/line" />
         </LinearLayout>
     </ScrollView>
 

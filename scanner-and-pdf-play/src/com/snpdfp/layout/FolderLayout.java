@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,10 +31,10 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 	private TextView myPath;
 	private ListView lstView;
 
+	protected File currDir = null;
+
 	public FolderLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
-		// TODO Auto-generated constructor stub
 		this.context = context;
 
 		LayoutInflater layoutInflater = (LayoutInflater) context
@@ -44,8 +45,23 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 		lstView = (ListView) findViewById(R.id.list);
 
 		Log.i("FolderView", "Constructed");
-		getDir(root, lstView);
+		System.out.println("=------------"
+				+ Environment.getExternalStorageDirectory().getPath());
 
+		System.out.println("=------------"
+				+ Environment.getExternalStorageDirectory());
+
+		File file = new File("/sdcard");
+		if (file.exists()) {
+			getDir(file.getAbsolutePath(), lstView);
+		} else {
+			file = Environment.getExternalStorageDirectory();
+			if (file.exists()) {
+				getDir(file.getAbsolutePath(), lstView);
+			} else {
+				getDir(root, lstView);
+			}
+		}
 	}
 
 	public void setIFolderItemListener(IFolderItemListener folderItemListener) {
@@ -57,9 +73,15 @@ public class FolderLayout extends LinearLayout implements OnItemClickListener {
 		getDir(dirPath, lstView);
 	}
 
+	public File getCurrDir() {
+		return currDir;
+	}
+
 	private void getDir(String dirPath, ListView v) {
 
-		myPath.setText("Location: " + dirPath);
+		myPath.setText("location: " + dirPath);
+		currDir = new File(dirPath);
+
 		item = new ArrayList<String>();
 		path = new ArrayList<String>();
 		File f = new File(dirPath);
