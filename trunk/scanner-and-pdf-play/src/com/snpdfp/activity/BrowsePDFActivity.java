@@ -47,7 +47,8 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 	 * Called on file click
 	 */
 	public void OnFileClicked(File file) {
-		if (fileType == null && !file.getName().endsWith(".pdf")) {
+
+		if (fileType == null && !file.getName().toLowerCase().endsWith(".pdf")) {
 			getAlertDialog()
 					.setTitle("Invalid selection")
 					.setMessage(
@@ -113,6 +114,20 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 			result.putExtra(SNPDFCContstants.FILE_URI, file.getAbsolutePath());
 			setResult(Activity.RESULT_OK, result);
 			finish();
+		}
+
+	}
+
+	/**
+	 * On back press, take to previous folder
+	 */
+	@Override
+	public void onBackPressed() {
+		File currDir = localFolders.getCurrDir();
+		if (currDir != null && currDir.getParent() != null) {
+			localFolders.setDir(currDir.getParent());
+		} else {
+			super.onBackPressed();
 		}
 
 	}

@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/path"
-            style="@style/HeadTextLeft"
+            style="@style/HeadText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Path" >

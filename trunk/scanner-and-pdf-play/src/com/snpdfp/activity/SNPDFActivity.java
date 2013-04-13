@@ -188,7 +188,11 @@ public class SNPDFActivity extends Activity {
 			message = "File " + file.getName() + " successfully deleted!";
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
-		startActivity(new Intent(this, MainActivity.class));
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+		startActivity(intent);
 	}
 
 	public android.app.AlertDialog.Builder getAlertDialog() {

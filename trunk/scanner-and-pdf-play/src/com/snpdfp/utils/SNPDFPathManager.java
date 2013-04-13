@@ -1,15 +1,10 @@
 package com.snpdfp.utils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import android.os.Environment;
 
 public class SNPDFPathManager {
-
-	private static final String DATE_FORMAT = "yyyyMMddHHmmss";
 
 	public static File getSavePDFPath(String fileName) {
 		// Environment
@@ -26,13 +21,21 @@ public class SNPDFPathManager {
 	}
 
 	private static File getFile(File file, String fileName) {
-		return new File(
-				file,
-				fileName.substring(0, fileName.lastIndexOf("."))
-						+ "_SNPDF_"
-						+ new SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
-								.format(new Date(System.currentTimeMillis()))
-						+ fileName.substring(fileName.lastIndexOf(".")));
+
+		File returnFile = new File(file, fileName.substring(0,
+				fileName.lastIndexOf("."))
+				+ "_SNPDF" + fileName.substring(fileName.lastIndexOf(".")));
+		int i = 0;
+		while (returnFile.exists()) {
+			returnFile = new File(file, fileName.substring(0,
+					fileName.lastIndexOf("."))
+					+ "_SNPDF("
+					+ ++i
+					+ ")"
+					+ fileName.substring(fileName.lastIndexOf(".")));
+		}
+
+		return returnFile;
 	}
 
 	public static File getSavePDFPathWOTimestamp(String fileName) {
