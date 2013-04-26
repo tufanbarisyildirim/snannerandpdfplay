@@ -5,11 +5,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.hwpf.usermodel.Range;
+import org.apache.poi.hwpf.usermodel.Table;
+import org.apache.poi.hwpf.usermodel.TableCell;
+import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import android.app.Activity;
@@ -23,7 +27,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.snpdfp.utils.SNPDFCContstants;
@@ -149,60 +157,12 @@ public class FileToPDFActivity extends SNPDFActivity {
 				if (srcFile.getName().toLowerCase().endsWith(".txt")
 						|| srcFile.getName().toLowerCase().endsWith(".log")
 						|| srcFile.getName().toLowerCase().endsWith(".csv")) {
-					BufferedReader in = null;
-					try {
-						in = new BufferedReader(new FileReader(srcFile));
-						// Read the file and write it into the new file
-						String fileText = in.readLine();
-
-						while (fileText != null) {
-							document.add(new Paragraph(fileText));
-							fileText = in.readLine();
-						}
-					} finally {
-						if (in != null)
-							in.close();
-					}
-
+					convertTXT(document);
 				} else if (srcFile.getName().toLowerCase().endsWith(".htm")
 						|| srcFile.getName().toLowerCase().endsWith(".html")) {
-					// To convert a HTML file from the filesystem
-					FileInputStream fis = null;
-					XMLWorkerHelper worker = null;
-					try {
-						fis = new FileInputStream(srcFile);
-						worker = XMLWorkerHelper.getInstance();
-						// convert to PDF
-						worker.parseXHtml(pdfWriter, document, fis);
-
-					} finally {
-						if (fis != null) {
-							fis.close();
-						}
-					}
+					convertHTML(document, pdfWriter);
 				} else if (srcFile.getName().toLowerCase().endsWith(".doc")) {
-					FileInputStream fis = null;
-					POIFSFileSystem fs = null;
-					try {
-						fis = new FileInputStream(srcFile);
-						fs = new POIFSFileSystem(fis);
-						HWPFDocument doc = new HWPFDocument(fs);
-						WordExtractor we = new WordExtractor(doc);
-						String[] para = we.getParagraphText();
-						if (para != null) {
-							String text = null;
-							for (int i = 0; i < para.length; i++) {
-								text = para[i];
-								if (text != null) {
-									document.add(new Paragraph(text.trim()));
-								}
-							}
-						}
-					} finally {
-						if (fis != null) {
-							fis.close();
-						}
-					}
+					convertDoc(document);
 				}
 
 			} catch (Exception e) {
@@ -221,6 +181,99 @@ public class FileToPDFActivity extends SNPDFActivity {
 			return error;
 
 		}
+
+		private void convertTXT(Document document) throws IOException,
+				DocumentException {
+			BufferedReader in = null;
+			try {
+				in = new BufferedReader(new FileReader(srcFile));
+				// Read the file and write it into the new file
+				String fileText = in.readLine();
+
+				while (fileText != null) {
+					document.add(new Paragraph(fileText));
+					fileText = in.readLine();
+				}
+			} finally {
+				if (in != null)
+					in.close();
+			}
+
+		}
+
+		private void convertHTML(Document document, PdfWriter pdfWriter)
+				throws IOException {
+			// To convert a HTML file from the filesystem
+			FileInputStream fis = null;
+			XMLWorkerHelper worker = null;
+			try {
+				fis = new FileInputStream(srcFile);
+				worker = XMLWorkerHelper.getInstance();
+				// convert to PDF
+				worker.parseXHtml(pdfWriter, document, fis);
+			} finally {
+				if (fis != null) {
+					fis.close();
+				}
+			}
+
+		}
+
+		private void convertDoc(Document document) throws DocumentException,
+				IOException {
+			FileInputStream fis = null;
+			POIFSFileSystem fs = null;
+			try {
+				fis = new FileInputStream(srcFile);
+				fs = new POIFSFileSystem(fis);
+				HWPFDocument doc = new HWPFDocument(fs);
+				Range range = doc.getRange();
+				TableRow row = null;
+				PdfPTable pdftable = null;
+				TableCell cell = null;
+				PdfPCell pdfcell = null;
+				Paragraph paragraph = null;
+				for (int i = 0; i < range.numParagraphs(); i++) {
+					org.apache.poi.hwpf.usermodel.Paragraph par = range
+							.getParagraph(i);
+
+					if (!par.isInTable()) {
+						paragraph = new Paragraph(par.text().trim());
+						document.add(paragraph);
+
+					} else {
+						document.add(new Paragraph("\n"));
+						Table table = range.getTable(par);
+						int paragraphCount = table.numParagraphs();
+						for (int rowIdx = 0; rowIdx < table.numRows(); rowIdx++) {
+							row = table.getRow(rowIdx);
+							pdftable = new PdfPTable(row.numCells());
+							for (int colIdx = 0; colIdx < row.numCells(); colIdx++) {
+								cell = row.getCell(colIdx);
+								pdfcell = new PdfPCell(new Phrase(cell.text()
+										.trim()));
+								pdftable.addCell(pdfcell);
+
+							}
+
+							// Set table width to complete pdf
+							pdftable.setWidthPercentage(100f);
+							document.add(pdftable);
+						}
+
+						i = i + paragraphCount;
+
+					}
+
+				}
+			} finally {
+				if (fis != null) {
+					fis.close();
+				}
+			}
+
+		}
+
 	}
 
 	public void displayResult(Boolean error) {
