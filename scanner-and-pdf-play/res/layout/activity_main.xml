@@ -55,17 +55,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_scanner" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="camera"
                     android:onClick="scan"
-                    android:text="scan-now" />
+                    android:src="@drawable/camera" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="scan"
+                        android:text="@string/select_scanner" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This opens camera - take picture and convert to PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -77,17 +101,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_imageconvert" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="gallery"
                     android:onClick="convertImage"
-                    android:text="image-to-pdf" />
+                    android:src="@drawable/gallery" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="convertImage"
+                        android:text="@string/select_imageconvert" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This opens gallery - select any picture and convert to PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -107,17 +155,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/concatenate_pdf" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="concatenate"
                     android:onClick="concatenatePDF"
-                    android:text="concatenate-pdfs" />
+                    android:src="@drawable/plus" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="concatenatePDF"
+                        android:text="@string/concatenate_pdf" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This option lets you concatenate two PDFs into one" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -129,17 +201,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/extract_pdf" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="extract"
                     android:onClick="extractPDF"
-                    android:text="extract-pdf-pages" />
+                    android:src="@drawable/split" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="extractPDF"
+                        android:text="@string/extract_pdf" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This option lets you extract out only relevant pages from a PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -151,17 +247,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_pdfToText" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="pdf to text"
                     android:onClick="pdfToText"
-                    android:text="pdf-to-text" />
+                    android:src="@drawable/text" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="pdfToText"
+                        android:text="@string/select_pdfToText" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="It extracts out the text from a PDF into a new txt file" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -173,17 +293,87 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_lockpdf" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="lock"
                     android:onClick="lockPDF"
-                    android:text="lock-pdf" />
+                    android:src="@drawable/lock" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="lockPDF"
+                        android:text="@string/select_lockpdf" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="Prepares a new protected PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/gap" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="unlock"
+                    android:onClick="copyProtectedPDF"
+                    android:src="@drawable/unlock" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="copyProtectedPDF"
+                        android:text="@string/select_copyProtectedPDF" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="Prepares a new unlocked PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -203,17 +393,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_txtconvert" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="convert txt file"
                     android:onClick="convertTXTFile"
-                    android:text="txt-to-pdf" />
+                    android:src="@drawable/text" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="convertTXTFile"
+                        android:text="@string/select_txtconvert" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This option converts a txt, log or csv file into PDF" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -225,17 +439,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_docconvert" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="convert doc file"
                     android:onClick="convertDocFile"
-                    android:text="doc-to-pdf" />
+                    android:src="@drawable/wtp" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="convertDocFile"
+                        android:text="@string/select_docconvert" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This option converts a doc file into PDF\n(images and text formatting are ignored)" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -247,17 +485,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_htmlconvert" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="convert html file"
                     android:onClick="convertHTMLFile"
-                    android:text="html-to-pdf" />
+                    android:src="@drawable/htp" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="convertHTMLFile"
+                        android:text="@string/select_htmlconvert" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This option converts an html or htm file into PDF\n(only script html files)" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -270,26 +532,6 @@
                 android:layout_height="wrap_content"
                 android:text="miscellaneous options" />
 
-            <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_copyProtectedPDF" />
-
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
-                    android:onClick="copyProtectedPDF"
-                    android:text="copy-protected" />
-            </LinearLayout>
-
             <View style="@style/gap" />
 
             <LinearLayout
@@ -299,17 +541,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/OptionText"
-                    android:layout_weight="1"
-                    android:text="@string/select_addwatermark" />
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
 
-                <Button
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="watermark"
                     android:onClick="addWatermark"
-                    android:text="add-watermark" />
+                    android:src="@drawable/watermark" />
+
+                <View
+                    style="@style/gap_horizontal"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        style="@style/ClickableOptionText"
+                        android:background="@drawable/option_text"
+                        android:onClick="addWatermark"
+                        android:text="@string/select_addwatermark" />
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="Add watermark image to any PDF file" />
+
+                    <View style="@style/line" />
+                </LinearLayout>
             </LinearLayout>
 
             <View style="@style/gap" />

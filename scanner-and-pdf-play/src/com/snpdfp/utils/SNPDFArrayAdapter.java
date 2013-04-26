@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +46,7 @@ public class SNPDFArrayAdapter extends ArrayAdapter<File> {
 				.findViewById(R.id.rowthumbnail);
 		imageView.setBackgroundResource(R.drawable.pdf);
 		if (!file.getName().toLowerCase().endsWith(".pdf")) {
-			imageView.setBackgroundResource(R.drawable.txt);
+			imageView.setBackgroundResource(R.drawable.text);
 		}
 		return rowView;
 	}

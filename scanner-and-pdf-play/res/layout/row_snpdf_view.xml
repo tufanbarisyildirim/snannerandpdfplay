@@ -9,7 +9,7 @@
         android:id="@+id/rowthumbnail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:contentDescription="thumbnail" />
 
     <TextView
@@ -17,7 +17,7 @@
         style="@style/SNPDFFolderText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="5"
         android:paddingLeft="2sp" />
 
     <TextView

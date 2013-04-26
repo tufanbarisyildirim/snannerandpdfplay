@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rowtext"
-    style="@style/SNPDFFolderText"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/select_file"
-    android:textStyle="normal" />
+    style="@style/BrowseText"
+    android:background="@drawable/select_file" />

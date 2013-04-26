@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
@@ -45,15 +45,15 @@
     </style>
 
     <style name="HeadText">
-        <item name="android:textColor">#8B0000</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@color/pink</item>
+        <item name="android:background">#000000</item>
     </style>
 
     <style name="HeadTextLeft">
-        <item name="android:textColor">#800000</item>
+        <item name="android:textColor">#8A110F</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
@@ -61,7 +61,7 @@
     </style>
 
     <style name="FAQ">
-        <item name="android:textColor">#800000</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
@@ -73,20 +73,30 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="SNPDFFolderText">
-        <item name="android:textColor">#800000</item>
+    <style name="BrowseText">
+        <item name="android:textColor">#000000</item>
         <item name="android:gravity">left</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="SNPDFFolderText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="SNPDFFolderDetail">
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">#808080</item>
         <item name="android:gravity">left</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="AnswerText">
-        <item name="android:textColor">#800000</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">normal</item>
         <item name="android:layout_width">0dp</item>
@@ -95,12 +105,22 @@
     </style>
 
     <style name="OptionText">
-        <item name="android:textColor">#800000</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:gravity">left</item>
         <item name="android:textStyle">normal</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ClickableOptionText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="IntroText">
@@ -111,6 +131,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">#D1FFA3</item>
+    </style>
+
+    <style name="DescriptionText">
+        <item name="android:textColor">#808080</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="line">
@@ -132,8 +161,18 @@
     </style>
 
     <style name="gap_horizontal">
-        <item name="android:layout_width">10sp</item>
+        <item name="android:layout_width">15sp</item>
         <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="first_indent">
+        <item name="android:layout_width">35sp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="OptionImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
