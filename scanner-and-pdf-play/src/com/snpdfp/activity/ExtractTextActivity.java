@@ -16,14 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.parser.FilteredTextRenderListener;
-import com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-import com.itextpdf.text.pdf.parser.RegionTextRenderFilter;
-import com.itextpdf.text.pdf.parser.RenderFilter;
-import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
@@ -180,14 +174,8 @@ public class ExtractTextActivity extends SNPDFActivity {
 				}
 
 				out = new PrintWriter(new FileOutputStream(mainFile));
-				Rectangle rect = new Rectangle(70, 80, 490, 580);
-				RenderFilter filter = new RegionTextRenderFilter(rect);
-				TextExtractionStrategy strategy;
 				for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
-					strategy = new FilteredTextRenderListener(
-							new LocationTextExtractionStrategy(), filter);
-					out.println(PdfTextExtractor.getTextFromPage(pdfReader, i,
-							strategy));
+					out.println(PdfTextExtractor.getTextFromPage(pdfReader, i));
 				}
 				out.flush();
 			} catch (Exception e) {
