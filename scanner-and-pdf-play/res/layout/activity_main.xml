@@ -80,7 +80,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="scan"
                         android:text="@string/select_scanner" />
 
@@ -126,7 +126,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="convertImage"
                         android:text="@string/select_imageconvert" />
 
@@ -180,7 +180,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="concatenatePDF"
                         android:text="@string/concatenate_pdf" />
 
@@ -226,7 +226,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="extractPDF"
                         android:text="@string/extract_pdf" />
 
@@ -272,7 +272,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="pdfToText"
                         android:text="@string/select_pdfToText" />
 
@@ -318,7 +318,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="lockPDF"
                         android:text="@string/select_lockpdf" />
 
@@ -364,7 +364,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="copyProtectedPDF"
                         android:text="@string/select_copyProtectedPDF" />
 
@@ -418,7 +418,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="convertTXTFile"
                         android:text="@string/select_txtconvert" />
 
@@ -464,7 +464,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="convertDocFile"
                         android:text="@string/select_docconvert" />
 
@@ -510,7 +510,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="convertHTMLFile"
                         android:text="@string/select_htmlconvert" />
 
@@ -566,7 +566,7 @@
 
                     <TextView
                         style="@style/ClickableOptionText"
-                        android:background="@drawable/option_text"
+                        android:background="@drawable/select_file"
                         android:onClick="addWatermark"
                         android:text="@string/select_addwatermark" />
 
