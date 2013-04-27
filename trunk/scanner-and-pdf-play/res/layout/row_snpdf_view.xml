@@ -7,15 +7,14 @@
 
     <ImageView
         android:id="@+id/rowthumbnail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/OptionImage"
         android:layout_weight="2"
         android:contentDescription="thumbnail" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="8"
         android:orientation="vertical" >

@@ -39,18 +39,15 @@
 
                 <ImageView
                     android:id="@+id/imageOP"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
+                    style="@style/OptionImage"
                     android:layout_gravity="center|center_vertical"
-                    android:layout_weight="3" />
+                    android:layout_weight="2" />
 
                 <TextView
                     android:id="@+id/message"
-                    style="@style/MessageText"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    style="@style/IntroText"
                     android:layout_gravity="left|center_vertical"
-                    android:layout_weight="7" />
+                    android:layout_weight="8" />
             </LinearLayout>
 
             <View style="@style/line" />
@@ -79,12 +76,10 @@
                 <TextView
                     style="@style/ClickableOptionText"
                     android:layout_weight="5"
-                    android:background="@drawable/option_text"
+                    android:background="@drawable/select_file"
                     android:onClick="openPDF"
                     android:text="@string/open_pdf" />
             </LinearLayout>
-
-            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -108,12 +103,10 @@
                 <TextView
                     style="@style/ClickableOptionText"
                     android:layout_weight="5"
-                    android:background="@drawable/option_text"
+                    android:background="@drawable/select_file"
                     android:onClick="sharePDF"
                     android:text="@string/share_pdf" />
             </LinearLayout>
-
-            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -137,12 +130,10 @@
                 <TextView
                     style="@style/ClickableOptionText"
                     android:layout_weight="5"
-                    android:background="@drawable/option_text"
+                    android:background="@drawable/select_file"
                     android:onClick="protectPDF"
                     android:text="@string/protect_pdf" />
             </LinearLayout>
-
-            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -166,12 +157,10 @@
                 <TextView
                     style="@style/ClickableOptionText"
                     android:layout_weight="5"
-                    android:background="@drawable/option_text"
+                    android:background="@drawable/select_file"
                     android:onClick="renamePDF"
                     android:text="@string/rename_pdf" />
             </LinearLayout>
-
-            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
@@ -195,7 +184,7 @@
                 <TextView
                     style="@style/ClickableOptionText"
                     android:layout_weight="5"
-                    android:background="@drawable/option_text"
+                    android:background="@drawable/select_file"
                     android:onClick="deletePDF"
                     android:text="@string/delete_pdf" />
             </LinearLayout>

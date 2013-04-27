@@ -32,11 +32,29 @@
             android:orientation="vertical"
             tools:context=".ConcatenatePDFActivity" >
 
-            <TextView
-                style="@style/IntroText"
-                android:text="@string/intro_concatenate" />
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="1"
+                    android:contentDescription="info"
+                    android:src="@drawable/info" />
+
+                <TextView
+                    style="@style/IntroText"
+                    android:layout_weight="4"
+                    android:text="@string/intro_concatenate" />
+            </LinearLayout>
 
             <View style="@style/line" />
+
+            <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"

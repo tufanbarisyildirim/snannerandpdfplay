@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true"><shape>
-            <solid android:color="#E3E4FA" />
+            <solid android:color="#01A9DB" />
         </shape></item>
     <item><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-        	<solid android:color="#FFFFFF" />
-            <padding android:bottom="5dip" android:top="5dip" />
+            <solid android:color="#FFFFFF" />
+            <padding android:bottom="5dip" android:top="5dip" />
         </shape></item>
 
 </selector>
