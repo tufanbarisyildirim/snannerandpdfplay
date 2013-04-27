@@ -283,7 +283,7 @@ public class FileToPDFActivity extends SNPDFActivity {
 			SNPDFUtils.setErrorText(this,
 					"Unable to convert file " + srcFile.getName() + " to PDF ("
 							+ errorMessage + ")");
-			disableButtons();
+			hideButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF file successfully created.",
 					mainFile);

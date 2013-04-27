@@ -40,7 +40,7 @@
                 <ImageView
                     android:id="@+id/imageOP"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="fill_parent"
                     android:layout_gravity="center|center_vertical"
                     android:layout_weight="3" />
 
@@ -48,7 +48,7 @@
                     android:id="@+id/message"
                     style="@style/MessageText"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="left|center_vertical"
                     android:layout_weight="7" />
             </LinearLayout>
@@ -59,46 +59,58 @@
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/openPDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/AnswerText"
-                    android:layout_weight="1"
-                    android:text="@string/open_pdf" />
-
-                <Button
-                    android:id="@+id/openPDF"
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="open"
                     android:onClick="openPDF"
-                    android:text="open-file" />
+                    android:src="@drawable/open" />
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ClickableOptionText"
+                    android:layout_weight="5"
+                    android:background="@drawable/option_text"
+                    android:onClick="openPDF"
+                    android:text="@string/open_pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/sharePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/AnswerText"
-                    android:layout_weight="1"
-                    android:text="@string/share_pdf" />
-
-                <Button
-                    android:id="@+id/sharePDF"
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="share"
                     android:onClick="sharePDF"
-                    android:text="share-file" />
+                    android:src="@drawable/share" />
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ClickableOptionText"
+                    android:layout_weight="5"
+                    android:background="@drawable/option_text"
+                    android:onClick="sharePDF"
+                    android:text="@string/share_pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />
@@ -111,64 +123,81 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/AnswerText"
-                    android:layout_weight="1"
-                    android:text="@string/protect_pdf" />
-
-                <Button
-                    android:id="@+id/protectPDF"
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="protect"
                     android:onClick="protectPDF"
-                    android:text="protect-pdf" />
+                    android:src="@drawable/lock" />
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ClickableOptionText"
+                    android:layout_weight="5"
+                    android:background="@drawable/option_text"
+                    android:onClick="protectPDF"
+                    android:text="@string/protect_pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/renamePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/AnswerText"
-                    android:layout_weight="1"
-                    android:text="@string/rename_pdf" />
-
-                <Button
-                    android:id="@+id/renamePDF"
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="rename"
                     android:onClick="renamePDF"
-                    android:text="rename-file" />
+                    android:src="@drawable/rename" />
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ClickableOptionText"
+                    android:layout_weight="5"
+                    android:background="@drawable/option_text"
+                    android:onClick="renamePDF"
+                    android:text="@string/rename_pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />
 
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/deletePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
-                    style="@style/AnswerText"
-                    android:layout_weight="1"
-                    android:text="@string/delete_pdf" />
-
-                <Button
-                    android:id="@+id/deletePDF"
-                    style="@style/ButtonText"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="delete"
                     android:onClick="deletePDF"
-                    android:text="delete-file" />
+                    android:src="@drawable/delete" />
+
+                <View
+                    style="@style/first_indent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ClickableOptionText"
+                    android:layout_weight="5"
+                    android:background="@drawable/option_text"
+                    android:onClick="deletePDF"
+                    android:text="@string/delete_pdf" />
             </LinearLayout>
 
             <View style="@style/gap" />

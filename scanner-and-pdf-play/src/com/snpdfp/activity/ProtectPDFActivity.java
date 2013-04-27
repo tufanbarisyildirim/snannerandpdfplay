@@ -196,7 +196,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			SNPDFUtils.setErrorText(this,
 					"Unable to lock file: " + srcFile.getName() + " ("
 							+ errorMessage + ")");
-			disableButtons();
+			hideButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF successfully protected.",
 					mainFile);

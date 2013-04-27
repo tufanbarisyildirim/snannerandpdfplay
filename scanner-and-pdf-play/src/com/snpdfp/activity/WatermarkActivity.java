@@ -243,7 +243,7 @@ public class WatermarkActivity extends SNPDFActivity {
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to add watermark to PDF: "
 					+ selectedFile.getName() + " (" + errorMessage + ")");
-			disableButtons();
+			hideButtons();
 
 		} else {
 			SNPDFUtils.setSuccessText(this, "Watermark successfully added.",

@@ -293,7 +293,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 			SNPDFUtils.setErrorText(this, "Unable to concatenate PDFs "
 					+ firstFile.getName() + " and " + secondFile.getName()
 					+ " (" + errorMessage + ")");
-			disableButtons();
+			hideButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDFs " + firstFile.getName()
 					+ " and " + secondFile.getName()
