@@ -74,7 +74,7 @@ public class RenameActivity extends SNPDFActivity {
 			if (!success) {
 				SNPDFUtils.setErrorText(this,
 						"Unable to rename file: " + file.getName());
-				disableButtons();
+				hideButtons();
 
 			} else {
 

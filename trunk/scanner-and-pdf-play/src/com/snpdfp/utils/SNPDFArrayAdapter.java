@@ -39,7 +39,7 @@ public class SNPDFArrayAdapter extends ArrayAdapter<File> {
 		File file = files.get(position);
 		fileNameView.setText(file.getName());
 		fileDetailView.setText(SNPDFUtils.getSizeText(file.length())
-				+ ", "
+				+ " | "
 				+ new SimpleDateFormat(SNPDFCContstants.DATE_FORMAT, Locale
 						.getDefault()).format(new Date(file.lastModified())));
 		ImageView imageView = (ImageView) rowView

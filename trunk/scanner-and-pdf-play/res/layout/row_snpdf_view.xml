@@ -12,19 +12,26 @@
         android:layout_weight="2"
         android:contentDescription="thumbnail" />
 
-    <TextView
-        android:id="@+id/rowtext"
-        style="@style/SNPDFFolderText"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:paddingLeft="2sp" />
+        android:layout_weight="8"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/rowdetail"
-        style="@style/SNPDFFolderDetail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3" />
+        <TextView
+            android:id="@+id/rowtext"
+            style="@style/SNPDFFolderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2sp" />
+
+        <TextView
+            android:id="@+id/rowdetail"
+            style="@style/SNPDFFolderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

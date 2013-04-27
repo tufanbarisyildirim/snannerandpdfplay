@@ -142,7 +142,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to create PDF ("
 					+ errorMessage + ")");
-			disableButtons();
+			hideButtons();
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF successfully created.",
 					mainFile);

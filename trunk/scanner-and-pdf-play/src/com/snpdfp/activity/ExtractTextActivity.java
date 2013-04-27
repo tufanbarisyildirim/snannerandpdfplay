@@ -206,7 +206,7 @@ public class ExtractTextActivity extends SNPDFActivity {
 		if (error) {
 			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
 					+ selectedFile.getName() + " (" + errorMessage + ")");
-			disableButtons();
+			hideButtons();
 
 		} else {
 			SNPDFUtils.setSuccessText(this, "TXT file successfully created.",

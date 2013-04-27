@@ -362,7 +362,7 @@ public class SplitActivity extends SNPDFActivity {
 			SNPDFUtils.setErrorText(this, "Unable to extract PDF " + srcPDF
 					+ " from page " + fromPageNumber + " to page "
 					+ toPageNumber + " (" + errorMessage + ")");
-			disableButtons();
+			hideButtons();
 
 		} else {
 			SNPDFUtils.setSuccessText(this, "PDF " + srcPDF.getName()

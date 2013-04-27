@@ -470,7 +470,7 @@
 
                     <TextView
                         style="@style/DescriptionText"
-                        android:text="This option converts a doc file into PDF\n(images and text formatting are ignored)" />
+                        android:text="This option converts a doc file into PDF\n(images and text formatting ignored)" />
 
                     <View style="@style/line" />
                 </LinearLayout>

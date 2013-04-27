@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -162,17 +161,17 @@ public class SNPDFActivity extends Activity {
 
 	}
 
-	protected void disableButtons() {
-		Button open_button = (Button) findViewById(R.id.openPDF);
-		Button share_button = (Button) findViewById(R.id.sharePDF);
-		Button protect_button = (Button) findViewById(R.id.protectPDF);
-		Button delete_button = (Button) findViewById(R.id.deletePDF);
-		Button rename_button = (Button) findViewById(R.id.renamePDF);
-		open_button.setEnabled(false);
-		share_button.setEnabled(false);
-		delete_button.setEnabled(false);
-		protect_button.setEnabled(false);
-		rename_button.setEnabled(false);
+	protected void hideButtons() {
+		LinearLayout open_button = (LinearLayout) findViewById(R.id.openPDF);
+		LinearLayout share_button = (LinearLayout) findViewById(R.id.sharePDF);
+		LinearLayout protect_button = (LinearLayout) findViewById(R.id.protect_pdf_layout);
+		LinearLayout delete_button = (LinearLayout) findViewById(R.id.deletePDF);
+		LinearLayout rename_button = (LinearLayout) findViewById(R.id.renamePDF);
+		open_button.setVisibility(View.GONE);
+		share_button.setVisibility(View.GONE);
+		delete_button.setVisibility(View.GONE);
+		protect_button.setVisibility(View.GONE);
+		rename_button.setVisibility(View.GONE);
 	}
 
 	private void renameFile(File mainFile) {
