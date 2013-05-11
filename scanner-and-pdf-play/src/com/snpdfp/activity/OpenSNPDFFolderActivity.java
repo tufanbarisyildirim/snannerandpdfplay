@@ -61,7 +61,7 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 				List<String> none = new ArrayList<String>();
 				none.add("NONE");
 				lv.setAdapter(new ArrayAdapter<String>(this, R.layout.row, none));
-				
+
 				Button button = (Button) findViewById(R.id.deleteAll);
 				button.setVisibility(View.GONE);
 
@@ -126,7 +126,11 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
 		Toast.makeText(this, "All snpdf prepared files deleted!",
 				Toast.LENGTH_SHORT).show();
 
-		startActivity(new Intent(this, MainActivity.class));
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+		startActivity(intent);
 	}
 
 }
