@@ -14,21 +14,13 @@
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
-    <TextView
-        android:id="@+id/snpdf_settings"
-        style="@style/HeadText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="set me up please..." />
-
-    <LinearLayout
+     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
-        android:layout_below="@+id/snpdf_settings"
         android:orientation="vertical"
         tools:context=".SNPDFSettings" >
 

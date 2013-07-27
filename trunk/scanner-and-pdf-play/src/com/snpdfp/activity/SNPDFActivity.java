@@ -222,7 +222,7 @@ public class SNPDFActivity extends Activity {
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
 			return true;
-		case R.id.sndpf_location:
+		case R.id.snpdf_location:
 			startActivity(new Intent(this, OpenSNPDFFolderActivity.class));
 			return true;
 		case R.id.faq:

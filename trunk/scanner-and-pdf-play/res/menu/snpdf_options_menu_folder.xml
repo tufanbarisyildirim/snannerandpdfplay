@@ -6,11 +6,6 @@
         android:showAsAction="ifRoom"
         android:title="home"/>
     <item
-        android:id="@+id/snpdf_location"
-        android:icon="@drawable/folder"
-        android:showAsAction="ifRoom"
-        android:title="@string/open_snpdf_file"/>
-    <item
         android:id="@+id/settings"
         android:title="settings"/>
     <item
