@@ -5,6 +5,11 @@
         android:icon="@drawable/home"
         android:showAsAction="ifRoom"
         android:title="home"/>
+     <item
+        android:id="@+id/delete"
+        android:icon="@drawable/delete"
+        android:showAsAction="ifRoom"
+        android:title="delete-all"/>
     <item
         android:id="@+id/settings"
         android:title="settings"/>

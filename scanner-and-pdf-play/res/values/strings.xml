@@ -38,9 +38,9 @@
     <string name="app_type">open source</string>
     <string name="app_url">http://code.google.com/p/snannerandpdfplay</string>
     <string name="title_about">that\'s what I am!</string>
-    <string name="open_snpdf_file">my prepared files</string>
+    <string name="open_snpdf_file">prepared files</string>
     <string name="select_copyProtectedPDF">unlock pdf</string>
-    <string name="title_activity_open_snpdffolder">my prepared files</string>
+    <string name="title_activity_open_snpdffolder">prepared files</string>
     <string name="title_activity_picked_pdf">selected file</string>
     <string name="title_activity_faq">do you know?</string>
     <string name="motivation">motivation and resources</string>
