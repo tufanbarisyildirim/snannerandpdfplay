@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,16 +22,34 @@ import com.snpdfp.utils.SNPDFUtils;
 public class ImageToPDFActivity extends SNPDFActivity {
 	Logger logger = Logger.getLogger(ImageToPDFActivity.class.getName());
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		new ConvertImage().execute();
+		String imagePath = getIntent().getStringExtra(
+				SNPDFCContstants.IMAGE_URI);
+
+		if (imagePath != null) {
+			new ConvertImage(imagePath).execute();
+		} else {
+			final Context context = this;
+			getAlertDialog()
+					.setMessage(
+							"Cannot identify the image, doesn't appear to exist on your phone!")
+					.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									Intent intent = new Intent(context,
+											MainActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									startActivity(intent);
+								}
+
+							}).show();
+		}
 
 	}
 
@@ -74,6 +94,9 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "unable to convert to pdf", e);
+			if (pdf.exists()) {
+				pdf.delete();
+			}
 			throw e;
 
 		} finally {
@@ -91,6 +114,12 @@ public class ImageToPDFActivity extends SNPDFActivity {
 	private class ConvertImage extends AsyncTask<String, Void, Boolean> {
 
 		private ProgressDialog progressDialog;
+
+		private String imagePath;
+
+		public ConvertImage(String imagePath) {
+			this.imagePath = imagePath;
+		}
 
 		@Override
 		protected void onPreExecute() {
@@ -113,9 +142,6 @@ public class ImageToPDFActivity extends SNPDFActivity {
 		protected Boolean doInBackground(String... params) {
 			logger.info("****** starting to convert image to pdf **********");
 			boolean error = false;
-			Intent intent = getIntent();
-			String imagePath = intent
-					.getStringExtra(SNPDFCContstants.IMAGE_URI);
 
 			try {
 				File file = new File(imagePath);

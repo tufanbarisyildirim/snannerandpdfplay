@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import com.itextpdf.text.PageSize;
 import com.snpdfp.menu.About;
 import com.snpdfp.menu.FAQActivity;
 import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFPathManager;
 
 public class SNPDFActivity extends Activity {
 
@@ -209,6 +211,45 @@ public class SNPDFActivity extends Activity {
 		return cursor.getString(column_index);
 	}
 
+	public void deleteAll() {
+		final Context context = this;
+		getAlertDialog()
+				.setTitle("Delete all files?")
+				.setMessage("Are you sure to delete all prepared files?")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						File snpdf = SNPDFPathManager.getRootDirectory();
+						File[] list = snpdf.listFiles();
+
+						if (list != null && list.length > 0) {
+							for (File file : list) {
+								file.delete();
+							}
+						}
+
+						Toast.makeText(context,
+								"All snpdf prepared files deleted!",
+								Toast.LENGTH_SHORT).show();
+
+						Intent intent = new Intent(context, MainActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+						startActivity(intent);
+					}
+
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						}).show();
+
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -219,6 +260,9 @@ public class SNPDFActivity extends Activity {
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.delete:
+			deleteAll();
+			return true;
 		case R.id.about:
 			startActivity(new Intent(this, About.class));
 			return true;
