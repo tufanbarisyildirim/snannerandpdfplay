@@ -8,7 +8,7 @@
     <color name="custom_theme_color_end">#FFFFFF</color>
     <color name="pink">#FFD700</color>
 
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <item name="android:scrollbars">vertical</item>
         <item name="android:gravity">left</item>
         <item name="android:windowBackground">@color/custom_theme_color_start</item>

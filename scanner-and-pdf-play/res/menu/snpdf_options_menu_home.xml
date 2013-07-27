@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/home"
-        android:icon="@drawable/home"
-        android:showAsAction="ifRoom"
-        android:title="home"/>
-    <item
+   <item
         android:id="@+id/snpdf_location"
         android:icon="@drawable/folder"
         android:showAsAction="ifRoom"
