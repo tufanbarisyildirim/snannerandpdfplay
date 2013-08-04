@@ -127,8 +127,7 @@ public class BrowsePDFActivity extends SNPDFActivity implements
 		if (currDir != null && currDir.getParent() != null) {
 			localFolders.setDir(currDir.getParent());
 		} else {
-			super.onBackPressed();
+			super.originalBackPressed();
 		}
-
 	}
 }

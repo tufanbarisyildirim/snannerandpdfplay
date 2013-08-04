@@ -93,8 +93,6 @@
 
             <View style="@style/gap" />
 
-            <View style="@style/gap" />
-
             <LinearLayout
                 xmlns:tools="http://schemas.android.com/tools"
                 style="http://schemas.android.com/apk/res/android"
@@ -131,6 +129,151 @@
             </EditText>
 
             <View style="@style/gap" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/section3"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/pdf_file3"
+                    style="@style/AnswerText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:hint="Select third PDF" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/find"
+                    android:onClick="pickFile3" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/password3"
+                style="@style/AnswerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword" >
+            </EditText>
+
+            <View style="@style/gap" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/section4"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/pdf_file4"
+                    style="@style/AnswerText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:hint="Select fourth PDF" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/find"
+                    android:onClick="pickFile4" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/password4"
+                style="@style/AnswerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword" >
+            </EditText>
+
+            <View style="@style/gap" />
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/section5"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/pdf_file5"
+                    style="@style/AnswerText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:hint="Select fifth PDF" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/find"
+                    android:onClick="pickFile5" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/password5"
+                style="@style/AnswerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword" >
+            </EditText>
+
+            <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/add_more"
+                style="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal" >
+
+                <View style="@style/gap_horizontal" />
+
+                <ImageView
+                    style="@style/OptionImage"
+                    android:layout_weight="2"
+                    android:contentDescription="ADD MORE"
+                    android:src="@drawable/add" />
+
+                <TextView
+                    style="@style/ClickableOptionTextSmall"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_weight="3"
+                    android:background="@drawable/select_file"
+                    android:onClick="addMore"
+                    android:text="ADD MORE" />
+            </LinearLayout>
+
+            <View style="@style/gap" />
+
+            <TextView
+                android:id="@+id/required_fields"
+                style="@style/DescriptionText"
+                android:text="* First two PDFs are mandatory" />
 
             <View style="@style/gap" />
 

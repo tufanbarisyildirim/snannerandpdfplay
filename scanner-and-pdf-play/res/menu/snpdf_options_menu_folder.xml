@@ -7,7 +7,7 @@
         android:title="home"/>
      <item
         android:id="@+id/delete"
-        android:icon="@drawable/delete"
+        android:icon="@drawable/delete_small"
         android:showAsAction="ifRoom"
         android:title="delete-all"/>
     <item
