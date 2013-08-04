@@ -177,7 +177,7 @@
 
                     <TextView
                         style="@style/DescriptionText"
-                        android:text="This option lets you concatenate two PDFs into one" />
+                        android:text="This option lets you concatenate multiple PDFs into one" />
 
                     <View style="@style/line" />
                 </LinearLayout>

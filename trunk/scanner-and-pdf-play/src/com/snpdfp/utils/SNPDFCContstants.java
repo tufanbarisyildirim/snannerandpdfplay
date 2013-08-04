@@ -54,6 +54,12 @@ public class SNPDFCContstants {
 	public static final int PICK_FILE1 = 8;
 
 	public static final int PICK_FILE2 = 9;
+	
+	public static final int PICK_FILE3 = 10;
+	
+	public static final int PICK_FILE4 = 11;
+	
+	public static final int PICK_FILE5 = 12;
 
 	public static final String FILE_TYPE_DOC = "DOC";
 
