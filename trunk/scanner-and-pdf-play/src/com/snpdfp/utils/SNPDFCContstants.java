@@ -65,6 +65,8 @@ public class SNPDFCContstants {
 
 	public static final String APP_URL = "Check out \"scanner and pdf play\" - https://play.google.com/store/apps/details?id=com.snpdfp.activity";
 
+  public static final String SUCCESS = "SUCCESS";
+
 	public static Rectangle PAGE_SIZE = PageSize.A4;
 
 }
