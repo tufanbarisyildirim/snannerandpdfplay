@@ -50,29 +50,16 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_concatenate_pdf);
 
-    EditText password1 = (EditText) findViewById(R.id.password1);
-    password1.setVisibility(View.GONE);
+    setInvisible(R.id.password1, R.id.password2, R.id.password3, R.id.password4, R.id.password5, R.id.section3,
+        R.id.section4, R.id.section5);
     password1_req = false;
-
-    EditText password2 = (EditText) findViewById(R.id.password2);
-    password2.setVisibility(View.GONE);
     password2_req = false;
-
-    setInvisible(R.id.section3, R.id.password3);
     password3_req = false;
-
-    setInvisible(R.id.section4, R.id.password4);
+    password4_req = false;
     password4_req = false;
 
-    setInvisible(R.id.section5, R.id.password5);
-    password4_req = false;
-
-    findViewById(R.id.required_fields).setVisibility(View.GONE);
-  }
-
-  private void setInvisible(int section, int password) {
-    findViewById(section).setVisibility(View.GONE);
-    findViewById(password).setVisibility(View.GONE);
+    setInvisible(R.id.required_fields, R.id.remove_last);
+    setVisible(R.id.add_more);
   }
 
   public void pickFile1(View view) {
@@ -102,15 +89,37 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
 
   public void addMore(View view) {
     if (findViewById(R.id.section3).getVisibility() == View.GONE) {
-      findViewById(R.id.section3).setVisibility(View.VISIBLE);
+      setVisible(R.id.section3);
     } else if (findViewById(R.id.section4).getVisibility() == View.GONE) {
-      findViewById(R.id.section4).setVisibility(View.VISIBLE);
+      setVisible(R.id.section4);
     } else if (findViewById(R.id.section5).getVisibility() == View.GONE) {
-      findViewById(R.id.section5).setVisibility(View.VISIBLE);
-      findViewById(R.id.add_more).setVisibility(View.GONE);
+      setVisible(R.id.section5);
+      setInvisible(R.id.add_more);
     }
 
-    findViewById(R.id.required_fields).setVisibility(View.VISIBLE);
+    setVisible(R.id.remove_last, R.id.required_fields);
+  }
+
+  public void removeLast(View view) {
+    if (findViewById(R.id.section5).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section5);
+      password5_req = false;
+      password5 = null;
+      fifthFile = null;
+    } else if (findViewById(R.id.section4).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section4);
+      password4_req = false;
+      password4 = null;
+      fourthFile = null;
+    } else if (findViewById(R.id.section3).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section3);
+      password3_req = false;
+      password3 = null;
+      thirdFile = null;
+      setInvisible(R.id.remove_last, R.id.required_fields);
+    }
+
+    setVisible(R.id.add_more);
   }
 
   @Override

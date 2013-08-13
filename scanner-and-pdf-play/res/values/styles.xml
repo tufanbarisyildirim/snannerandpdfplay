@@ -176,5 +176,15 @@
         <item name="android:layout_width">80sp</item>
         <item name="android:layout_height">80sp</item>
     </style>
+    
+    <style name="OptionImageSmall">
+        <item name="android:layout_width">40sp</item>
+        <item name="android:layout_height">40sp</item>
+    </style>
+    
+     <style name="OptionImageMedium">
+        <item name="android:layout_width">50sp</item>
+        <item name="android:layout_height">50sp</item>
+    </style>
 
 </resources>

@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -229,6 +230,27 @@ public class SNPDFActivity extends Activity {
           }
 
         });
+
+  }
+
+  protected void setEditTextEmpty(int... ids) {
+    for (int id : ids) {
+      ((EditText) findViewById(id)).setText("");
+    }
+
+  }
+
+  protected void setInvisible(int... ids) {
+    for (int id : ids) {
+      findViewById(id).setVisibility(View.GONE);
+    }
+
+  }
+
+  protected void setVisible(int... ids) {
+    for (int id : ids) {
+      findViewById(id).setVisibility(View.VISIBLE);
+    }
 
   }
 

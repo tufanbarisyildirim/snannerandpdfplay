@@ -39,7 +39,7 @@
 
                 <ImageView
                     android:id="@+id/imageOP"
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_gravity="center|center_vertical"
                     android:layout_weight="2" />
 
@@ -63,7 +63,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_weight="2"
                     android:contentDescription="open"
                     android:onClick="openPDF"
@@ -90,7 +90,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_weight="2"
                     android:contentDescription="share"
                     android:onClick="sharePDF"
@@ -117,7 +117,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_weight="2"
                     android:contentDescription="protect"
                     android:onClick="protectPDF"
@@ -144,7 +144,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_weight="2"
                     android:contentDescription="rename"
                     android:onClick="renamePDF"
@@ -171,7 +171,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    style="@style/OptionImage"
+                    style="@style/OptionImageMedium"
                     android:layout_weight="2"
                     android:contentDescription="delete"
                     android:onClick="deletePDF"
