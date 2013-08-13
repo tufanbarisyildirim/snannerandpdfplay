@@ -64,32 +64,64 @@ public class SplitActivity extends SNPDFActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_split);
 
-    EditText password = (EditText) findViewById(R.id.password);
-    password.setVisibility(View.GONE);
     password_req = false;
 
-    findViewById(R.id.section2).setVisibility(View.GONE);
-    findViewById(R.id.section3).setVisibility(View.GONE);
-    findViewById(R.id.section4).setVisibility(View.GONE);
-    findViewById(R.id.section5).setVisibility(View.GONE);
+    setVisible(R.id.add_more);
+    setInvisible(R.id.password, R.id.section2, R.id.section3, R.id.section4, R.id.section5, R.id.remove_last);
   }
 
   public void addMore(View view) {
     if (findViewById(R.id.section2).getVisibility() == View.GONE) {
-      findViewById(R.id.section2).setVisibility(View.VISIBLE);
+      setVisible(R.id.section2);
       enterSecond = true;
     } else if (findViewById(R.id.section3).getVisibility() == View.GONE) {
-      findViewById(R.id.section3).setVisibility(View.VISIBLE);
+      setVisible(R.id.section3);
       enterThird = true;
     } else if (findViewById(R.id.section4).getVisibility() == View.GONE) {
-      findViewById(R.id.section4).setVisibility(View.VISIBLE);
+      setVisible(R.id.section4);
       enterFourth = true;
     } else if (findViewById(R.id.section5).getVisibility() == View.GONE) {
-      findViewById(R.id.section5).setVisibility(View.VISIBLE);
-      findViewById(R.id.add_more).setVisibility(View.GONE);
+      setVisible(R.id.section5);
+      setInvisible(R.id.add_more);
       enterFifth = true;
     }
 
+    setVisible(R.id.remove_last);
+
+  }
+
+  public void removeLast(View view) {
+    if (findViewById(R.id.section5).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section5);
+      enterFifth = false;
+      fromPageNumber5 = 0;
+      toPageNumber5 = 0;
+      setEditTextEmpty(R.id.from_number5, R.id.to_number5);
+
+    } else if (findViewById(R.id.section4).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section4);
+      enterFourth = false;
+      fromPageNumber4 = 0;
+      toPageNumber4 = 0;
+      setEditTextEmpty(R.id.from_number4, R.id.to_number4);
+
+    } else if (findViewById(R.id.section3).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section3);
+      enterThird = false;
+      fromPageNumber3 = 0;
+      toPageNumber3 = 0;
+      setEditTextEmpty(R.id.from_number3, R.id.to_number3);
+
+    } else if (findViewById(R.id.section2).getVisibility() == View.VISIBLE) {
+      setInvisible(R.id.section2);
+      enterSecond = false;
+      fromPageNumber2 = 0;
+      toPageNumber2 = 0;
+      setEditTextEmpty(R.id.from_number2, R.id.to_number2);
+      setInvisible(R.id.remove_last);
+    }
+
+    setVisible(R.id.add_more);
   }
 
   public void pickFile(View view) {
@@ -178,10 +210,7 @@ public class SplitActivity extends SNPDFActivity {
     ((EditText) findViewById(R.id.to_number4)).setText("");
     ((EditText) findViewById(R.id.from_number5)).setText("");
     ((EditText) findViewById(R.id.to_number5)).setText("");
-    findViewById(R.id.section2).setVisibility(View.GONE);
-    findViewById(R.id.section3).setVisibility(View.GONE);
-    findViewById(R.id.section4).setVisibility(View.GONE);
-    findViewById(R.id.section5).setVisibility(View.GONE);
+    setInvisible(R.id.section2, R.id.section3, R.id.section4, R.id.section5);
   }
 
   private void setName() {
