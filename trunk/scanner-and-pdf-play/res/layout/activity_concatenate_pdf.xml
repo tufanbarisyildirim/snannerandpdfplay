@@ -257,6 +257,7 @@
                     style="@style/OptionImageSmall"
                     android:layout_weight="1"
                     android:contentDescription="ADD MORE"
+                    android:onClick="addMore"
                     android:src="@drawable/add" />
 
                 <TextView
@@ -283,6 +284,7 @@
                     style="@style/OptionImageSmall"
                     android:layout_weight="1"
                     android:contentDescription="REMOVE LAST"
+                    android:onClick="removeLast"
                     android:src="@drawable/remove" />
 
                 <TextView

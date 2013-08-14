@@ -39,7 +39,7 @@
 
                 <ImageView
                     android:id="@+id/imageOP"
-                    style="@style/OptionImageMedium"
+                    style="@style/OptionImage"
                     android:layout_gravity="center|center_vertical"
                     android:layout_weight="2" />
 

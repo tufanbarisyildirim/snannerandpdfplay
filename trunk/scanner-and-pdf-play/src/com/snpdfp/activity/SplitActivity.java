@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import android.app.Activity;
@@ -57,7 +56,7 @@ public class SplitActivity extends SNPDFActivity {
   int toPageNumber5;
   boolean enterFifth = false;
 
-  List<String> createdPDFs = new ArrayList<String>();
+  ArrayList<CharSequence> createdPDFs = new ArrayList<CharSequence>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -237,7 +236,7 @@ public class SplitActivity extends SNPDFActivity {
       } else if (showMessage) {
         TextView textView = (TextView) findViewById(R.id.message);
         textView.setText("Maximum number of pages in selected PDF is " + numberOfPages
-            + ".\nSo FROM cannot be less than 1 and TO cannot exceed " + (numberOfPages - 1));
+            + ".\nSo FROM cannot be less than 1 and TO cannot exceed " + numberOfPages);
 
       }
 
@@ -328,42 +327,48 @@ public class SplitActivity extends SNPDFActivity {
       // populate page details
       populatePageDetails(true);
       boolean errorFill = false;
+      String errorSections = "";
       try {
         toPageNumber1 = Integer.parseInt(((EditText) findViewById(R.id.to_number1)).getText().toString());
         fromPageNumber1 = Integer.parseInt(((EditText) findViewById(R.id.from_number1)).getText().toString());
-        if (toPageNumber1 > numberOfPages - 1 || fromPageNumber1 < 1) {
+        if (invalidPageNumbers(toPageNumber1, fromPageNumber1)) {
           errorFill = true;
+          errorSections += " 1";
         }
 
         if (enterSecond) {
           toPageNumber2 = Integer.parseInt(((EditText) findViewById(R.id.to_number2)).getText().toString());
           fromPageNumber2 = Integer.parseInt(((EditText) findViewById(R.id.from_number2)).getText().toString());
-          if (toPageNumber2 > numberOfPages - 1 || fromPageNumber2 < 1) {
+          if (invalidPageNumbers(toPageNumber2, fromPageNumber2)) {
             errorFill = true;
+            errorSections += " 2";
           }
         }
 
         if (enterThird) {
           toPageNumber3 = Integer.parseInt(((EditText) findViewById(R.id.to_number3)).getText().toString());
           fromPageNumber3 = Integer.parseInt(((EditText) findViewById(R.id.from_number3)).getText().toString());
-          if (toPageNumber3 > numberOfPages - 1 || fromPageNumber3 < 1) {
+          if (invalidPageNumbers(toPageNumber3, fromPageNumber3)) {
             errorFill = true;
+            errorSections += " 3";
           }
         }
 
         if (enterFourth) {
           toPageNumber4 = Integer.parseInt(((EditText) findViewById(R.id.to_number4)).getText().toString());
           fromPageNumber4 = Integer.parseInt(((EditText) findViewById(R.id.from_number4)).getText().toString());
-          if (toPageNumber4 > numberOfPages - 1 || fromPageNumber4 < 1) {
+          if (invalidPageNumbers(toPageNumber4, fromPageNumber4)) {
             errorFill = true;
+            errorSections += " 4";
           }
         }
 
         if (enterFifth) {
           toPageNumber5 = Integer.parseInt(((EditText) findViewById(R.id.to_number5)).getText().toString());
           fromPageNumber5 = Integer.parseInt(((EditText) findViewById(R.id.from_number5)).getText().toString());
-          if (toPageNumber5 > numberOfPages - 1 || fromPageNumber5 < 1) {
+          if (invalidPageNumbers(toPageNumber5, fromPageNumber5)) {
             errorFill = true;
+            errorSections += " 5";
           }
         }
 
@@ -373,7 +378,7 @@ public class SplitActivity extends SNPDFActivity {
 
       if (errorFill) {
         getAlertDialog().setTitle("Incorrect page numbers")
-            .setMessage("Invalid numbers entered! Please enter valid numbers as explained in the instructions.")
+            .setMessage("Please enter valid numbers as explained in the instructions for sections " + errorSections)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
               public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -386,6 +391,14 @@ public class SplitActivity extends SNPDFActivity {
 
     }
 
+  }
+
+  private boolean invalidPageNumbers(int toPageNumber, int fromPageNumber) {
+    if ((toPageNumber == fromPageNumber && toPageNumber == numberOfPages && numberOfPages < 2)
+        || (toPageNumber > numberOfPages || fromPageNumber < 1 || toPageNumber < fromPageNumber)) {
+      return true;
+    }
+    return false;
   }
 
   private boolean checkFirst() {
@@ -566,20 +579,16 @@ public class SplitActivity extends SNPDFActivity {
             + fromPageNumber1 + " to page " + toPageNumber1, mainFile);
       }
     } else {
-      Intent intent = new Intent(this, OpenSNPDFFolderActivity.class);
-      StringBuffer successText = new StringBuffer();
+      Intent intent = new Intent(this, SplitOutput.class);
+      intent.putCharSequenceArrayListExtra(SNPDFCContstants.FILES, createdPDFs);
       if (error) {
-        successText.append("Unable to extract PDF " + srcPDF + "(" + errorMessage + ")");
+        intent.putExtra(SNPDFCContstants.MESSAGE, "Error while extracting files (" + errorMessage + ")");
         intent.putExtra(SNPDFCContstants.SUCCESS, false);
       } else {
-        successText.append("PDF " + srcPDF.getName() + " successfully extracted into " + createdPDFs.size() + " pdfs:");
-        for (String fileName : createdPDFs) {
-          successText.append("\n" + fileName);
-        }
+        intent.putExtra(SNPDFCContstants.MESSAGE, createdPDFs.size() + " files successfully created after extraction");
         intent.putExtra(SNPDFCContstants.SUCCESS, true);
       }
 
-      intent.putExtra(SNPDFCContstants.TEXT, successText.toString());
       startActivity(intent);
     }
 

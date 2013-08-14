@@ -150,6 +150,12 @@
             android:label="@string/title_activity_snpdfsettings"
             android:screenOrientation="nosensor" >
         </activity>
+        <activity
+            android:name="com.snpdfp.activity.SplitOutput"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="@string/title_activity_split"
+            android:screenOrientation="nosensor" >
+        </activity>
     </application>
 
 </manifest>

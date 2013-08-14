@@ -17,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.snpdfp.utils.SNPDFArrayAdapter;
 import com.snpdfp.utils.SNPDFCContstants;
@@ -29,12 +28,6 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_open_snpdffolder);
-
-    // Show message for from Split options
-    String message = getIntent().getStringExtra(SNPDFCContstants.TEXT);
-    if (message != null) {
-      Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
 
     File root = SNPDFPathManager.getRootDirectory();
     File[] snpdfFiles = root.listFiles(new FilenameFilter() {
