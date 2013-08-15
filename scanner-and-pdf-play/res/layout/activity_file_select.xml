@@ -30,6 +30,13 @@
             android:text="Path" >
         </TextView>
 
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="search files..."
+            android:inputType="textVisiblePassword" />
+
         <View style="@style/line" />
 
         <ListView
