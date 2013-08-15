@@ -10,11 +10,14 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +31,8 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_open_snpdffolder);
+
+    EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 
     File root = SNPDFPathManager.getRootDirectory();
     File[] snpdfFiles = root.listFiles(new FilenameFilter() {
@@ -60,19 +65,39 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
         none.add("NONE");
         lv.setAdapter(new ArrayAdapter<String>(this, R.layout.row, none));
 
+        inputSearch.setVisibility(View.GONE);
       } else {
-        lv.setAdapter(new SNPDFArrayAdapter(this, files));
+
+        final ArrayAdapter<File> adapter = new SNPDFArrayAdapter(this, files);
+        lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             mainFile = new File(SNPDFPathManager.getRootDirectory(), (String) ((TextView) v.findViewById(R.id.rowtext))
                 .getText());
-
             showIntentForPickedPDF();
+          }
+        });
+
+        // enable search
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+          @Override
+          public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+            // When user changed the Text
+            adapter.getFilter().filter(cs);
+          }
+
+          @Override
+          public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 
           }
 
+          @Override
+          public void afterTextChanged(Editable arg0) {
+          }
         });
+
       }
 
     }
