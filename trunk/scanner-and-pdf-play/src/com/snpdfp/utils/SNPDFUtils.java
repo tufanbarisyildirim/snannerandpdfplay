@@ -8,9 +8,12 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfReader;
 import com.snpdfp.activity.R;
 
@@ -35,7 +38,6 @@ public class SNPDFUtils {
     textView.setTextColor(Color.parseColor("#298A08"));
 
     imageView.setImageResource(R.drawable.correct);
-
   }
 
   public static void setSuccessText(Activity activity, String message, File file) {
@@ -108,6 +110,41 @@ public class SNPDFUtils {
     }
 
     return false;
+  }
+
+  public static void showPageSizeInfo(Activity activity) {
+    View view = activity.findViewById(R.id.pagesize_info);
+    if (view != null) {
+      ((TextView) view).setText("The default page type is set as " + getName(SNPDFCContstants.PAGE_SIZE)
+          + ". To change, goto settings option.");
+    }
+
+  }
+
+  private static String getName(Rectangle pageSize) {
+    if (pageSize.equals(PageSize.A4)) {
+      return "A4";
+    } else if (pageSize.equals(PageSize.A3)) {
+      return "A3";
+    } else if (pageSize.equals(PageSize.A2)) {
+      return "A2";
+    } else if (pageSize.equals(PageSize.A1)) {
+      return "A1";
+    } else if (pageSize.equals(PageSize.A0)) {
+      return "A0";
+    } else if (pageSize.equals(PageSize.B4)) {
+      return "B4";
+    } else if (pageSize.equals(PageSize.B3)) {
+      return "B3";
+    } else if (pageSize.equals(PageSize.B2)) {
+      return "B2";
+    } else if (pageSize.equals(PageSize.B1)) {
+      return "B1";
+    } else if (pageSize.equals(PageSize.B0)) {
+      return "B0";
+    }
+
+    return null;
   }
 
 }

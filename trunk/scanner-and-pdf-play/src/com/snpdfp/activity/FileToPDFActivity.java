@@ -268,6 +268,7 @@ public class FileToPDFActivity extends SNPDFActivity {
       hideButtons();
     } else {
       SNPDFUtils.setSuccessText(this, "PDF file successfully created.", mainFile);
+      SNPDFUtils.showPageSizeInfo(this);
     }
   }
 
