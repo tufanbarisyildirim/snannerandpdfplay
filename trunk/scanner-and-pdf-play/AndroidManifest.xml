@@ -76,7 +76,8 @@
             android:name="com.snpdfp.activity.ProtectPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_lock_pdf"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name="com.snpdfp.activity.ConcatenatePDFActivity"
@@ -88,13 +89,15 @@
             android:name="com.snpdfp.activity.SplitActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_split"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.OpenSNPDFFolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_open_snpdffolder"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.PickedPDFActivity"
@@ -142,7 +145,8 @@
             android:name="com.snpdfp.activity.CopyEncryptedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_copy_encrypted"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.SNPDFSettings"

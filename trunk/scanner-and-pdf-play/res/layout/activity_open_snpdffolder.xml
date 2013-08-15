@@ -24,6 +24,13 @@
         android:orientation="vertical"
         tools:context=".OpenSNPDFFolderActivity" >
 
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="search files..."
+            android:inputType="textVisiblePassword" />
+
         <ListView
             android:id="@+id/list_snpdf_files"
             android:layout_width="match_parent"
