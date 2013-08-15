@@ -71,6 +71,8 @@ public class SNPDFCContstants {
 
   public static final String SUCCESS = "SUCCESS";
 
+  public static final String REQUEST_TYPE = "REQUEST_TYPE";
+
   public static Rectangle PAGE_SIZE = PageSize.A4;
 
 }

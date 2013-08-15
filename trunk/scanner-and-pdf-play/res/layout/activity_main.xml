@@ -315,7 +315,7 @@
 
                     <TextView
                         style="@style/DescriptionText"
-                        android:text="Prepares a new protected PDF" />
+                        android:text="Prepares a new password protected PDF" />
 
                     <View style="@style/line" />
                 </LinearLayout>
