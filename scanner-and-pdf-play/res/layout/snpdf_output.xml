@@ -190,6 +190,12 @@
             </LinearLayout>
 
             <View style="@style/gap" />
+
+            <View style="@style/gap" />            
+
+            <TextView
+                android:id="@+id/pagesize_info"
+                style="@style/IntroText" />
         </LinearLayout>
     </ScrollView>
 

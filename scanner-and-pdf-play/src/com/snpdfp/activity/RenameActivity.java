@@ -69,7 +69,7 @@ public class RenameActivity extends SNPDFActivity {
 			boolean success = file.renameTo(newFile);
 			mainFile = newFile;
 
-			setContentView(R.layout.activity_rename);
+			setContentView(R.layout.snpdf_output);
 
 			if (!success) {
 				SNPDFUtils.setErrorText(this,

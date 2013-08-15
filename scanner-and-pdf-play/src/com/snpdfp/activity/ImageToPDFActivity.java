@@ -161,7 +161,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
   }
 
   public void displayResult(Boolean error) {
-    setContentView(R.layout.activity_image_to_pdf);
+    setContentView(R.layout.snpdf_output);
 
     logger.info("****** starting to convert image to pdf **********");
     if (error) {
@@ -169,6 +169,7 @@ public class ImageToPDFActivity extends SNPDFActivity {
       hideButtons();
     } else {
       SNPDFUtils.setSuccessText(this, "PDF successfully created.", mainFile);
+      SNPDFUtils.showPageSizeInfo(this);
     }
   }
 

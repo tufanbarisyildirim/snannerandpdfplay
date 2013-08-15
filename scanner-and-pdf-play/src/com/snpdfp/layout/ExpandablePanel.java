@@ -38,7 +38,7 @@ public class ExpandablePanel extends LinearLayout {
     mCollapsedHeight = (int) a.getDimension(R.styleable.ExpandablePanel_collapsedHeight, 0.0f);
 
     // How long the animation should take
-    mAnimationDuration = a.getInteger(R.styleable.ExpandablePanel_animationDuration, 500);
+    mAnimationDuration = a.getInteger(R.styleable.ExpandablePanel_animationDuration, 300);
 
     int handleId = a.getResourceId(R.styleable.ExpandablePanel_handle, 0);
     if (handleId == 0) {

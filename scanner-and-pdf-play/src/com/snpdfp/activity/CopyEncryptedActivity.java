@@ -22,172 +22,153 @@ import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
 public class CopyEncryptedActivity extends SNPDFActivity {
-	Logger logger = Logger.getLogger(CopyEncryptedActivity.class.getName());
+  Logger logger = Logger.getLogger(CopyEncryptedActivity.class.getName());
 
-	File selectedFile;
+  File selectedFile;
 
-	String password;
+  String password;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_copy_encrypted);
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_copy_encrypted);
+  }
 
-	public void pickFile(View view) {
-		Intent filePick = new Intent(this, BrowsePDFActivity.class);
-		startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
-	}
+  public void pickFile(View view) {
+    Intent filePick = new Intent(this, BrowsePDFActivity.class);
+    startActivityForResult(filePick, SNPDFCContstants.PICK_FILE);
+  }
 
-	public void copyPDF(View view) {
-		if (selectedFile == null || !selectedFile.exists()) {
-			getAlertDialog()
-					.setTitle("Incomplete details")
-					.setMessage("Please select a protected PDF file!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-								}
+  public void copyPDF(View view) {
+    if (selectedFile == null || !selectedFile.exists()) {
+      getAlertDialog().setTitle("Incomplete details").setMessage("Please select a protected PDF file!")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
 
-							}).show();
-		} else {
-			password = ((EditText) findViewById(R.id.password)).getText()
-					.toString();
+          }).show();
+    } else {
+      password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-			if (password == null || "".equals(password)) {
-				getAlertDialog()
-						.setTitle("Incomplete details")
-						.setMessage(
-								"Please enter the password of the encrypted file!")
-						.setPositiveButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-									}
+      if (password == null || "".equals(password)) {
+        getAlertDialog().setTitle("Incomplete details").setMessage("Please enter the password of the encrypted file!")
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+              }
 
-								}).show();
+            }).show();
 
-			} else if (!SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
-				getAlertDialog()
-						.setTitle("Incorrect password!")
-						.setMessage(
-								"Please enter the correct password for selected PDF!")
-						.setPositiveButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-									}
+      } else if (!SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
+        getAlertDialog().setTitle("Incorrect password!")
+            .setMessage("Please enter the correct password for selected PDF!")
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+              }
 
-								}).show();
+            }).show();
 
-			} else {
-				new CopyPDFExecutor().execute();
-			}
-		}
-	}
+      } else {
+        new CopyPDFExecutor().execute();
+      }
+    }
+  }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_FILE) {
-				selectedFile = new File(
-						data.getStringExtra(SNPDFCContstants.FILE_URI));
-				setName();
-				((EditText) findViewById(R.id.password)).setText("");
-			}
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (resultCode == Activity.RESULT_OK) {
+      if (requestCode == SNPDFCContstants.PICK_FILE) {
+        selectedFile = new File(data.getStringExtra(SNPDFCContstants.FILE_URI));
+        setName();
+        ((EditText) findViewById(R.id.password)).setText("");
+      }
 
-		} else {
-			operationCancelled();
-		}
-	}
+    } else {
+      operationCancelled();
+    }
+  }
 
-	private void setName() {
-		EditText editText = (EditText) findViewById(R.id.pdf_file);
-		editText.setText(selectedFile.getName());
-	}
+  private void setName() {
+    EditText editText = (EditText) findViewById(R.id.pdf_file);
+    editText.setText(selectedFile.getName());
+  }
 
-	private class CopyPDFExecutor extends AsyncTask<String, Void, Boolean> {
+  private class CopyPDFExecutor extends AsyncTask<String, Void, Boolean> {
 
-		private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(CopyEncryptedActivity.this);
-			progressDialog
-					.setMessage("Copying encrypted PDF to non-encrypted one...");
-			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			progressDialog.show();
+    @Override
+    protected void onPreExecute() {
+      progressDialog = new ProgressDialog(CopyEncryptedActivity.this);
+      progressDialog.setMessage("Copying encrypted PDF to non-encrypted one...");
+      progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+      progressDialog.show();
 
-		}
+    }
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (progressDialog != null && progressDialog.isShowing())
-				progressDialog.dismiss();
+    @Override
+    protected void onPostExecute(Boolean result) {
+      if (progressDialog != null && progressDialog.isShowing())
+        progressDialog.dismiss();
 
-			displayResult(result);
+      displayResult(result);
 
-		}
+    }
 
-		@Override
-		protected Boolean doInBackground(String... params) {
-			logger.info("****** starting to copy encrypted PDF **********");
-			boolean error = false;
+    @Override
+    protected Boolean doInBackground(String... params) {
+      logger.info("****** starting to copy encrypted PDF **********");
+      boolean error = false;
 
-			PrintWriter out = null;
-			PdfReader pdfReader = null;
-			PdfCopyFields copy = null;
+      PrintWriter out = null;
+      PdfReader pdfReader = null;
+      PdfCopyFields copy = null;
 
-			mainFile = SNPDFPathManager.getSavePDFPath("COPY_"
-					+ selectedFile.getName());
-			try {
-				if (password != null) {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath(),
-							password.getBytes());
-				} else {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-				}
+      mainFile = SNPDFPathManager.getSavePDFPath("COPY_" + selectedFile.getName());
+      try {
+        if (password != null) {
+          pdfReader = new PdfReader(selectedFile.getAbsolutePath(), password.getBytes());
+        } else {
+          pdfReader = new PdfReader(selectedFile.getAbsolutePath());
+        }
 
-				copy = new PdfCopyFields(new FileOutputStream(mainFile));
-				copy.addDocument(pdfReader);
+        copy = new PdfCopyFields(new FileOutputStream(mainFile));
+        copy.addDocument(pdfReader);
 
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Unable to extract Text from PDF", e);
-				error = true;
-				errorMessage = e.getLocalizedMessage();
-			} finally {
-				// close the writer
-				if (pdfReader != null)
-					pdfReader.close();
+      } catch (Exception e) {
+        logger.log(Level.SEVERE, "Unable to extract Text from PDF", e);
+        error = true;
+        errorMessage = e.getLocalizedMessage();
+      } finally {
+        // close the writer
+        if (pdfReader != null)
+          pdfReader.close();
 
-				if (copy != null) {
-					copy.close();
-				}
+        if (copy != null) {
+          copy.close();
+        }
 
-			}
+      }
 
-			return error;
+      return error;
 
-		}
+    }
 
-	}
+  }
 
-	public void displayResult(Boolean error) {
-		setContentView(R.layout.snpdf_output);
+  public void displayResult(Boolean error) {
+    setContentView(R.layout.snpdf_output);
 
-		if (error) {
-			SNPDFUtils.setErrorText(this, "Unable to extract text from file "
-					+ selectedFile.getName() + " (" + errorMessage + ")");
-			hideButtons();
+    if (error) {
+      SNPDFUtils.setErrorText(this, "Unable to extract text from file " + selectedFile.getName() + " (" + errorMessage
+          + ")");
+      hideButtons();
 
-		} else {
-			SNPDFUtils.setSuccessText(this, "TXT file successfully created.",
-					mainFile);
-		}
-	}
+    } else {
+      SNPDFUtils.setSuccessText(this, "Unprotected PDF successfully created: ", mainFile);
+    }
+  }
 
 }
