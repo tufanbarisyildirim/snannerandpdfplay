@@ -33,23 +33,21 @@
             android:orientation="vertical"
             tools:context=".FileToPDFActivity" >
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
+            <com.snpdfp.layout.ExpandablePanel
+                android:id="@+id/expandable_intro"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".ConcatenatePDFActivity" >
+                app:collapsedHeight="80sp"
+                app:content="@+id/value"
+                app:handle="@+id/expand" >
 
-                <com.snpdfp.layout.ExpandablePanel
-                    android:id="@+id/expandable_intro"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:id="@+id/value"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:collapsedHeight="80sp"
-                    app:content="@+id/value"
-                    app:handle="@+id/expand" >
+                    android:layout_gravity="left|center_vertical"
+                    android:orientation="horizontal" >
 
                     <ImageView
                         style="@style/OptionImage"
@@ -62,28 +60,25 @@
                         style="@style/IntroText"
                         android:layout_weight="4"
                         android:text="@string/intro_filetopdf" />
-                </com.snpdfp.layout.ExpandablePanel>
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/expand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                <LinearLayout
+                    android:id="@+id/expand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
 
-                <View
-                    style="@style/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="4" />
+                    <View
+                        style="@style/line"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="4" />
 
-                <ImageView
-                    style="@style/OptionImageTiny"
-                    android:layout_weight="1"
-                    android:contentDescription="expand-collapse"
-                    android:src="@drawable/expandcollapse" />
-            </LinearLayout>
-
-            <com.snpdfp.layout.ExpandablePanel>
+                    <ImageView
+                        style="@style/OptionImageTiny"
+                        android:layout_weight="1"
+                        android:contentDescription="expand-collapse"
+                        android:src="@drawable/expandcollapse" />
+                </LinearLayout>
             </com.snpdfp.layout.ExpandablePanel>
 
             <View style="@style/gap" />
