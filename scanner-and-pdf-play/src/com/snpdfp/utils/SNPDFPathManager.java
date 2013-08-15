@@ -6,78 +6,69 @@ import android.os.Environment;
 
 public class SNPDFPathManager {
 
-	public static File getSavePDFPath(String fileName) {
-		// Environment
-		// .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		File file = new File(Environment.getExternalStorageDirectory(), "snpdf");
+  private static File getSNPDFRoot() {
+    return new File(Environment.getExternalStorageDirectory(), "snpdf");
+  }
 
-		if (!file.exists()) {
-			file.mkdirs();
-		}
+  public static File getSavePDFPath(String fileName) {
+    // Environment
+    // .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    File file = getSNPDFRoot();
 
-		file = getFile(file, fileName);
+    if (!file.exists()) {
+      file.mkdirs();
+    }
 
-		return file;
-	}
+    file = getFile(file, fileName);
 
-	private static File getFile(File file, String fileName) {
+    return file;
+  }
 
-		File returnFile = new File(file, fileName.substring(0,
-				fileName.lastIndexOf("."))
-				+ "_SNPDF" + fileName.substring(fileName.lastIndexOf(".")));
-		int i = 0;
-		while (returnFile.exists()) {
-			returnFile = new File(file, fileName.substring(0,
-					fileName.lastIndexOf("."))
-					+ "_SNPDF("
-					+ ++i
-					+ ")"
-					+ fileName.substring(fileName.lastIndexOf(".")));
-		}
+  private static File getFile(File file, String fileName) {
 
-		return returnFile;
-	}
+    File returnFile = new File(file, fileName.substring(0, fileName.lastIndexOf(".")) + "_SNPDF"
+        + fileName.substring(fileName.lastIndexOf(".")));
+    int i = 0;
+    while (returnFile.exists()) {
+      returnFile = new File(file, fileName.substring(0, fileName.lastIndexOf(".")) + "_SNPDF(" + ++i + ")"
+          + fileName.substring(fileName.lastIndexOf(".")));
+    }
 
-	public static File getSavePDFPathWOTimestamp(String fileName) {
-		File file = new File(Environment.getExternalStorageDirectory(), "snpdf");
+    return returnFile;
+  }
 
-		if (!file.exists()) {
-			file.mkdirs();
-		}
+  public static File getRootDirectory() {
+    File dir = getSNPDFRoot();
+    if (!dir.exists()) {
+      dir.mkdirs();
+    }
 
-		file = new File(file, fileName);
+    return dir;
+  }
 
-		return file;
-	}
+  public static File getTextFileForPDF(File pdffile) {
+    File file = new File(Environment.getExternalStorageDirectory(), "snpdf");
 
-	public static File getRootDirectory() {
-		File dir = new File(Environment.getExternalStorageDirectory(), "snpdf");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
+    String pdfFileName = pdffile.getName();
+    if (!file.exists()) {
+      file.mkdirs();
+    }
 
-		return dir;
-	}
+    file = getFile(file, getFileNameWithoutExtn(pdfFileName) + ".txt");
 
-	public static File getSNPDFPicFile() {
-		return getSavePDFPathWOTimestamp("PIC.jpg");
-	}
+    return file;
+  }
 
-	public static File getTextFileForPDF(File pdffile) {
-		File file = new File(Environment.getExternalStorageDirectory(), "snpdf");
+  public static String getFileNameWithoutExtn(String filename) {
+    return filename.substring(0, filename.lastIndexOf("."));
+  }
 
-		String pdfFileName = pdffile.getName();
-		if (!file.exists()) {
-			file.mkdirs();
-		}
+  public static boolean isSNPDFImage(File file) {
+    if (file.getParentFile().equals(getSNPDFRoot()) && file.getName().endsWith(".jpg")) {
+      return true;
+    }
 
-		file = getFile(file, getFileNameWithoutExtn(pdfFileName) + ".txt");
-
-		return file;
-	}
-
-	public static String getFileNameWithoutExtn(String filename) {
-		return filename.substring(0, filename.lastIndexOf("."));
-	}
+    return false;
+  }
 
 }

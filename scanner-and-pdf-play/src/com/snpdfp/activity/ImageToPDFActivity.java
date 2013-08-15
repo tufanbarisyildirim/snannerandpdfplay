@@ -2,13 +2,12 @@ package com.snpdfp.activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -20,159 +19,157 @@ import com.snpdfp.utils.SNPDFPathManager;
 import com.snpdfp.utils.SNPDFUtils;
 
 public class ImageToPDFActivity extends SNPDFActivity {
-	Logger logger = Logger.getLogger(ImageToPDFActivity.class.getName());
+  Logger logger = Logger.getLogger(ImageToPDFActivity.class.getName());
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-		String imagePath = getIntent().getStringExtra(
-				SNPDFCContstants.IMAGE_URI);
+    List<String> imagePath = getIntent().getStringArrayListExtra(SNPDFCContstants.IMAGE_URI);
 
-		if (imagePath != null) {
-			new ConvertImage(imagePath).execute();
-		} else {
-			final Context context = this;
-			getAlertDialog()
-					.setMessage(
-							"Cannot identify the image, doesn't appear to exist on your phone!")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									Intent intent = new Intent(context,
-											MainActivity.class);
-									intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									startActivity(intent);
-								}
+    if (imagePath != null && imagePath.size() > 0) {
+      new ConvertImage(imagePath).execute();
+    } else {
+      getAlertDialog().setMessage("Seems no valid image was selected for conversion!")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+              showMainPage();
+            }
 
-							}).show();
-		}
+          }).show();
+    }
 
-	}
+  }
 
-	private File convertToPDF(File input) throws Exception {
-		String fileName = input.getName().substring(0,
-				input.getName().lastIndexOf("."))
-				+ ".pdf";
-		File pdf = SNPDFPathManager.getSavePDFPath(fileName);
+  private File convertToPDF(List<String> imagePath) throws Exception {
+    String fileName = "PREPARED.pdf";
+    if (imagePath.size() == 1) {
+      String temp = new File(imagePath.get(0)).getName();
+      fileName = temp.substring(0, temp.lastIndexOf(".")) + ".pdf";
+    }
 
-		logger.info("Intended PDF file path:" + pdf);
+    File pdf = SNPDFPathManager.getSavePDFPath(fileName);
 
-		Document document = new Document(SNPDFCContstants.PAGE_SIZE);
-		document.setMargins(0, 0, 0, 0);
-		PdfWriter writer = null;
-		try {
-			FileOutputStream fos = new FileOutputStream(pdf);
-			writer = PdfWriter.getInstance(document, fos);
-			writer.open();
-			document.open();
-			Image image = Image.getInstance(input.getAbsolutePath());
+    logger.info("Intended PDF file path:" + pdf);
 
-			float imageRatio = image.getHeight() / image.getWidth();
-			float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight()
-					/ SNPDFCContstants.PAGE_SIZE.getWidth();
+    Document document = new Document(SNPDFCContstants.PAGE_SIZE);
+    document.setMargins(0, 0, 0, 0);
+    PdfWriter writer = null;
+    try {
+      FileOutputStream fos = new FileOutputStream(pdf);
+      writer = PdfWriter.getInstance(document, fos);
+      writer.open();
+      document.open();
 
-			if (imageRatio == aspectRatio) {
-				image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
-						SNPDFCContstants.PAGE_SIZE.getHeight());
+      for (String path : imagePath) {
+        document.add(getImage(path));
+      }
 
-			} else if (imageRatio < aspectRatio) {
-				image.scaleToFit(
-						SNPDFCContstants.PAGE_SIZE.getWidth(),
-						(SNPDFCContstants.PAGE_SIZE.getWidth() / image
-								.getWidth()) * image.getHeight());
-			} else {
-				image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight()
-						/ image.getHeight() * image.getWidth()),
-						SNPDFCContstants.PAGE_SIZE.getHeight());
-			}
+    } catch (Exception e) {
+      logger.log(Level.SEVERE, "unable to convert to pdf", e);
+      if (pdf.exists()) {
+        pdf.delete();
+      }
+      throw e;
 
-			document.add(image);
+    } finally {
+      if (document != null) {
+        document.close();
+      }
+      if (writer != null) {
+        writer.close();
+      }
 
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, "unable to convert to pdf", e);
-			if (pdf.exists()) {
-				pdf.delete();
-			}
-			throw e;
+      // Clean up files
+      for (String path : imagePath) {
+        // Clean up snpdf images
+        File file = new File(path);
+        if (SNPDFPathManager.isSNPDFImage(file)) {
+          file.delete();
+        }
+      }
+    }
 
-		} finally {
-			if (document != null) {
-				document.close();
-			}
-			if (writer != null) {
-				writer.close();
-			}
-		}
+    return pdf;
+  }
 
-		return pdf;
-	}
+  private Image getImage(String path) throws Exception {
+    Image image = Image.getInstance(path);
 
-	private class ConvertImage extends AsyncTask<String, Void, Boolean> {
+    float imageRatio = image.getHeight() / image.getWidth();
+    float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight() / SNPDFCContstants.PAGE_SIZE.getWidth();
 
-		private ProgressDialog progressDialog;
+    if (imageRatio == aspectRatio) {
+      image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(), SNPDFCContstants.PAGE_SIZE.getHeight());
 
-		private String imagePath;
+    } else if (imageRatio < aspectRatio) {
+      image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
+          (SNPDFCContstants.PAGE_SIZE.getWidth() / image.getWidth()) * image.getHeight());
+    } else {
+      image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight() / image.getHeight() * image.getWidth()),
+          SNPDFCContstants.PAGE_SIZE.getHeight());
+    }
+    return image;
+  }
 
-		public ConvertImage(String imagePath) {
-			this.imagePath = imagePath;
-		}
+  private class ConvertImage extends AsyncTask<String, Void, Boolean> {
 
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(ImageToPDFActivity.this);
-			progressDialog.setMessage("Converting to PDF...");
-			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			progressDialog.show();
+    private ProgressDialog progressDialog;
 
-		}
+    private List<String> imagePath;
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (progressDialog != null && progressDialog.isShowing())
-				progressDialog.dismiss();
+    public ConvertImage(List<String> imagePath) {
+      this.imagePath = imagePath;
+    }
 
-			displayResult(result);
-		}
+    @Override
+    protected void onPreExecute() {
+      progressDialog = new ProgressDialog(ImageToPDFActivity.this);
+      progressDialog.setMessage("Converting to PDF...");
+      progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+      progressDialog.show();
 
-		@Override
-		protected Boolean doInBackground(String... params) {
-			logger.info("****** starting to convert image to pdf **********");
-			boolean error = false;
+    }
 
-			try {
-				File file = new File(imagePath);
-				mainFile = convertToPDF(file);
-				logger.info("Created PDF File: " + mainFile);
+    @Override
+    protected void onPostExecute(Boolean result) {
+      if (progressDialog != null && progressDialog.isShowing())
+        progressDialog.dismiss();
 
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Unable to create PDF", e);
-				error = true;
-				errorMessage = e.getLocalizedMessage();
-			} finally {
-				SNPDFPathManager.getSNPDFPicFile().delete();
-			}
+      displayResult(result);
+    }
 
-			return error;
-		}
+    @Override
+    protected Boolean doInBackground(String... params) {
+      logger.info("****** starting to convert image to pdf **********");
+      boolean error = false;
 
-	}
+      try {
+        mainFile = convertToPDF(imagePath);
+        logger.info("Created PDF File: " + mainFile);
 
-	public void displayResult(Boolean error) {
-		setContentView(R.layout.activity_image_to_pdf);
+      } catch (Exception e) {
+        logger.log(Level.SEVERE, "Unable to create PDF", e);
+        error = true;
+        errorMessage = e.getLocalizedMessage();
+      }
 
-		logger.info("****** starting to convert image to pdf **********");
-		if (error) {
-			SNPDFUtils.setErrorText(this, "Unable to create PDF ("
-					+ errorMessage + ")");
-			hideButtons();
-		} else {
-			SNPDFUtils.setSuccessText(this, "PDF successfully created.",
-					mainFile);
-		}
-	}
+      return error;
+    }
+
+  }
+
+  public void displayResult(Boolean error) {
+    setContentView(R.layout.activity_image_to_pdf);
+
+    logger.info("****** starting to convert image to pdf **********");
+    if (error) {
+      SNPDFUtils.setErrorText(this, "Unable to create PDF (" + errorMessage + ")");
+      hideButtons();
+    } else {
+      SNPDFUtils.setSuccessText(this, "PDF successfully created.", mainFile);
+    }
+  }
 
 }

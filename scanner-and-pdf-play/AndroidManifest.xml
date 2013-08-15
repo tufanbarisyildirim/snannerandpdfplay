@@ -156,6 +156,12 @@
             android:label="@string/title_activity_split"
             android:screenOrientation="nosensor" >
         </activity>
+        <activity
+            android:name="com.snpdfp.activity.ScanActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="@string/title_activity_scanner"
+            android:screenOrientation="nosensor" >
+        </activity>
     </application>
 
 </manifest>

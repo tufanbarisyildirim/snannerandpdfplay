@@ -170,11 +170,16 @@ public class SNPDFActivity extends Activity {
       message = "File " + file.getName() + " successfully deleted!";
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
+    showMainPage();
+  }
+
+  protected void showMainPage() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
     startActivity(intent);
+
   }
 
   public android.app.AlertDialog.Builder getAlertDialog() {
@@ -188,6 +193,10 @@ public class SNPDFActivity extends Activity {
     int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
     cursor.moveToFirst();
     return cursor.getString(column_index);
+  }
+
+  protected String getFilePathFromURI(Uri contentUri) {
+    return new File(contentUri.getPath()).getAbsolutePath();
   }
 
   public void deleteAll() {
@@ -207,11 +216,7 @@ public class SNPDFActivity extends Activity {
 
             Toast.makeText(context, "All snpdf prepared files deleted!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            startActivity(intent);
+            showMainPage();
           }
 
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -277,10 +282,7 @@ public class SNPDFActivity extends Activity {
       startActivity(new Intent(this, FAQActivity.class));
       return true;
     case R.id.home:
-      Intent intent = new Intent(this, MainActivity.class);
-      intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      startActivity(intent);
+      showMainPage();
       return true;
     case R.id.facebook:
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(SNPDFCContstants.FACEBOOK_URL)));
@@ -306,10 +308,7 @@ public class SNPDFActivity extends Activity {
 
   @Override
   public void onBackPressed() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    startActivity(intent);
+    showMainPage();
     finish();
   }
 
