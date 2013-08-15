@@ -182,6 +182,11 @@
         <item name="android:layout_height">40sp</item>
     </style>
     
+     <style name="OptionImageTiny">
+        <item name="android:layout_width">25sp</item>
+        <item name="android:layout_height">25sp</item>
+    </style>
+    
      <style name="OptionImageMedium">
         <item name="android:layout_width">50sp</item>
         <item name="android:layout_height">50sp</item>
