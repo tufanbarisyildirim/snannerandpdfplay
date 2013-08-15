@@ -9,164 +9,181 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.snpdfp.activity.R;
+import com.snpdfp.utils.SimpleArrayAdapter;
 
-public class FolderLayout extends LinearLayout implements OnItemClickListener {
-	Context context;
-	IFolderItemListener folderListener;
-	private List<String> item = null;
-	private List<String> path = null;
-	private String root = "/";
-	private TextView myPath;
-	private ListView lstView;
+public class FolderLayout extends LinearLayout {
+  Context context;
+  IFolderItemListener folderListener;
+  private List<Pair<String, String>> item = null;
+  private String root = "/";
+  private TextView myPath;
+  private ListView lstView;
 
-	protected File currDir = null;
+  private ArrayAdapter<Pair<String, String>> fileListAdapter;
 
-	public FolderLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		this.context = context;
+  protected File currDir = null;
 
-		LayoutInflater layoutInflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		layoutInflater.inflate(R.layout.activity_file_select, this);
+  private EditText inputSearch;
 
-		myPath = (TextView) findViewById(R.id.path);
-		lstView = (ListView) findViewById(R.id.list);
+  public FolderLayout(Context context, AttributeSet attrs) {
+    super(context, attrs);
+    this.context = context;
 
-		Log.i("FolderView", "Constructed");
-		System.out.println("=------------"
-				+ Environment.getExternalStorageDirectory().getPath());
+    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    layoutInflater.inflate(R.layout.activity_file_select, this);
 
-		System.out.println("=------------"
-				+ Environment.getExternalStorageDirectory());
+    myPath = (TextView) findViewById(R.id.path);
+    lstView = (ListView) findViewById(R.id.list);
 
-		File file = new File("/sdcard");
-		if (file.exists()) {
-			getDir(file.getAbsolutePath(), lstView);
-		} else {
-			file = Environment.getExternalStorageDirectory();
-			if (file.exists()) {
-				getDir(file.getAbsolutePath(), lstView);
-			} else {
-				getDir(root, lstView);
-			}
-		}
-	}
+    File file = new File("/sdcard");
+    if (file.exists()) {
+      getDir(file.getAbsolutePath(), lstView);
+    } else {
+      file = Environment.getExternalStorageDirectory();
+      if (file.exists()) {
+        getDir(file.getAbsolutePath(), lstView);
+      } else {
+        getDir(root, lstView);
+      }
+    }
 
-	public void setIFolderItemListener(IFolderItemListener folderItemListener) {
-		this.folderListener = folderItemListener;
-	}
+    inputSearch = (EditText) findViewById(R.id.inputSearch);
 
-	// Set Directory for view at anytime
-	public void setDir(String dirPath) {
-		getDir(dirPath, lstView);
-	}
+    // enable search
+    inputSearch.addTextChangedListener(new TextWatcher() {
 
-	public File getCurrDir() {
-		return currDir;
-	}
+      @Override
+      public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+        // When user changed the Text
+        if (fileListAdapter != null) {
+          fileListAdapter.getFilter().filter(cs);
+        }
 
-	private void getDir(String dirPath, ListView v) {
+      }
 
-		myPath.setText("location: " + dirPath);
-		currDir = new File(dirPath);
+      @Override
+      public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 
-		item = new ArrayList<String>();
-		path = new ArrayList<String>();
-		File f = new File(dirPath);
-		File[] files = f.listFiles();
+      }
 
-		if (!dirPath.equals(root)) {
+      @Override
+      public void afterTextChanged(Editable arg0) {
+      }
+    });
+  }
 
-			item.add("<- goto root (/)");
-			path.add(root);
-			item.add("<- go back (../)");
-			path.add(f.getParent());
+  public void setIFolderItemListener(IFolderItemListener folderItemListener) {
+    this.folderListener = folderItemListener;
+  }
 
-		}
+  // Set Directory for view at anytime
+  public void setDir(String dirPath) {
+    getDir(dirPath, lstView);
+  }
 
-		// Sort the files
-		List<File> fileList = Arrays.asList(files);
-		Collections.sort(fileList, new Comparator<File>() {
-			@Override
-			public int compare(File lhs, File rhs) {
-				if (lhs.lastModified() > rhs.lastModified()) {
-					return -1;
-				} else if (lhs.lastModified() < rhs.lastModified()) {
-					return 1;
-				}
+  public File getCurrDir() {
+    return currDir;
+  }
 
-				return 0;
-			}
-		});
+  private void getDir(String dirPath, ListView v) {
 
-		// Display all directories first
-		for (File file : fileList) {
-			if (file.isDirectory()) {
-				path.add(file.getPath());
-				item.add(file.getName() + "/");
-			}
-		}
+    myPath.setText("location: " + dirPath);
+    currDir = new File(dirPath);
 
-		// Display files now
-		for (File file : fileList) {
-			if (file.isFile()) {
-				path.add(file.getPath());
-				item.add(file.getName());
-			}
-		}
+    item = new ArrayList<Pair<String, String>>();
+    File f = new File(dirPath);
+    File[] files = f.listFiles();
 
-		Log.i("Folders", files.length + "");
+    if (!dirPath.equals(root)) {
 
-		setItemList(item);
+      item.add(new Pair<String, String>(root, "<- goto root (/)"));
+      item.add(new Pair<String, String>(f.getParentFile().getAbsolutePath(), "<- go back (../)"));
 
-	}
+    }
 
-	public void setItemList(List<String> item) {
-		ArrayAdapter<String> fileList = new ArrayAdapter<String>(context,
-				R.layout.row, item);
+    // Sort the files
+    List<File> fileList = Arrays.asList(files);
+    Collections.sort(fileList, new Comparator<File>() {
+      @Override
+      public int compare(File lhs, File rhs) {
+        if (lhs.lastModified() > rhs.lastModified()) {
+          return -1;
+        } else if (lhs.lastModified() < rhs.lastModified()) {
+          return 1;
+        }
 
-		lstView.setAdapter(fileList);
-		lstView.setOnItemClickListener(this);
-	}
+        return 0;
+      }
+    });
 
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		File file = new File(path.get(position));
-		if (file.isDirectory()) {
-			if (file.canRead())
-				getDir(path.get(position), l);
-			else {
-				// what to do when folder is unreadable
-				if (folderListener != null) {
-					folderListener.OnCannotFileRead(file);
+    // Display all directories first
+    for (File file : fileList) {
+      if (file.isDirectory()) {
+        item.add(new Pair<String, String>(file.getAbsolutePath(), file.getName() + "/"));
+      }
+    }
 
-				}
+    // Display files now
+    for (File file : fileList) {
+      if (file.isFile()) {
+        item.add(new Pair<String, String>(file.getAbsolutePath(), file.getName()));
+      }
+    }
 
-			}
-		} else {
+    Log.i("Folders", files.length + "");
 
-			// what to do when file is clicked
-			// You can add more,like checking extension,and performing separate
-			// actions
-			if (folderListener != null) {
-				folderListener.OnFileClicked(file);
-			}
+    setItemList(item);
 
-		}
-	}
+  }
 
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		onListItemClick((ListView) arg0, arg0, arg2, arg3);
-	}
+  public void setItemList(List<Pair<String, String>> item) {
+    if (inputSearch != null) {
+      inputSearch.setText("");
+    }
+
+    fileListAdapter = new SimpleArrayAdapter(context, item);
+    lstView.setAdapter(fileListAdapter);
+    lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        String path = ((TextView) v.findViewById(R.id.rowPath)).getText().toString();
+        File file = new File(path);
+        if (file.isDirectory()) {
+          if (file.canRead())
+            getDir(path, (ListView) parent);
+          else {
+            // what to do when folder is unreadable
+            if (folderListener != null) {
+              folderListener.OnCannotFileRead(file);
+
+            }
+          }
+
+        } else {
+          // what to do when file is clicked
+          // You can add more,like checking extension,and performing separate
+          // actions
+          if (folderListener != null) {
+            folderListener.OnFileClicked(file);
+          }
+
+        }
+      }
+    });
+  }
+
 }

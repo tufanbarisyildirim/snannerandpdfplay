@@ -70,7 +70,8 @@
             android:name="com.snpdfp.activity.BrowsePDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_browse_file"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name="com.snpdfp.activity.ProtectPDFActivity"
