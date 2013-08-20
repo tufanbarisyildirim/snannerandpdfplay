@@ -33,6 +33,7 @@ import com.snpdfp.utils.SNPDFPathManager;
 public class SNPDFActivity extends Activity {
 
   SharedPreferences mPrefs;
+  final String snpdfAutoFill = "SNPDF_AUTO_FILL";
   final String snpdfPageSize = "SNPDF_PAGE_SIZE";
   final String snpdfSkipIntro = "SNPDF_SKIP_INTRO";
 
@@ -339,6 +340,16 @@ public class SNPDFActivity extends Activity {
     String pageSize = mPrefs.getString(snpdfPageSize, "A4");
     setPageSize(pageSize);
 
+  }
+
+  protected void setUpAutoFill() {
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    String autoFill = mPrefs.getString(snpdfAutoFill, "true");
+    setAutoFill(autoFill);
+  }
+
+  protected void setAutoFill(String autoFill) {
+    SNPDFCContstants.AUTOFILL = Boolean.valueOf(autoFill);
   }
 
   protected void setPageSize(String size) {

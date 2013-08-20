@@ -33,8 +33,9 @@ public class MainActivity extends SNPDFActivity {
     String action = intent.getAction();
     String type = intent.getType();
 
-    // setup page size
+    // setup defaults
     setUpPageSize();
+    setUpAutoFill();
 
     logger.info(action + "  " + type);
     if (Intent.ACTION_SEND.equals(action) && type != null) {
