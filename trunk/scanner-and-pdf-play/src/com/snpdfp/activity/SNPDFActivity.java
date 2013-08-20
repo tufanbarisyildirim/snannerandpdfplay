@@ -269,7 +269,10 @@ public class SNPDFActivity extends Activity {
   @Override
   public boolean onMenuItemSelected(int featureId, MenuItem item) {
     switch (item.getItemId()) {
-    case R.id.delete:
+    case R.id.refresh:
+      startActivity(new Intent(this, OpenSNPDFFolderActivity.class));
+      return true;
+    case R.id.deleteAll:
       deleteAll();
       return true;
     case R.id.about:

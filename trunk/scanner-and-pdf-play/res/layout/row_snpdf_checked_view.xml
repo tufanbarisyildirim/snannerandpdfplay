@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/select_file"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/rowtext"
+            style="@style/SNPDFFolderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2sp" />
+
+        <TextView
+            android:id="@+id/rowdetail"
+            style="@style/SNPDFFolderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/rowthumbnail"
+        style="@style/OptionImageMedium"
+        android:layout_weight="2"
+        android:contentDescription="thumbnail" />
+
+    <ImageView
+        android:id="@+id/next"
+        style="@style/OptionImageMedium"
+        android:layout_weight="2"
+        android:contentDescription="next"
+        android:src="@drawable/next" />
+
+</LinearLayout>

@@ -6,9 +6,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,22 +22,24 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.snpdfp.utils.SNPDFArrayAdapter;
 import com.snpdfp.utils.SNPDFCContstants;
+import com.snpdfp.utils.SNPDFCheckedArrayAdapter;
 import com.snpdfp.utils.SNPDFPathManager;
 
 public class OpenSNPDFFolderActivity extends SNPDFActivity {
+
+  CheckBoxListener checkBoxListener = new CheckBoxListener(new HashSet<String>());
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_open_snpdffolder);
-
-    EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 
     File root = SNPDFPathManager.getRootDirectory();
     File[] snpdfFiles = root.listFiles(new FilenameFilter() {
@@ -65,20 +72,23 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
         none.add("NONE");
         lv.setAdapter(new ArrayAdapter<String>(this, R.layout.row, none));
 
-        inputSearch.setVisibility(View.GONE);
+        setInvisible(R.id.inputSearch, R.id.selectOption);
       } else {
 
-        final ArrayAdapter<File> adapter = new SNPDFArrayAdapter(this, files);
+        final ArrayAdapter<File> adapter = new SNPDFCheckedArrayAdapter(this, files, checkBoxListener,
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                mainFile = new File(SNPDFPathManager.getRootDirectory(), ((CheckBox) v.findViewById(R.id.rowtext))
+                    .getText().toString());
+                showIntentForPickedPDF();
+
+              }
+            });
+
         lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            mainFile = new File(SNPDFPathManager.getRootDirectory(), (String) ((TextView) v.findViewById(R.id.rowtext))
-                .getText());
-            showIntentForPickedPDF();
-          }
-        });
-
+        EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
         // enable search
         inputSearch.addTextChangedListener(new TextWatcher() {
 
@@ -115,6 +125,100 @@ public class OpenSNPDFFolderActivity extends SNPDFActivity {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.snpdf_options_menu_folder, menu);
     return true;
+  }
+
+  public void deleteSelectedPDF(View view) {
+    if (checkBoxListener.getSelectedFiles().size() > 0) {
+      getAlertDialog().setTitle("Delete all selected files?").setMessage("Are you sure to delete all selected files?")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+              deleteSelected();
+            }
+
+          }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+          }).show();
+    } else {
+      getAlertDialog().setTitle("None selected!").setMessage("Please select a file first.")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+
+          }).show();
+    }
+
+  }
+
+  private void deleteSelected() {
+    for (String fileName : checkBoxListener.getSelectedFiles()) {
+      new File(SNPDFPathManager.getRootDirectory(), fileName).delete();
+    }
+
+    Toast.makeText(this, "All selected files have been deleted!", Toast.LENGTH_SHORT).show();
+
+    Intent intent = new Intent(this, OpenSNPDFFolderActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+
+  }
+
+  public void shareSelectedPDF(View view) {
+    if (checkBoxListener.getSelectedFiles().size() > 0) {
+      ArrayList<Uri> path = new ArrayList<Uri>();
+      for (String fileName : checkBoxListener.getSelectedFiles()) {
+        path.add(Uri.fromFile(new File(SNPDFPathManager.getRootDirectory(), fileName)));
+      }
+
+      Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+      intent.setType("application/pdf");
+      String shareBody = "Emailing pdfs";
+
+      intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+      intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, path);
+
+      try {
+        startActivity(Intent.createChooser(intent, "Share via..."));
+      } catch (ActivityNotFoundException e) {
+        Toast.makeText(this, "No Application Available to share selected PDFs", Toast.LENGTH_SHORT).show();
+      }
+    } else {
+      getAlertDialog().setTitle("None selected!").setMessage("Please select a file first.")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+
+          }).show();
+    }
+
+  }
+
+  public class CheckBoxListener implements CompoundButton.OnCheckedChangeListener {
+
+    private Set<String> selectedFiles;
+
+    public Set<String> getSelectedFiles() {
+      return selectedFiles;
+    }
+
+    public CheckBoxListener(HashSet<String> selectedFiles) {
+      this.selectedFiles = selectedFiles;
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+      if (isChecked) {
+        selectedFiles.add(buttonView.getText().toString());
+      } else {
+        selectedFiles.remove(buttonView.getText().toString());
+      }
+    }
+
   }
 
 }

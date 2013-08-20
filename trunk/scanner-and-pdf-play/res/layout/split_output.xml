@@ -4,20 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.google.ads.AdView
-        android:id="@+id/adView"
+    <LinearLayout
+        android:id="@+id/selectOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+        android:background="@color/lavendar"
+        android:orientation="horizontal" >
+
+        <ImageView
+            style="@style/OptionImageMedium"
+            android:layout_weight="1"
+            android:contentDescription="share all"
+            android:onClick="shareAllPDF"
+            android:src="@drawable/share" />
+
+        <ImageView
+            style="@style/OptionImageMedium"
+            android:layout_weight="1"
+            android:contentDescription="delete all"
+            android:onClick="deleteAllPDF"
+            android:src="@drawable/delete" />
+    </LinearLayout>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -42,68 +52,9 @@
                 android:layout_weight="8" />
         </LinearLayout>
 
-        <View style="@style/line" />
-
-        <LinearLayout
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/sharePDF"
-            style="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <ImageView
-                style="@style/OptionImageMedium"
-                android:layout_weight="2"
-                android:contentDescription="share"
-                android:onClick="shareAllPDF"
-                android:src="@drawable/share" />
-
-            <View
-                style="@style/first_indent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/ClickableOptionTextSmall"
-                android:layout_weight="5"
-                android:background="@drawable/select_file"
-                android:onClick="shareAllPDF"
-                android:text="share all" />
-        </LinearLayout>
-
-        <LinearLayout
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/deletePDF"
-            style="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <ImageView
-                style="@style/OptionImageMedium"
-                android:layout_weight="2"
-                android:contentDescription="delete"
-                android:onClick="deleteAllPDF"
-                android:src="@drawable/delete" />
-
-            <View
-                style="@style/first_indent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/ClickableOptionTextSmall"
-                android:layout_weight="5"
-                android:background="@drawable/select_file"
-                android:onClick="deleteAllPDF"
-                android:text="delete all" />
-        </LinearLayout>
-
         <View style="@style/gap" />
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
