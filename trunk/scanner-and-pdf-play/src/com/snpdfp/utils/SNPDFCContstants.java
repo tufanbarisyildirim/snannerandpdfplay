@@ -77,4 +77,6 @@ public class SNPDFCContstants {
 
   public static Boolean AUTOFILL = true;
 
+  public static String PAGE_LAYOUT = "PAGE_LAYOUT";
+
 }

@@ -116,7 +116,7 @@ public class SNPDFUtils {
     View view = activity.findViewById(R.id.pagesize_info);
     if (view != null) {
       ((TextView) view).setText("The default page type is set as " + getName(SNPDFCContstants.PAGE_SIZE)
-          + ". To change, goto settings option.");
+          + " with layout as " + SNPDFCContstants.PAGE_LAYOUT + ". To change, goto settings option.");
     }
 
   }
