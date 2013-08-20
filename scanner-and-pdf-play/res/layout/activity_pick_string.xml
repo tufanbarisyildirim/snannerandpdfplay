@@ -5,28 +5,44 @@
     android:orientation="vertical"
     tools:context=".PickStringActivity" >
 
+    <View style="@style/gap" />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_name"
-        android:inputType="text" >
+        android:inputType="text"
+        android:selectAllOnFocus="true" />
 
-        <requestFocus />
-    </EditText>
+    <View style="@style/gap" />
 
-    <Button
-        android:id="@+id/button1"
-        style="@style/PopButtonText"
-        android:background="@drawable/snpdf_button"
-        android:onClick="passName"
-        android:text="@string/ok" />
+    <View style="@style/gap" />
 
-    <Button
-        android:id="@+id/button2"
-        style="@style/PopButtonText"
-        android:background="@drawable/snpdf_button"
-        android:onClick="cancel"
-        android:text="@string/cancel" />
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        style="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/PopButtonText"
+            android:layout_weight="1"
+            android:background="@drawable/snpdf_button"
+            android:onClick="passName"
+            android:text="@string/ok" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/PopButtonText"
+            android:layout_weight="1"
+            android:background="@drawable/snpdf_button"
+            android:onClick="cancel"
+            android:text="@string/cancel" />
+    </LinearLayout>
+
+    <View style="@style/gap" />
 
 </LinearLayout>

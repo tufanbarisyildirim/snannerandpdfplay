@@ -57,7 +57,7 @@ public class ProtectPDFActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

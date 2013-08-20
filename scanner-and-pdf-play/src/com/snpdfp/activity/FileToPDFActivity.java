@@ -95,7 +95,7 @@ public class FileToPDFActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

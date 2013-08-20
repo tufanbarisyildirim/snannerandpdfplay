@@ -182,7 +182,7 @@ public class ConcatenatePDFActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

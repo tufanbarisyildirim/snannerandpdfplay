@@ -312,14 +312,9 @@ public class SNPDFActivity extends Activity {
     finish();
   }
 
-  public void originalBackPressed() {
-    super.onBackPressed();
-  }
-
   protected void operationCancelled() {
     showCancelledMsg();
     finish();
-
   }
 
   protected void showCancelledMsg() {
