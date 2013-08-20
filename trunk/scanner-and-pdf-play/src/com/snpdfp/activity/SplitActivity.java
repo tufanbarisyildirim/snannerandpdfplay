@@ -192,7 +192,7 @@ public class SplitActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

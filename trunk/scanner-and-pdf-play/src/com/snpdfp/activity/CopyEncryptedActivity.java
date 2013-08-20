@@ -86,7 +86,7 @@ public class CopyEncryptedActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

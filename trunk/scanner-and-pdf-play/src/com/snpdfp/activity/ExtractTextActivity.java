@@ -113,7 +113,7 @@ public class ExtractTextActivity extends SNPDFActivity {
       }
 
     } else {
-      operationCancelled();
+      showCancelledMsg();
     }
   }
 

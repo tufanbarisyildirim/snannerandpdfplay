@@ -13,89 +13,80 @@ import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFUtils;
 
 public class RenameActivity extends SNPDFActivity {
-	Logger logger = Logger.getLogger(RenameActivity.class.getName());
+  Logger logger = Logger.getLogger(RenameActivity.class.getName());
 
-	File file = null;
+  File file = null;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Intent intent = getIntent();
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    Intent intent = getIntent();
 
-		file = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
-		tryRename();
-	}
+    file = new File(intent.getStringExtra(SNPDFCContstants.FILE_URI));
+    tryRename();
+  }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == SNPDFCContstants.PICK_NAME_REQUEST) {
-				renameFile(data.getStringExtra(SNPDFCContstants.TEXT));
-			}
-		} else {
-			operationCancelled();
-		}
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (resultCode == Activity.RESULT_OK) {
+      if (requestCode == SNPDFCContstants.PICK_NAME_REQUEST) {
+        renameFile(data.getStringExtra(SNPDFCContstants.TEXT));
+      }
+    } else {
+      operationCancelled();
+    }
 
-	}
+  }
 
-	private void renameFile(String name) {
-		String newFileName = name
-				+ file.getName().substring(file.getName().lastIndexOf("."));
-		File newFile = new File(file.getParentFile(), newFileName);
-		if (newFile.exists()) {
-			getAlertDialog()
-					.setTitle("Name already exists!")
-					.setMessage("Want to re-enter new name?")
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									tryRename();
-									return;
-								}
+  private void renameFile(String name) {
+    String newFileName = name + file.getName().substring(file.getName().lastIndexOf("."));
+    File newFile = new File(file.getParentFile(), newFileName);
+    if (newFile.exists()) {
+      getAlertDialog().setTitle("Name already exists!").setMessage("Want to re-enter new name?")
+          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+              tryRename();
+              return;
+            }
 
-							})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-									operationCancelled();
-								}
+          }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+              operationCancelled();
+            }
 
-							}).show();
-		} else {
-			boolean success = file.renameTo(newFile);
-			mainFile = newFile;
+          }).show();
+    } else {
+      boolean success = file.renameTo(newFile);
+      mainFile = newFile;
 
-			setContentView(R.layout.snpdf_output);
+      setContentView(R.layout.snpdf_output);
 
-			if (!success) {
-				SNPDFUtils.setErrorText(this,
-						"Unable to rename file: " + file.getName());
-				hideButtons();
+      if (!success) {
+        SNPDFUtils.setErrorText(this, "Unable to rename file: " + file.getName());
+        hideButtons();
 
-			} else {
+      } else {
 
-				Toast.makeText(
-						this,
-						"File successfully renamed from " + file.getName()
-								+ " to " + mainFile.getName(),
-						Toast.LENGTH_SHORT).show();
-				SNPDFUtils.setSuccessText(this, "File successfully renamed.",
-						mainFile);
-			}
-		}
+        Toast.makeText(this, "File successfully renamed from " + file.getName() + " to " + mainFile.getName(),
+            Toast.LENGTH_SHORT).show();
+        SNPDFUtils.setSuccessText(this, "File successfully renamed.", mainFile);
+      }
+    }
 
-	}
+  }
 
-	private void tryRename() {
-		Intent pickName = new Intent(this, PickStringActivity.class);
-		pickName.putExtra(SNPDFCContstants.TEXT,
-				file.getName().substring(0, file.getName().lastIndexOf(".")));
-		startActivityForResult(pickName, SNPDFCContstants.PICK_NAME_REQUEST);
+  private void tryRename() {
+    Intent pickName = new Intent(this, PickStringActivity.class);
+    pickName.putExtra(SNPDFCContstants.TEXT, file.getName().substring(0, file.getName().lastIndexOf(".")));
+    startActivityForResult(pickName, SNPDFCContstants.PICK_NAME_REQUEST);
 
-	}
+  }
+
+  @Override
+  public void onBackPressed() {
+    operationCancelled();
+  }
 
 }
