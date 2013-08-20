@@ -84,9 +84,4 @@ public class RenameActivity extends SNPDFActivity {
 
   }
 
-  @Override
-  public void onBackPressed() {
-    operationCancelled();
-  }
-
 }

@@ -118,21 +118,6 @@
 
             <View style="@style/gap" />
 
-            <View style="@style/gap" />
-
-            <Button
-                android:id="@+id/page_detail_button"
-                style="@style/ButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/snpdf_button"
-                android:onClick="fillPageDetails"
-                android:paddingLeft="16sp"
-                android:paddingRight="16sp"
-                android:text="get-page-details" />
-
-            <View style="@style/gap" />
-
             <TextView
                 android:id="@+id/message"
                 style="@style/AnswerText"
