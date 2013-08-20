@@ -11,63 +11,89 @@ import android.widget.Toast;
 
 public class SNPDFSettings extends SNPDFActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_snpdfsettings);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_snpdfsettings);
 
-		// Select page size
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		String pageSize = mPrefs.getString(snpdfPageSize, "A4");
+    // Select page size
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    String pageSize = mPrefs.getString(snpdfPageSize, "A4");
+    String autoFill = mPrefs.getString(snpdfAutoFill, "true");
 
-		TextView textView = (TextView) findViewById(R.id.pageSize);
-		textView.setText(pageSize);
+    TextView textView = (TextView) findViewById(R.id.pageSize);
+    textView.setText(pageSize);
 
-		textView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectPageSize(v);
-			}
-		});
+    textView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        selectPageSize(v);
+      }
+    });
 
-	}
+    TextView autoFillView = (TextView) findViewById(R.id.autoFill);
+    autoFillView.setText(autoFill);
 
-	public void save(View view) {
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    autoFillView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        selectAutoFill(v);
+      }
+    });
 
-		TextView textView = (TextView) findViewById(R.id.pageSize);
-		String size = textView.getText().toString();
-		setPageSize(size);
+  }
 
-		SharedPreferences.Editor editor = mPrefs.edit();
-		editor.putString(snpdfPageSize, size);
-		editor.commit(); // Very important to save the preference
+  public void save(View view) {
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		Toast.makeText(this, "Settings saved!", Toast.LENGTH_SHORT).show();
+    TextView textView = (TextView) findViewById(R.id.pageSize);
+    String size = textView.getText().toString();
+    setPageSize(size);
 
-		onBackPressed();
-	}
+    TextView autoFillView = (TextView) findViewById(R.id.autoFill);
+    String autoFill = autoFillView.getText().toString();
+    setAutoFill(autoFill);
 
-	public void selectPageSize(View view) {
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString(snpdfPageSize, size);
+    editor.putString(snpdfAutoFill, autoFill);
+    editor.commit(); // Very important to save the preference
 
-		final TextView textView = (TextView) findViewById(R.id.pageSize);
+    Toast.makeText(this, "Settings saved!", Toast.LENGTH_SHORT).show();
 
-		final TypedArray pageSizes = getResources().obtainTypedArray(
-				R.array.page_size_array);
+    onBackPressed();
+  }
 
-		getAlertDialog()
-				.setTitle("Select the page size")
-				.setItems(R.array.page_size_array,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								textView.setText(pageSizes.getText(which));
-								dialog.dismiss();
-							}
-						}).show();
-	}
+  public void selectPageSize(View view) {
 
-	public void cancel(View view) {
-		onBackPressed();
-	}
+    final TextView textView = (TextView) findViewById(R.id.pageSize);
+
+    final TypedArray pageSizes = getResources().obtainTypedArray(R.array.page_size_array);
+
+    getAlertDialog().setTitle("Select the page size")
+        .setItems(R.array.page_size_array, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            textView.setText(pageSizes.getText(which));
+            dialog.dismiss();
+          }
+        }).show();
+  }
+
+  public void selectAutoFill(View view) {
+
+    final TextView textView = (TextView) findViewById(R.id.autoFill);
+
+    final TypedArray trueFalse = getResources().obtainTypedArray(R.array.true_false_array);
+
+    getAlertDialog().setItems(R.array.true_false_array, new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int which) {
+        textView.setText(trueFalse.getText(which));
+        dialog.dismiss();
+      }
+    }).show();
+  }
+
+  public void cancel(View view) {
+    onBackPressed();
+  }
 }

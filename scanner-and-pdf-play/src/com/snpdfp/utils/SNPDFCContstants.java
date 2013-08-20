@@ -75,4 +75,6 @@ public class SNPDFCContstants {
 
   public static Rectangle PAGE_SIZE = PageSize.A4;
 
+  public static Boolean AUTOFILL = true;
+
 }

@@ -13,5 +13,9 @@
         <item><name>B1</name></item>
         <item><name>B0</name></item>
     </string-array>
+    <string-array name="true_false_array">
+        <item><name>true</name></item>
+        <item><name>false</name></item>
+    </string-array>
 
 </resources>

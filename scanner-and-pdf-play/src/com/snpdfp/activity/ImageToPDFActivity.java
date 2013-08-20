@@ -97,19 +97,22 @@ public class ImageToPDFActivity extends SNPDFActivity {
   private Image getImage(String path) throws Exception {
     Image image = Image.getInstance(path);
 
-    float imageRatio = image.getHeight() / image.getWidth();
-    float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight() / SNPDFCContstants.PAGE_SIZE.getWidth();
+    if (SNPDFCContstants.AUTOFILL) {
+      float imageRatio = image.getHeight() / image.getWidth();
+      float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight() / SNPDFCContstants.PAGE_SIZE.getWidth();
 
-    if (imageRatio == aspectRatio) {
-      image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(), SNPDFCContstants.PAGE_SIZE.getHeight());
+      if (imageRatio == aspectRatio) {
+        image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(), SNPDFCContstants.PAGE_SIZE.getHeight());
 
-    } else if (imageRatio < aspectRatio) {
-      image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
-          (SNPDFCContstants.PAGE_SIZE.getWidth() / image.getWidth()) * image.getHeight());
-    } else {
-      image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight() / image.getHeight() * image.getWidth()),
-          SNPDFCContstants.PAGE_SIZE.getHeight());
+      } else if (imageRatio < aspectRatio) {
+        image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
+            (SNPDFCContstants.PAGE_SIZE.getWidth() / image.getWidth()) * image.getHeight());
+      } else {
+        image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight() / image.getHeight() * image.getWidth()),
+            SNPDFCContstants.PAGE_SIZE.getHeight());
+      }
     }
+
     return image;
   }
 
