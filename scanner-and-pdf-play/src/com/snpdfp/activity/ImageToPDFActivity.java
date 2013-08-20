@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -53,7 +54,13 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
     logger.info("Intended PDF file path:" + pdf);
 
-    Document document = new Document(SNPDFCContstants.PAGE_SIZE);
+    Document document = null;
+    if ("LANDSCAPE".equalsIgnoreCase(SNPDFCContstants.PAGE_LAYOUT)) {
+      document = new Document(SNPDFCContstants.PAGE_SIZE.rotate());
+    } else {
+      document = new Document(SNPDFCContstants.PAGE_SIZE);
+    }
+
     document.setMargins(0, 0, 0, 0);
     PdfWriter writer = null;
     try {
@@ -96,20 +103,24 @@ public class ImageToPDFActivity extends SNPDFActivity {
 
   private Image getImage(String path) throws Exception {
     Image image = Image.getInstance(path);
+    Rectangle rectangle = null;
+    if ("LANDSCAPE".equalsIgnoreCase(SNPDFCContstants.PAGE_LAYOUT)) {
+      rectangle = SNPDFCContstants.PAGE_SIZE.rotate();
+    } else {
+      rectangle = SNPDFCContstants.PAGE_SIZE;
+    }
 
     if (SNPDFCContstants.AUTOFILL) {
       float imageRatio = image.getHeight() / image.getWidth();
-      float aspectRatio = SNPDFCContstants.PAGE_SIZE.getHeight() / SNPDFCContstants.PAGE_SIZE.getWidth();
+      float aspectRatio = rectangle.getHeight() / rectangle.getWidth();
 
       if (imageRatio == aspectRatio) {
-        image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(), SNPDFCContstants.PAGE_SIZE.getHeight());
+        image.scaleToFit(rectangle.getWidth(), rectangle.getHeight());
 
       } else if (imageRatio < aspectRatio) {
-        image.scaleToFit(SNPDFCContstants.PAGE_SIZE.getWidth(),
-            (SNPDFCContstants.PAGE_SIZE.getWidth() / image.getWidth()) * image.getHeight());
+        image.scaleToFit(rectangle.getWidth(), (rectangle.getWidth() / image.getWidth()) * image.getHeight());
       } else {
-        image.scaleToFit((SNPDFCContstants.PAGE_SIZE.getHeight() / image.getHeight() * image.getWidth()),
-            SNPDFCContstants.PAGE_SIZE.getHeight());
+        image.scaleToFit((rectangle.getHeight() / image.getHeight() * image.getWidth()), rectangle.getHeight());
       }
     }
 

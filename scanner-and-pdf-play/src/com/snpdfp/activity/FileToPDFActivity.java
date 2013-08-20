@@ -134,7 +134,12 @@ public class FileToPDFActivity extends SNPDFActivity {
       mainFile = SNPDFPathManager.getSavePDFPath(fileName);
 
       // create a new document
-      Document document = new Document(SNPDFCContstants.PAGE_SIZE);
+      Document document = null;
+      if ("LANDSCAPE".equalsIgnoreCase(SNPDFCContstants.PAGE_LAYOUT)) {
+        document = new Document(SNPDFCContstants.PAGE_SIZE.rotate());
+      } else {
+        document = new Document(SNPDFCContstants.PAGE_SIZE);
+      }
 
       PdfWriter pdfWriter = null;
 

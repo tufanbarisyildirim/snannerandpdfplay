@@ -34,6 +34,7 @@ public class SNPDFActivity extends Activity {
 
   SharedPreferences mPrefs;
   final String snpdfAutoFill = "SNPDF_AUTO_FILL";
+  final String snpdfPageLayout = "SNPDF_PAGE_LAYOUT";
   final String snpdfPageSize = "SNPDF_PAGE_SIZE";
   final String snpdfSkipIntro = "SNPDF_SKIP_INTRO";
 
@@ -350,6 +351,16 @@ public class SNPDFActivity extends Activity {
 
   protected void setAutoFill(String autoFill) {
     SNPDFCContstants.AUTOFILL = Boolean.valueOf(autoFill);
+  }
+
+  protected void setUpPageLayout() {
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    String pageLayout = mPrefs.getString(snpdfPageLayout, "PORTRAIT");
+    setPageLayout(pageLayout);
+  }
+
+  protected void setPageLayout(String pageLayout) {
+    SNPDFCContstants.PAGE_LAYOUT = pageLayout;
   }
 
   protected void setPageSize(String size) {

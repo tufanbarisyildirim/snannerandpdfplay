@@ -67,7 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/pink"
+                        android:background="@color/yellow"
                         android:gravity="center"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -75,95 +75,134 @@
                 <TextView
                     style="@style/DescriptionText"
                     android:text="This sets the PDF page size for the freshly created PDFs like the ones from scan/convert-image operations." />
-            </LinearLayout>
 
-            <View style="@style/gap" />
+                <View style="@style/gap" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-            <View style="@style/line" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
 
-            <TextView
-                style="@style/HeadTextLeft"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="image setttings" />
+                        <View
+                            style="@style/first_indent"
+                            android:layout_weight="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                        <TextView
+                            style="@style/AnswerText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_weight="2"
+                            android:text="pdf page layout" />
+
+                        <TextView
+                            android:id="@+id/pageLayout"
+                            style="@style/AnswerText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/DescriptionText"
+                        android:text="This sets the PDF page layout for the freshly created PDFs like the ones from scan/convert-image operations." />
+                </LinearLayout>
+
+                <View style="@style/gap" />
+
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/HeadTextLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="image setttings" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
 
-                    <View
-                        style="@style/first_indent"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        style="@style/AnswerText"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:layout_weight="2"
-                        android:text="auto fill page" />
+                        android:orientation="horizontal" >
+
+                        <View
+                            style="@style/first_indent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/AnswerText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_weight="2"
+                            android:text="auto fit page" />
+
+                        <TextView
+                            android:id="@+id/autoFill"
+                            style="@style/AnswerText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/autoFill"
-                        style="@style/AnswerText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/pink"
-                        android:gravity="center"
-                        android:textStyle="bold" />
+                        style="@style/DescriptionText"
+                        android:text="On selecting this option as true, the PDF scanned image OR the PDF converted image would resize to fit the complete page.\nNOTE: Setting this option as false may lead the large images to overflow." />
                 </LinearLayout>
 
-                <TextView
-                    style="@style/DescriptionText"
-                    android:text="On selecting this option as true, the PDF scanned image OR the PDF converted image would resize to fill the complete page." />
-            </LinearLayout>
+                <View style="@style/gap" />
 
-            <View style="@style/gap" />
+                <View style="@style/line" />
 
-            <View style="@style/line" />
+                <View style="@style/gap" />
 
-            <View style="@style/gap" />
-
-            <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/save_settings_button"
-                    style="@style/ButtonText"
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    style="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
-                    android:onClick="save"
-                    android:paddingLeft="16sp"
-                    android:paddingRight="16sp"
-                    android:text="save" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
 
-                <View style="@style/gap_horizontal" />
+                    <Button
+                        android:id="@+id/save_settings_button"
+                        style="@style/ButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/snpdf_button"
+                        android:onClick="save"
+                        android:paddingLeft="16sp"
+                        android:paddingRight="16sp"
+                        android:text="save" />
 
-                <Button
-                    android:id="@+id/cancel_button"
-                    style="@style/ButtonText"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/snpdf_button"
-                    android:onClick="cancel"
-                    android:paddingLeft="16sp"
-                    android:paddingRight="16sp"
-                    android:text="cancel" />
+                    <View style="@style/gap_horizontal" />
+
+                    <Button
+                        android:id="@+id/cancel_button"
+                        style="@style/ButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/snpdf_button"
+                        android:onClick="cancel"
+                        android:paddingLeft="16sp"
+                        android:paddingRight="16sp"
+                        android:text="cancel" />
+                </LinearLayout>
+
+                <View style="@style/gap" />
             </LinearLayout>
-
-            <View style="@style/gap" />
         </LinearLayout>
     </ScrollView>
 

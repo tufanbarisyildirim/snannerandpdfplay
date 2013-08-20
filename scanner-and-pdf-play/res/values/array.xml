@@ -17,5 +17,9 @@
         <item><name>true</name></item>
         <item><name>false</name></item>
     </string-array>
+    <string-array name="page_layout_array">
+        <item><name>PORTRAIT</name></item>
+        <item><name>LANDSCAPE</name></item>
+    </string-array>
 
 </resources>
