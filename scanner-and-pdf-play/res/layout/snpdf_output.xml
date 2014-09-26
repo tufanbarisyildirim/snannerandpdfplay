@@ -15,23 +15,20 @@
         ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
         android:orientation="vertical" >
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-            xmlns:tools="http://schemas.android.com/tools"
+          
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+               
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +52,7 @@
             <View style="@style/gap" />
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+               
                 android:id="@+id/openPDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -82,7 +79,7 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+              
                 android:id="@+id/sharePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -109,7 +106,7 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+               
                 android:id="@+id/protect_pdf_layout"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -136,7 +133,7 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+               
                 android:id="@+id/renamePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -163,7 +160,7 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
+                
                 android:id="@+id/deletePDF"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
