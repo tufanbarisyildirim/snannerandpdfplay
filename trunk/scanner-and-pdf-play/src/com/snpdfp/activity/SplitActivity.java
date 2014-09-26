@@ -524,7 +524,7 @@ public class SplitActivity extends SNPDFActivity {
           while (fromPageNumber <= toPageNumber) {
             document.newPage();
             page = writer.getImportedPage(inputPDF, fromPageNumber);
-            cb.addTemplate(page, 0, 0);
+          
             fromPageNumber++;
           }
 
