@@ -15,8 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.itextpdf.text.pdf.PdfCopyFields;
-import com.itextpdf.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfCopyFields;
+import com.lowagie.text.pdf.PdfReader;
 import com.snpdfp.layout.FolderLayout;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;

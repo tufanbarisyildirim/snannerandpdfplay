@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.google.ads.AdView
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/adUnitId"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, B0CFB07E3B5A4F8FC8C3AC50DA5DF5CE" />
+        ads:adUnitId="@string/adUnitId" />
 
     <ScrollView
         android:layout_width="match_parent"
