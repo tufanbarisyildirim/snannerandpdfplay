@@ -13,11 +13,9 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
         ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+        ads:testDevices="TEST_EMULATOR, B0CFB07E3B5A4F8FC8C3AC50DA5DF5CE" />
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
@@ -25,9 +23,6 @@
         tools:context=".SplitActivity" >
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -82,7 +77,6 @@
             <View style="@style/gap" />
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,7 +121,6 @@
             <View style="@style/gap" />
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/section1"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -154,7 +147,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/section2"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -181,7 +173,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/section3"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -208,7 +199,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/section4"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -235,7 +225,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/section5"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -262,7 +251,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/add_more"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -289,7 +277,6 @@
             </LinearLayout>
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/remove_last"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -318,7 +305,6 @@
             <View style="@style/gap" />
 
             <LinearLayout
-                xmlns:tools="http://schemas.android.com/tools"
                 style="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

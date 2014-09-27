@@ -12,24 +12,20 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/adUnitId"
         ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 714028AE5C3B8CEEE2D9995406974941" />
+        ads:testDevices="TEST_EMULATOR, B0CFB07E3B5A4F8FC8C3AC50DA5DF5CE" />
 
     <ScrollView
-        
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
         android:orientation="vertical" >
 
         <LinearLayout
-          
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
-               
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -52,9 +48,7 @@
             <View style="@style/gap" />
 
             <LinearLayout
-               
                 android:id="@+id/openPDF"
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -79,9 +73,7 @@
             </LinearLayout>
 
             <LinearLayout
-              
                 android:id="@+id/sharePDF"
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -106,9 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-               
                 android:id="@+id/protect_pdf_layout"
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -133,9 +123,7 @@
             </LinearLayout>
 
             <LinearLayout
-               
                 android:id="@+id/renamePDF"
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -160,9 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
-                
                 android:id="@+id/deletePDF"
-                style="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -188,7 +174,7 @@
 
             <View style="@style/gap" />
 
-            <View style="@style/gap" />            
+            <View style="@style/gap" />
 
             <TextView
                 android:id="@+id/pagesize_info"
