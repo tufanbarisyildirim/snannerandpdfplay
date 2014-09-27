@@ -1,7 +1,7 @@
 package com.snpdfp.utils;
 
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Rectangle;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Rectangle;
 
 public class SNPDFCContstants {
 

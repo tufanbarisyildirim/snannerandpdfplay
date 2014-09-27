@@ -71,14 +71,14 @@
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_browse_file"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ProtectPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_lock_pdf"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.snpdfp.activity.ConcatenatePDFActivity"
@@ -120,9 +120,6 @@
             android:label="@string/title_activity_extract_text"
             android:screenOrientation="nosensor" >
         </activity>
-        <activity
-            android:name="com.google.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
             android:name="com.snpdfp.activity.WatermarkActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
@@ -167,6 +164,11 @@
             android:label="@string/title_activity_scanner"
             android:screenOrientation="nosensor" >
         </activity>
+        <activity android:name="com.google.android.gms.ads.AdActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
