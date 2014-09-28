@@ -29,8 +29,6 @@
             android:orientation="vertical"
             tools:context=".SNPDFSettings" >
 
-            <View style="@style/line" />
-
             <TextView
                 style="@style/HeadTextLeft"
                 android:layout_width="match_parent"

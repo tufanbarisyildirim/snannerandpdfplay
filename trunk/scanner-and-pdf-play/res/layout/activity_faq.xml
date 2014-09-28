@@ -29,8 +29,6 @@
             android:orientation="vertical"
             tools:context=".FAQActivity" >
 
-            <View style="@style/line" />
-
             <TextView
                 android:id="@+id/question1"
                 style="@style/FAQ"
