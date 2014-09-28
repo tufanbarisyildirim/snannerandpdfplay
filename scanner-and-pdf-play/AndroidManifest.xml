@@ -135,6 +135,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_pick_string"
             android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateVisible"
             android:theme="@android:style/Theme.Holo.Light.Dialog" >
         </activity>
         <activity
