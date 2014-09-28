@@ -16,9 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PdfEncryptor;
 import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
 import com.snpdfp.utils.SNPDFCContstants;
 import com.snpdfp.utils.SNPDFPathManager;
@@ -70,34 +69,34 @@ public class ProtectPDFActivity extends SNPDFActivity {
 	public void protect(View view) {
 		if (srcFile == null || !srcFile.exists()) {
 			getAlertDialog().setTitle("Incomplete details").setMessage("Please select a PDF file!")
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
 
-					}).show();
+				}).show();
 		} else {
 			password = ((EditText) findViewById(R.id.password)).getText().toString();
 			String confirmPassword = ((EditText) findViewById(R.id.confirm_password)).getText().toString();
 
 			if (password == null || confirmPassword == null || "".equals(password) || "".equals(confirmPassword) || !password.equals(confirmPassword)) {
 				getAlertDialog().setTitle("Incomplete details").setMessage("Password and Confirm Password fields are required, and they must match!")
+					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+
+					}).show();
+
+			} else {
+				if (SNPDFUtils.isProtected(srcFile)) {
+					getAlertDialog().setTitle("Invalid selection").setMessage("The PDF is already protected, cannot process further!")
 						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 								dialog.dismiss();
 							}
 
 						}).show();
-
-			} else {
-				if (SNPDFUtils.isProtected(srcFile)) {
-					getAlertDialog().setTitle("Invalid selection").setMessage("The PDF is already protected, cannot process further!")
-							.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-
-							}).show();
 				} else {
 					new PDFProtect().execute();
 				}
@@ -135,23 +134,25 @@ public class ProtectPDFActivity extends SNPDFActivity {
 			mainFile = SNPDFPathManager.getSavePDFPath(fileName);
 
 			PdfReader reader = null;
-			PdfStamper stamper = null;
+			FileOutputStream fileOutputStream = null;
 			try {
-				reader = new PdfReader(srcFile.getAbsolutePath());
-				stamper = new PdfStamper(reader, new FileOutputStream(mainFile));
-				stamper.setEncryption(password.getBytes(), password.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128
-						| PdfWriter.DO_NOT_ENCRYPT_METADATA);
+				reader = SNPDFUtils.getPdfReader(srcFile.getAbsolutePath(), false, null);
+				fileOutputStream = new FileOutputStream(mainFile);
+				PdfEncryptor.encrypt(reader, fileOutputStream, password.getBytes(), password.getBytes(), PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS | PdfWriter.ALLOW_MODIFY_CONTENTS
+					| PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
+
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Unable to lock PDF", e);
 				error = true;
 				errorMessage = e.getLocalizedMessage();
 			} finally {
-				try {
-					stamper.close();
-				} catch (DocumentException e) {
-
-				} catch (IOException e) {
-
+				if (fileOutputStream != null) {
+					try {
+						fileOutputStream.close();
+					} catch (IOException e) {
+						errorMessage = e.getLocalizedMessage();
+					}
 				}
 				reader.close();
 			}

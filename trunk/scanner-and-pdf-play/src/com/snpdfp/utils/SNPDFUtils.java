@@ -45,7 +45,7 @@ public class SNPDFUtils {
 		ImageView imageView = (ImageView) activity.findViewById(R.id.imageOP);
 
 		String fileDetails = "Filename:" + file.getName() + "\nSize:" + SNPDFUtils.getSizeText(file.length()) + "\nDate Modified:"
-				+ new SimpleDateFormat(SNPDFCContstants.DATE_FORMAT, Locale.getDefault()).format(new Date(file.lastModified()));
+			+ new SimpleDateFormat(SNPDFCContstants.DATE_FORMAT, Locale.getDefault()).format(new Date(file.lastModified()));
 		textView.setText(message + "\n" + fileDetails);
 		textView.setTextColor(Color.parseColor("#298A08"));
 
@@ -111,11 +111,19 @@ public class SNPDFUtils {
 		return false;
 	}
 
+	public static PdfReader getPdfReader(String filePath, boolean passwordRequired, String password) throws IOException {
+		if (passwordRequired) {
+			return new PdfReader(filePath, password.getBytes());
+		} else {
+			return new PdfReader(filePath);
+		}
+	}
+
 	public static void showPageSizeInfo(Activity activity) {
 		View view = activity.findViewById(R.id.pagesize_info);
 		if (view != null) {
 			((TextView) view).setText("The default page type is set as " + getName(SNPDFCContstants.PAGE_SIZE) + " with layout as "
-					+ SNPDFCContstants.PAGE_LAYOUT + ". To change, goto settings option.");
+				+ SNPDFCContstants.PAGE_LAYOUT + ". To change, goto settings option.");
 		}
 
 	}

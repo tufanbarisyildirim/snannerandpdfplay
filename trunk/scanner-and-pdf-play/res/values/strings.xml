@@ -2,19 +2,15 @@
 <resources>
 
     <string name="app_name">scanner and pdf play!</string>
-    <string name="what_it_does">It is a PDF utility which can be used to:\n1. Scan/Convert any image to PDF\n2. Extract pages from PDF\n3. Concatenate multiple PDFs\n4. Protect a PDF with password\n5. Convert a DOC/TXT/HTML file to PDF\n6. Extract text from PDF\n7. Add watermark to PDF\n8. Copy an encrypted PDF to a non-encrypted one\n9. Change PDF password\netc&#8230;\n\nYou can create PDF of following sizes: A0, A1, A2, A3, A4 (default), B0, B1, B2, B3 and B4</string>
+    <string name="what_it_does">It is a PDF utility which can be used to:\n1. Scan/Convert any image to PDF\n2. Extract pages from PDF\n3. Concatenate multiple PDFs\n4. Protect a PDF with password\n5. Extract text from PDF\n6. Add watermark to PDF\n7. Copy an encrypted PDF to a non-encrypted one\n8. Change PDF password\n\nYou can create PDF of following sizes: A0, A1, A2, A3, A4 (default), B0, B1, B2, B3 and B4</string>
     <string name="menu_settings">settings</string>
     <string name="select_scanner">open scanner</string>
     <string name="select_imageconvert">image to pdf</string>
-    <string name="select_txtconvert">txt to pdf</string>
-    <string name="select_htmlconvert">html to pdf</string>
-    <string name="select_docconvert">ms doc to pdf</string>
     <string name="select_unlockpdf">unlock pdf</string>
     <string name="select_lockpdf">protect pdf</string>
     <string name="select_pdfToText">extract text</string>
     <string name="title_activity_scanner">scanner</string>
     <string name="title_activity_image_to_pdf">pdf from image</string>
-    <string name="title_activity_file_to_pdf">pdf from file</string>
     <string name="title_activity_protect_pdf">protect pdf</string>
     <string name="title_activity_browse_file">browse file</string>
     <string name="open_pdf">open this file</string>
@@ -34,7 +30,7 @@
     <string name="title_activity_split">split pdf</string>
     <string name="enter_frompgnumber">from page #</string>
     <string name="enter_topgnumber">to page #</string>
-    <string name="app_home">open source app: http://code.google.com/p/snannerandpdfplay</string>
+    <string name="app_home">app source: http://code.google.com/p/snannerandpdfplay</string>
     <string name="app_type">open source</string>
     <string name="app_url">http://code.google.com/p/snannerandpdfplay</string>
     <string name="title_about">that\'s what I am!</string>
@@ -43,12 +39,10 @@
     <string name="title_activity_open_snpdffolder">prepared files</string>
     <string name="title_activity_picked_pdf">selected file</string>
     <string name="title_activity_faq">do you know?</string>
-    <string name="motivation">motivation and resources</string>
-    <string name="developer">developer</string>
-    <string name="aahuti">Aahuti Ghosh</string>
-    <string name="shikhar">Kumar Shikhar</string>
-    <string name="courtesy">This application makes use of following open source libraries: itextpdf-5.3.4, poi-3.9</string>
-    <string name="title_activity_extract_text">pdf from text</string>
+    <string name="license">licensed under</string>
+    <string name="apache"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></string>
+    <string name="courtesy"><p>This application makes use of open source library itextpdf-2.1.7</p>\n<div>Icons made by Elegant Themes, Anas Ramadan, SimpleIcon, Freepik, Icons8 from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div></string>
+    <string name="title_activity_extract_text">text from pdf</string>
     <string name="select_addwatermark">add watermark</string>
     <string name="adUnitId">ca-app-pub-1056589928819786/4583708678</string>
     <string name="title_activity_watermark">watermark pdf</string>
@@ -59,8 +53,7 @@
     <string name="title_activity_snpdfsettings">set me up!</string>
     <string name="intro_concatenate">This option let\'s you concatenate upto 5 multiple PDF files.\n1. Select as many as 5 PDFs for concatenation in sequence.\n2. Enter respective passwords, if protected\n3. Click concatenate</string>
     <string name="intro_protect">This option let\'s you encrypt a PDF file with password.\n1. Select the PDF\n2. Enter a password\n3. Click protect</string>
-    <string name="intro_split">This option let\'s you extract out pages from a possibly huge PDF file.\n1. Select the PDF and enter it\'s password, if protected\n2. Click get-page-details. This will tell the number of pages it has and instruction to enter page details\n3. Enter from and to page range which you intend to extract out. You can extract up to 5 PDFs in one go, by choosing ADD MORE option in sequence.\n4. Click split\nTIP: For extracting a single page, enter from and to page number as same</string>
-    <string name="intro_filetopdf">This option let\'s you convert a file to PDF.\n1. Select the file\n2. Click convert-to-PDF</string>
+    <string name="intro_split">This option let\'s you extract out pages from a possibly huge PDF file.\n1. Select the PDF and enter it\'s password, if protected\n2. Enter from and to page range which you intend to extract out. You can extract up to 5 PDFs in one go, by choosing ADD MORE option in sequence.\n3. Click split\nTIP: For extracting a single page, enter from and to page number as same</string>
     <string name="intro_copy">This option let\'s you copy a password protected PDF into a new non-encrypted PDF file.\n1. Select the PDF\n2. Enter it\'s password\n3. Click copy</string>
     <string name="intro_pdftotext">This option let\'s you to extract out text from a PDF file.\n1. Select the PDF\n2. Enter it\'s password, if protected\n3. Click extract-text</string>
     <string name="intro_watermark">This option let\'s you add an image as watermark to an existing PDF file.\n1. Select the PDF\n2. Enter it\'s password, if protected\n3. Pick the image to add as watermark\n4. Click add-watermark</string>

@@ -48,36 +48,19 @@
                 android:text="@string/app_url" />
 
             <TextView
-                android:id="@+id/motivation"
+                android:id="@+id/license"
                 style="@style/FAQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/motivation" />
+                android:text="@string/license" />
 
             <TextView
-                android:id="@+id/aahuti"
+                android:id="@+id/apache"
                 style="@style/AnswerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/aahuti" />
-
-            <TextView
-                android:id="@+id/developer"
-                style="@style/FAQ"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/developer" />
-
-            <TextView
-                android:id="@+id/shikhar"
-                style="@style/AnswerText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/shikhar"
-                android:visibility="visible" />
-
+                android:text="@string/apache" />
             <View style="@style/gap" />
 
             <View style="@style/line" />
