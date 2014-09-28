@@ -119,187 +119,21 @@
 
             <View style="@style/gap" />
 
-            <LinearLayout
-                android:id="@+id/section1"
-                style="http://schemas.android.com/apk/res/android"
+            <TextView
+                style="@style/AnswerText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter comma separated page numbers and use &apos;-&apos; for range of pages, e.g 1,2-3,8,9-15" />
+
+            <View style="@style/gap" />
+
+            <EditText
+                android:id="@+id/page_number"
+                style="@style/AnswerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/from_number1"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_frompgnumber"
-                    android:inputType="number" >
-                </EditText>
-
-                <EditText
-                    android:id="@+id/to_number1"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_topgnumber"
-                    android:inputType="number" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/section2"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/from_number2"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_frompgnumber"
-                    android:inputType="number" >
-                </EditText>
-
-                <EditText
-                    android:id="@+id/to_number2"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_topgnumber"
-                    android:inputType="number" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/section3"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/from_number3"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_frompgnumber"
-                    android:inputType="number" >
-                </EditText>
-
-                <EditText
-                    android:id="@+id/to_number3"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_topgnumber"
-                    android:inputType="number" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/section4"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/from_number4"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_frompgnumber"
-                    android:inputType="number" >
-                </EditText>
-
-                <EditText
-                    android:id="@+id/to_number4"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_topgnumber"
-                    android:inputType="number" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/section5"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/from_number5"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_frompgnumber"
-                    android:inputType="number" >
-                </EditText>
-
-                <EditText
-                    android:id="@+id/to_number5"
-                    style="@style/AnswerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_topgnumber"
-                    android:inputType="number" >
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/add_more"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:orientation="horizontal" >
-
-                <View style="@style/gap_horizontal" />
-
-                <ImageView
-                    style="@style/OptionImageSmall"
-                    android:layout_weight="1"
-                    android:contentDescription="ADD MORE"
-                    android:onClick="addMore"
-                    android:src="@drawable/add" />
-
-                <TextView
-                    style="@style/ClickableOptionTextSmall"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_weight="4"
-                    android:background="@drawable/select_file"
-                    android:onClick="addMore"
-                    android:text="ADD MORE" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/remove_last"
-                style="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:orientation="horizontal" >
-
-                <View style="@style/gap_horizontal" />
-
-                <ImageView
-                    style="@style/OptionImageSmall"
-                    android:layout_weight="1"
-                    android:contentDescription="REMOVE LAST"
-                    android:onClick="removeLast"
-                    android:src="@drawable/remove" />
-
-                <TextView
-                    style="@style/ClickableOptionTextSmall"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_weight="4"
-                    android:background="@drawable/select_file"
-                    android:onClick="removeLast"
-                    android:text="REMOVE LAST" />
-            </LinearLayout>
+                android:hint="e.g. 1,2-3,8,9-15" >
+            </EditText>
 
             <View style="@style/gap" />
 

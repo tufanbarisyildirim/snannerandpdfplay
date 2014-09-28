@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import android.app.Activity;
@@ -12,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,90 +39,15 @@ public class SplitActivity extends SNPDFActivity {
 	String password;
 	int numberOfPages;
 
-	int fromPageNumber1;
-	int toPageNumber1;
-
-	int fromPageNumber2;
-	int toPageNumber2;
-	boolean enterSecond = false;
-
-	int fromPageNumber3;
-	int toPageNumber3;
-	boolean enterThird = false;
-
-	int fromPageNumber4;
-	int toPageNumber4;
-	boolean enterFourth = false;
-
-	int fromPageNumber5;
-	int toPageNumber5;
-	boolean enterFifth = false;
-
+	private List<Pair<Integer, Integer>> pages = new ArrayList<Pair<Integer, Integer>>();
 	ArrayList<CharSequence> createdPDFs = new ArrayList<CharSequence>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_split);
-
 		password_req = false;
-
-		setVisible(R.id.add_more);
-		setInvisible(R.id.password, R.id.section2, R.id.section3, R.id.section4, R.id.section5, R.id.remove_last);
-	}
-
-	public void addMore(View view) {
-		if (findViewById(R.id.section2).getVisibility() == View.GONE) {
-			setVisible(R.id.section2);
-			enterSecond = true;
-		} else if (findViewById(R.id.section3).getVisibility() == View.GONE) {
-			setVisible(R.id.section3);
-			enterThird = true;
-		} else if (findViewById(R.id.section4).getVisibility() == View.GONE) {
-			setVisible(R.id.section4);
-			enterFourth = true;
-		} else if (findViewById(R.id.section5).getVisibility() == View.GONE) {
-			setVisible(R.id.section5);
-			setInvisible(R.id.add_more);
-			enterFifth = true;
-		}
-
-		setVisible(R.id.remove_last);
-
-	}
-
-	public void removeLast(View view) {
-		if (findViewById(R.id.section5).getVisibility() == View.VISIBLE) {
-			setInvisible(R.id.section5);
-			enterFifth = false;
-			fromPageNumber5 = 0;
-			toPageNumber5 = 0;
-			setEditTextEmpty(R.id.from_number5, R.id.to_number5);
-
-		} else if (findViewById(R.id.section4).getVisibility() == View.VISIBLE) {
-			setInvisible(R.id.section4);
-			enterFourth = false;
-			fromPageNumber4 = 0;
-			toPageNumber4 = 0;
-			setEditTextEmpty(R.id.from_number4, R.id.to_number4);
-
-		} else if (findViewById(R.id.section3).getVisibility() == View.VISIBLE) {
-			setInvisible(R.id.section3);
-			enterThird = false;
-			fromPageNumber3 = 0;
-			toPageNumber3 = 0;
-			setEditTextEmpty(R.id.from_number3, R.id.to_number3);
-
-		} else if (findViewById(R.id.section2).getVisibility() == View.VISIBLE) {
-			setInvisible(R.id.section2);
-			enterSecond = false;
-			fromPageNumber2 = 0;
-			toPageNumber2 = 0;
-			setEditTextEmpty(R.id.from_number2, R.id.to_number2);
-			setInvisible(R.id.remove_last);
-		}
-
-		setVisible(R.id.add_more);
+		setInvisible(R.id.password);
 	}
 
 	public void pickFile(View view) {
@@ -130,7 +58,6 @@ public class SplitActivity extends SNPDFActivity {
 	private boolean pdfDetailsComplete() {
 		if (password_req) {
 			password = ((EditText) findViewById(R.id.password)).getText().toString();
-
 			if (password == null || password.equals("") || !SNPDFUtils.isPasswordCorrect(srcPDF, password)) {
 				return false;
 			}
@@ -174,24 +101,13 @@ public class SplitActivity extends SNPDFActivity {
 	private void resetFields() {
 		((EditText) findViewById(R.id.password)).setText("");
 		((TextView) findViewById(R.id.message)).setText("");
-		((EditText) findViewById(R.id.from_number1)).setText("");
-		((EditText) findViewById(R.id.to_number1)).setText("");
-		((EditText) findViewById(R.id.from_number2)).setText("");
-		((EditText) findViewById(R.id.to_number2)).setText("");
-		((EditText) findViewById(R.id.from_number3)).setText("");
-		((EditText) findViewById(R.id.to_number3)).setText("");
-		((EditText) findViewById(R.id.from_number4)).setText("");
-		((EditText) findViewById(R.id.to_number4)).setText("");
-		((EditText) findViewById(R.id.from_number5)).setText("");
-		((EditText) findViewById(R.id.to_number5)).setText("");
-		setInvisible(R.id.section2, R.id.section3, R.id.section4, R.id.section5, R.id.remove_last);
-		enterSecond = enterThird = enterFourth = enterFifth = false;
+		((EditText) findViewById(R.id.page_number)).setText("");
+		pages = new ArrayList<Pair<Integer, Integer>>();
 	}
 
 	private void setName() {
 		EditText editText = (EditText) findViewById(R.id.pdf_file);
 		editText.setText(srcPDF.getName());
-
 	}
 
 	private boolean populatePageDetails(PdfReader inputPDF) {
@@ -221,46 +137,6 @@ public class SplitActivity extends SNPDFActivity {
 				}
 
 			}).show();
-		} else if (!checkFirst()) {
-			getAlertDialog().setTitle("Incorrect page numbers").setMessage("Please enter valid page numbers in first block!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-
-				}).show();
-		} else if (!checkSecond()) {
-			getAlertDialog().setTitle("Incorrect page numbers").setMessage("Please enter valid page numbers in second block!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-
-				}).show();
-		} else if (!checkThird()) {
-			getAlertDialog().setTitle("Incorrect page numbers").setMessage("Please enter valid page numbers in third block!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-
-				}).show();
-		} else if (!checkFourth()) {
-			getAlertDialog().setTitle("Incorrect page numbers").setMessage("Please enter valid page numbers in fourth block!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-
-				}).show();
-		} else if (!checkFifth()) {
-			getAlertDialog().setTitle("Incorrect page numbers").setMessage("Please enter valid page numbers in fifth block!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-
-				}).show();
 		} else if (!pdfDetailsComplete()) {
 			getAlertDialog().setTitle("Incorrect password").setMessage("Please enter the correct PDF password")
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -270,96 +146,81 @@ public class SplitActivity extends SNPDFActivity {
 
 				}).show();
 		} else {
+			PdfReader inputPDF = null;
 
 			try {
-				// Get PDF Reader
-				PdfReader inputPDF = getPDFReader(srcPDF);
-
-				// populate page details
+				inputPDF = getPDFReader(srcPDF);
 				if (populatePageDetails(inputPDF)) {
+					String pageString = ((EditText) findViewById(R.id.page_number)).getText().toString();
 
-					boolean errorFill = false;
-					String errorSections = "";
-
-					toPageNumber1 = Integer.parseInt(((EditText) findViewById(R.id.to_number1)).getText().toString());
-					fromPageNumber1 = Integer.parseInt(((EditText) findViewById(R.id.from_number1)).getText().toString());
-					if (invalidPageNumbers(toPageNumber1, fromPageNumber1)) {
-						errorFill = true;
-						errorSections += " 1";
-					}
-
-					if (enterSecond) {
-						toPageNumber2 = Integer.parseInt(((EditText) findViewById(R.id.to_number2)).getText().toString());
-						fromPageNumber2 = Integer.parseInt(((EditText) findViewById(R.id.from_number2)).getText().toString());
-						if (invalidPageNumbers(toPageNumber2, fromPageNumber2)) {
-							errorFill = true;
-							errorSections += " 2";
-						}
-					}
-
-					if (enterThird) {
-						toPageNumber3 = Integer.parseInt(((EditText) findViewById(R.id.to_number3)).getText().toString());
-						fromPageNumber3 = Integer.parseInt(((EditText) findViewById(R.id.from_number3)).getText().toString());
-						if (invalidPageNumbers(toPageNumber3, fromPageNumber3)) {
-							errorFill = true;
-							errorSections += " 3";
-						}
-					}
-
-					if (enterFourth) {
-						toPageNumber4 = Integer.parseInt(((EditText) findViewById(R.id.to_number4)).getText().toString());
-						fromPageNumber4 = Integer.parseInt(((EditText) findViewById(R.id.from_number4)).getText().toString());
-						if (invalidPageNumbers(toPageNumber4, fromPageNumber4)) {
-							errorFill = true;
-							errorSections += " 4";
-						}
-					}
-
-					if (enterFifth) {
-						toPageNumber5 = Integer.parseInt(((EditText) findViewById(R.id.to_number5)).getText().toString());
-						fromPageNumber5 = Integer.parseInt(((EditText) findViewById(R.id.from_number5)).getText().toString());
-						if (invalidPageNumbers(toPageNumber5, fromPageNumber5)) {
-							errorFill = true;
-							errorSections += " 5";
-						}
-					}
-
-					if (errorFill) {
-						getAlertDialog().setTitle("Incorrect page numbers")
-							.setMessage("Please enter valid numbers as explained in the instructions for sections " + errorSections)
-							.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
+					StringBuffer errorMessage = new StringBuffer();
+					if (pageString == null || pageString.trim().length() == 0) {
+						errorMessage.append("Please enter page number!");
+					} else {
+						StringTokenizer tokenizer = new StringTokenizer(pageString, ",");
+						while (tokenizer.hasMoreElements()) {
+							String pageRange = tokenizer.nextToken().trim();
+							if (pageRange.contains("-")) {
+								String[] pageArray = pageRange.split("-");
+								if (pageArray.length != 2) {
+									errorMessage.append("\n" + pageRange + " is not in right format!");
+								} else {
+									try {
+										int from = Integer.parseInt(pageArray[0].trim());
+										int to = Integer.parseInt(pageArray[1].trim());
+										if (invalidPageNumbers(to, from)) {
+											errorMessage.append("\nPage numbers " + pageRange + " are out of range!");
+										} else {
+											pages.add(Pair.create(from, to));
+										}
+									} catch (Exception e) {
+										errorMessage.append("\nInvalid page number format: " + pageRange);
+									}
 								}
 
-							}).show();
+							} else {
+								try {
+									int page = Integer.parseInt(pageRange);
+									if (invalidPageNumbers(page, page)) {
+										errorMessage.append("\nInvalid page number: " + page + " (out of range)");
+									} else {
+										pages.add(Pair.create(page, page));
+									}
+								} catch (Exception e) {
+									errorMessage.append("\nInvalid page number: " + pageRange);
+								}
+							}
+						}
+					}
+					if (errorMessage.length() > 0) {
+						getAlertDialog().setTitle("Invalid page number!").setMessage(errorMessage).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								pages = new ArrayList<Pair<Integer, Integer>>();
+								dialog.dismiss();
+							}
+						}).show();
 					} else {
-						new SplitPDF(inputPDF).execute();
+						new SplitPDF(inputPDF, pages).execute();
 					}
 
 				} else {
-					getAlertDialog().setTitle("Invalid selection")
-						.setMessage("The selected PDF just has " + numberOfPages + " page, so cannot be split further!!!")
+					getAlertDialog().setTitle("Invalid PDF!").setMessage("The PDF just has one page - so cannot be further slipt!")
 						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 								dialog.dismiss();
 							}
-
 						}).show();
 				}
-
 			} catch (Exception e) {
 				getAlertDialog().setTitle("ERROR").setMessage("Unable to process! Please re-enter all details")
 					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
+							resetFields();
 						}
-
 					}).show();
 			}
-
 		}
-
 	}
 
 	private boolean invalidPageNumbers(int toPageNumber, int fromPageNumber) {
@@ -370,79 +231,15 @@ public class SplitActivity extends SNPDFActivity {
 		return false;
 	}
 
-	private boolean checkFirst() {
-		String from = ((EditText) findViewById(R.id.from_number1)).getText().toString();
-		String to = ((EditText) findViewById(R.id.to_number1)).getText().toString();
-
-		if (from == null || "".equals(from) || to == null || "".equals(to)) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean checkSecond() {
-		if (enterSecond) {
-			String from = ((EditText) findViewById(R.id.from_number2)).getText().toString();
-			String to = ((EditText) findViewById(R.id.to_number2)).getText().toString();
-
-			if (from == null || "".equals(from) || to == null || "".equals(to)) {
-				return false;
-			}
-		}
-		return true;
-
-	}
-
-	private boolean checkThird() {
-		if (enterThird) {
-			String from = ((EditText) findViewById(R.id.from_number3)).getText().toString();
-			String to = ((EditText) findViewById(R.id.to_number3)).getText().toString();
-
-			if (from == null || "".equals(from) || to == null || "".equals(to)) {
-				return false;
-			}
-		}
-
-		return true;
-
-	}
-
-	private boolean checkFourth() {
-		if (enterFourth) {
-			String from = ((EditText) findViewById(R.id.from_number4)).getText().toString();
-			String to = ((EditText) findViewById(R.id.to_number4)).getText().toString();
-
-			if (from == null || "".equals(from) || to == null || "".equals(to)) {
-				return false;
-			}
-		}
-
-		return true;
-
-	}
-
-	private boolean checkFifth() {
-		if (enterFifth) {
-			String from = ((EditText) findViewById(R.id.from_number5)).getText().toString();
-			String to = ((EditText) findViewById(R.id.to_number5)).getText().toString();
-
-			if (from == null || "".equals(from) || to == null || "".equals(to)) {
-				return false;
-			}
-		}
-
-		return true;
-
-	}
-
 	private class SplitPDF extends AsyncTask<String, Void, Boolean> {
 
 		private ProgressDialog progressDialog;
 		private PdfReader inputPDF;
+		private List<Pair<Integer, Integer>> pages;
 
-		public SplitPDF(PdfReader inputPDF) {
+		public SplitPDF(PdfReader inputPDF, List<Pair<Integer, Integer>> pages) {
 			this.inputPDF = inputPDF;
+			this.pages = pages;
 		}
 
 		@Override
@@ -466,71 +263,48 @@ public class SplitActivity extends SNPDFActivity {
 		protected Boolean doInBackground(String... params) {
 			boolean error = false;
 			try {
-				if (write(inputPDF, fromPageNumber1, toPageNumber1, true)) {
-					return true;
+				for (Pair<Integer, Integer> page : pages) {
+					write(inputPDF, page.first, page.second);
 				}
-				if (write(inputPDF, fromPageNumber2, toPageNumber2, enterSecond)) {
-					return true;
-				}
-				if (write(inputPDF, fromPageNumber3, toPageNumber3, enterThird)) {
-					return true;
-				}
-				if (write(inputPDF, fromPageNumber4, toPageNumber4, enterFourth)) {
-					return true;
-				}
-				if (write(inputPDF, fromPageNumber5, toPageNumber5, enterFifth)) {
-					return true;
-				}
-
 			} catch (Exception e) {
-				e.printStackTrace();
 				error = true;
 				errorMessage = e.getLocalizedMessage();
 			} finally {
-				if (inputPDF != null) {
+				if (inputPDF != null)
 					inputPDF.close();
-				}
 			}
 
 			return error;
 		}
 
-		private boolean write(PdfReader inputPDF, int fromPageNumber, int toPageNumber, boolean detailsComplete) throws IOException {
-			boolean error = false;
-			if (detailsComplete) {
-				mainFile = SNPDFPathManager.getSavePDFPath("EXTRACTED_" + SNPDFPathManager.getFileNameWithoutExtn(srcPDF.getName()) + "_" + fromPageNumber
-					+ "-" + toPageNumber + ".pdf");
+		private void write(PdfReader inputPDF, int fromPageNumber, int toPageNumber) throws IOException {
+			mainFile = SNPDFPathManager.getSavePDFPath("EXTRACTED_" + SNPDFPathManager.getFileNameWithoutExtn(srcPDF.getName()) + "_" + fromPageNumber
+				+ "-" + toPageNumber + ".pdf");
 
-				Document document = new Document();
-				PdfCopy writer = null;
-				try {
-					writer = new PdfCopy(document, new FileOutputStream(mainFile));
+			Document document = new Document();
+			PdfCopy writer = null;
+			try {
+				writer = new PdfCopy(document, new FileOutputStream(mainFile));
+				document.open();
+				PdfImportedPage page = null;
 
-					document.open();
-					PdfImportedPage page = null;
-
-					while (fromPageNumber <= toPageNumber) {
-						document.newPage();
-						page = writer.getImportedPage(inputPDF, fromPageNumber);
-						writer.addPage(page);
-						fromPageNumber++;
-					}
-
-					createdPDFs.add(mainFile.getName());
-
-				} catch (Exception e) {
-					error = true;
-					errorMessage = "Exception while splitting from " + fromPageNumber + " to " + toPageNumber + "[" + e.getLocalizedMessage() + "]";
-				} finally {
-					if (document.isOpen())
-						document.close();
-					if (writer != null) {
-						writer.close();
-					}
+				while (fromPageNumber <= toPageNumber) {
+					document.newPage();
+					page = writer.getImportedPage(inputPDF, fromPageNumber);
+					writer.addPage(page);
+					fromPageNumber++;
 				}
-			}
 
-			return error;
+				createdPDFs.add(mainFile.getName());
+			} catch (Exception e) {
+				throw new RuntimeException("Exception while splitting from " + fromPageNumber + " to " + toPageNumber + "[" + e.getLocalizedMessage() + "]");
+			} finally {
+				if (document.isOpen())
+					document.close();
+				if (writer != null)
+					writer.close();
+
+			}
 		}
 	}
 
@@ -539,13 +313,10 @@ public class SplitActivity extends SNPDFActivity {
 			setContentView(R.layout.snpdf_output);
 
 			if (error) {
-				SNPDFUtils.setErrorText(this, "Unable to extract PDF " + srcPDF + " from page " + fromPageNumber1 + " to page " + toPageNumber1 + " ("
-					+ errorMessage + ")");
+				SNPDFUtils.setErrorText(this, "Unable to extract PDF " + srcPDF + " (" + errorMessage + ")");
 				hideButtons();
-
 			} else {
-				SNPDFUtils.setSuccessText(this, "PDF " + srcPDF.getName() + " successfully extracted  from page " + fromPageNumber1 + " to page "
-					+ toPageNumber1, mainFile);
+				SNPDFUtils.setSuccessText(this, "PDF " + srcPDF.getName() + " successfully extracted!!!", mainFile);
 			}
 		} else {
 			Intent intent = new Intent(this, SplitOutput.class);
