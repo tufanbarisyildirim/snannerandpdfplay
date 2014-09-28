@@ -48,21 +48,21 @@ public class ExtractTextActivity extends SNPDFActivity {
 	public void extractText(View view) {
 		if (selectedFile == null || !selectedFile.exists()) {
 			getAlertDialog().setTitle("Incomplete details").setMessage("Please select the PDF file to extract text from!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+
+				}).show();
+		} else {
+			if (!arePDFDetailsComplete()) {
+				getAlertDialog().setTitle("PDF password required").setMessage("Please enter a valid password for the selected PDF")
 					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 						}
 
 					}).show();
-		} else {
-			if (!arePDFDetailsComplete()) {
-				getAlertDialog().setTitle("PDF password required").setMessage("Please enter a valid password for the selected PDF")
-						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-
-						}).show();
 			} else {
 				new TextExtractor().execute();
 			}
@@ -91,16 +91,16 @@ public class ExtractTextActivity extends SNPDFActivity {
 				((EditText) findViewById(R.id.file)).setText(selectedFile.getName());
 				if (SNPDFUtils.isProtected(selectedFile)) {
 					getAlertDialog().setTitle("PDF is encrypted!").setMessage("The selected PDF is protected, please enter it's password!")
-							.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-									EditText password = (EditText) findViewById(R.id.password);
-									password.setVisibility(View.VISIBLE);
-									password_req = true;
-									password.setText("");
-								}
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+								EditText password = (EditText) findViewById(R.id.password);
+								password.setVisibility(View.VISIBLE);
+								password_req = true;
+								password.setText("");
+							}
 
-							}).show();
+						}).show();
 
 				} else {
 					EditText password = (EditText) findViewById(R.id.password);
@@ -146,11 +146,7 @@ public class ExtractTextActivity extends SNPDFActivity {
 			PdfReader pdfReader = null;
 			mainFile = SNPDFPathManager.getTextFileForPDF(selectedFile);
 			try {
-				if (password_req) {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath(), password.getBytes());
-				} else {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-				}
+				pdfReader = SNPDFUtils.getPdfReader(selectedFile.getAbsolutePath(), password_req, password);
 
 				out = new PrintWriter(new FileOutputStream(mainFile));
 				PdfTextExtractor extractor = new PdfTextExtractor(pdfReader);

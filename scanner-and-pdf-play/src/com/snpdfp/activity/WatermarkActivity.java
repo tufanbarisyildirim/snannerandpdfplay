@@ -57,26 +57,26 @@ public class WatermarkActivity extends SNPDFActivity {
 
 	public void pickImage(View view) {
 		getAlertDialog().setTitle("Select image from?").setMessage("Do you want to select photo from Gallery or take a new photo?")
-				.setPositiveButton("From Gallery", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
+			.setPositiveButton("From Gallery", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
 
-						Intent imagePick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-						startActivityForResult(imagePick, SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
-					}
+					Intent imagePick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					startActivityForResult(imagePick, SNPDFCContstants.RESULT_LOAD_IMAGE_REQUEST);
+				}
 
-				}).setNegativeButton("Take Photo", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
+			}).setNegativeButton("Take Photo", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
 
-						currentUri = Uri.fromFile(SNPDFPathManager.getSavePDFPath("PIC.jpg"));
-						cleanUpUris.add(currentUri);
-						Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-						intent.putExtra(MediaStore.EXTRA_OUTPUT, currentUri);
-						startActivityForResult(intent, SNPDFCContstants.PICK_CAMERA_IMAGE_REQUEST);
-					}
+					currentUri = Uri.fromFile(SNPDFPathManager.getSavePDFPath("PIC.jpg"));
+					cleanUpUris.add(currentUri);
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					intent.putExtra(MediaStore.EXTRA_OUTPUT, currentUri);
+					startActivityForResult(intent, SNPDFCContstants.PICK_CAMERA_IMAGE_REQUEST);
+				}
 
-				}).show();
+			}).show();
 
 	}
 
@@ -88,16 +88,16 @@ public class WatermarkActivity extends SNPDFActivity {
 				((EditText) findViewById(R.id.file)).setText(selectedFile.getName());
 				if (SNPDFUtils.isProtected(selectedFile)) {
 					getAlertDialog().setTitle("PDF is encrypted!").setMessage("The selected PDF is protected, please enter it's password!")
-							.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-									EditText password = (EditText) findViewById(R.id.password);
-									password.setVisibility(View.VISIBLE);
-									password_req = true;
-									password.setText("");
-								}
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+								EditText password = (EditText) findViewById(R.id.password);
+								password.setVisibility(View.VISIBLE);
+								password_req = true;
+								password.setText("");
+							}
 
-							}).show();
+						}).show();
 
 				} else {
 					EditText password = (EditText) findViewById(R.id.password);
@@ -124,27 +124,27 @@ public class WatermarkActivity extends SNPDFActivity {
 	public void addWatermark(View view) {
 		if (selectedFile == null || !selectedFile.exists()) {
 			getAlertDialog().setTitle("Incomplete details").setMessage("Please select the PDF file to add watermark to!")
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
 
-					}).show();
+				}).show();
 		} else if (image == null || !image.exists()) {
 			getAlertDialog().setTitle("Incomplete details").setMessage("Please select a valid image to add as watermark!")
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					}).show();
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				}).show();
 		} else if (!arePDFDetailsComplete()) {
 			getAlertDialog().setTitle("PDF password required").setMessage("Please enter a valid password for the selected PDF")
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
 
-					}).show();
+				}).show();
 		} else {
 			new WatermarkExecutor().execute();
 		}
@@ -154,7 +154,6 @@ public class WatermarkActivity extends SNPDFActivity {
 	private boolean arePDFDetailsComplete() {
 		if (password_req) {
 			password = ((EditText) findViewById(R.id.password)).getText().toString();
-
 			if (password == null || password.equals("") || !SNPDFUtils.isPasswordCorrect(selectedFile, password)) {
 				return false;
 			}
@@ -194,11 +193,7 @@ public class WatermarkActivity extends SNPDFActivity {
 			PdfStamper stamp = null;
 			mainFile = SNPDFPathManager.getSavePDFPath(selectedFile.getName());
 			try {
-				if (password != null) {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath(), password.getBytes());
-				} else {
-					pdfReader = new PdfReader(selectedFile.getAbsolutePath());
-				}
+				pdfReader = SNPDFUtils.getPdfReader(selectedFile.getAbsolutePath(), password != null, password);
 
 				int number_of_pages = pdfReader.getNumberOfPages();
 				stamp = new PdfStamper(pdfReader, new FileOutputStream(mainFile));

@@ -41,18 +41,26 @@ public class SNPDFActivity extends Activity {
 	final String snpdfSkipIntro = "SNPDF_SKIP_INTRO";
 
 	protected File mainFile = null;
-
 	protected String errorMessage = "";
-
-	private AdView adView;
+	AdView adView = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
 
-		adView = (AdView) this.findViewById(R.id.adView);
+	@Override
+	public void setContentView(int id) {
+		super.setContentView(id);
+		loadAd();
+	}
+
+	protected void loadAd() {
+		// Look up the AdView as a resource and load a request.
+		AdView adView = (AdView) this.findViewById(R.id.adView);
 		if (adView != null) {
-			AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("TEST_DEVICE_ID").build();
+			AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("B0CFB07E3B5A4F8FC8C3AC50DA5DF5CE")
+				.build();
 			adView.loadAd(adRequest);
 		}
 	}
@@ -114,12 +122,12 @@ public class SNPDFActivity extends Activity {
 	public void protectPDF(View view) {
 		if (!mainFile.getName().toLowerCase().endsWith(".pdf")) {
 			getAlertDialog().setTitle("Invalid option").setMessage("This option is not valid for non-pdf files: " + mainFile.getName())
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
 
-					}).show();
+				}).show();
 		} else {
 			Intent pdfintent = new Intent(this, ProtectPDFActivity.class);
 			pdfintent.putExtra(SNPDFCContstants.FILE_URI, mainFile.getAbsolutePath());
@@ -130,33 +138,33 @@ public class SNPDFActivity extends Activity {
 
 	public void deletePDF(View view) {
 		getAlertDialog().setTitle("Delete file?").setMessage("Are you sure to delete file: " + mainFile.getName())
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						delete(mainFile);
-					}
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					delete(mainFile);
+				}
 
-				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
+			}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).show();
 
 	}
 
 	public void renamePDF(View view) {
 		getAlertDialog().setTitle("New name").setMessage("Enter the new name. File type will not be changed!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						renameFile(mainFile);
-					}
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					renameFile(mainFile);
+				}
 
-				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
+			}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).show();
 
 	}
 
@@ -218,28 +226,28 @@ public class SNPDFActivity extends Activity {
 	public void deleteAll() {
 		final Context context = this;
 		getAlertDialog().setTitle("Delete all files?").setMessage("Are you sure to delete all prepared files?")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						File snpdf = SNPDFPathManager.getRootDirectory();
-						File[] list = snpdf.listFiles();
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					File snpdf = SNPDFPathManager.getRootDirectory();
+					File[] list = snpdf.listFiles();
 
-						if (list != null && list.length > 0) {
-							for (File file : list) {
-								file.delete();
-							}
+					if (list != null && list.length > 0) {
+						for (File file : list) {
+							file.delete();
 						}
-
-						Toast.makeText(context, "All snpdf prepared files deleted!", Toast.LENGTH_SHORT).show();
-
-						showMainPage();
 					}
 
-				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
+					Toast.makeText(context, "All snpdf prepared files deleted!", Toast.LENGTH_SHORT).show();
+
+					showMainPage();
+				}
+
+			}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).show();
 
 	}
 
@@ -341,11 +349,11 @@ public class SNPDFActivity extends Activity {
 
 	protected void showCannotReadFileDialog(File file) {
 		getAlertDialog().setTitle("Invalid selection").setMessage("[" + file.getName() + "] folder can't be read!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).show();
 
 	}
 

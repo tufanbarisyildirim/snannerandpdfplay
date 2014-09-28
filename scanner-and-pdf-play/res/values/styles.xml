@@ -7,6 +7,7 @@
     <color name="custom_theme_color_start">#FFFFFF</color>
     <color name="custom_theme_color_end">#FFFFFF</color>
     <color name="yellow">#FFD700</color>
+    <color name="blue">#A9BCF5</color>
 
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <item name="android:scrollbars">vertical</item>
@@ -133,6 +134,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:paddingLeft">5sp</item>
     </style>
 
     <style name="DescriptionText">
@@ -191,5 +193,11 @@
         <item name="android:layout_width">50sp</item>
         <item name="android:layout_height">50sp</item>
     </style>
-
+    
+     <style name="SearchStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wallet_link_text_light</item>
+    </style>
 </resources>
