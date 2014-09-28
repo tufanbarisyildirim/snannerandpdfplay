@@ -1,7 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
 
     <LinearLayout
         android:id="@+id/selectOption"
@@ -14,21 +18,21 @@
         <ImageView
             style="@style/OptionImageMedium"
             android:layout_weight="1"
+            android:background="@color/blue"
             android:contentDescription="share selected"
             android:onClick="shareSelectedPDF"
             android:paddingEnd="20sp"
             android:paddingStart="20sp"
-            android:background="@color/blue"
             android:src="@drawable/share" />
 
         <ImageView
             style="@style/OptionImageMedium"
             android:layout_weight="1"
+            android:background="@color/blue"
             android:contentDescription="delete selected"
             android:onClick="deleteSelectedPDF"
             android:paddingEnd="20sp"
             android:paddingStart="20sp"
-            android:background="@color/blue"
             android:src="@drawable/delete" />
     </LinearLayout>
 
@@ -41,7 +45,7 @@
 
         <EditText
             android:id="@+id/inputSearch"
-            style="@style/SearchStyle"            
+            style="@style/SearchStyle"
             android:hint="search files..."
             android:inputType="textVisiblePassword" />
 

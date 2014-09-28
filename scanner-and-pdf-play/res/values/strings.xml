@@ -41,7 +41,7 @@
     <string name="title_activity_faq">do you know?</string>
     <string name="license">licensed under</string>
     <string name="apache"><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></string>
-    <string name="courtesy"><p>This application makes use of open source library itextpdf-2.1.7</p>\n<div>Icons made by Elegant Themes, Anas Ramadan, SimpleIcon, Freepik, Icons8 from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div></string>
+    <string name="courtesy"><div>Icons made by Elegant Themes, Yannick, Anas Ramadan, SimpleIcon, Freepik, Icons8 from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div></string>
     <string name="title_activity_extract_text">text from pdf</string>
     <string name="select_addwatermark">add watermark</string>
     <string name="adUnitId">ca-app-pub-1056589928819786/4583708678</string>
