@@ -28,8 +28,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <View style="@style/line" />
-
             <TextView
                 android:id="@+id/app_detail"
                 style="@style/AnswerText"
