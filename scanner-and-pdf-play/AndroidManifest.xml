@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.snpdf.activity"
-    android:versionCode="3"
-    android:versionName="1.11" >
+    package="com.shikhar.pdfutil"
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -17,13 +17,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -34,7 +27,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.snpdf.activity.MainActivity"
+            android:name="com.shikhar.pdfutil.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/app_name"
             android:screenOrientation="nosensor" >
@@ -59,106 +52,106 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.snpdf.activity.ImageToPDFActivity"
+            android:name="com.shikhar.pdfutil.ImageToPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_image_to_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.BrowsePDFActivity"
+            android:name="com.shikhar.pdfutil.BrowsePDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_browse_file"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.ProtectPDFActivity"
+            android:name="com.shikhar.pdfutil.ProtectPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_lock_pdf"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.ConcatenatePDFActivity"
+            android:name="com.shikhar.pdfutil.ConcatenatePDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_concatenate_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.SplitActivity"
+            android:name="com.shikhar.pdfutil.SplitActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_split"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.OpenSNPDFFolderActivity"
+            android:name="com.shikhar.pdfutil.OpenSNPDFFolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_open_snpdffolder"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.PickedPDFActivity"
+            android:name="com.shikhar.pdfutil.PickedPDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_picked_pdf"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.menu.FAQActivity"
+            android:name="com.shikhar.pdfutil.menu.FAQActivity"
             android:label="@string/title_activity_faq" >
         </activity>
         <activity
-            android:name="com.snpdf.menu.About"
+            android:name="com.shikhar.pdfutil.menu.About"
             android:label="@string/title_about" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.ExtractTextActivity"
+            android:name="com.shikhar.pdfutil.ExtractTextActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_extract_text"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.WatermarkActivity"
+            android:name="com.shikhar.pdfutil.WatermarkActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_watermark"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.RenameActivity"
+            android:name="com.shikhar.pdfutil.RenameActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_rename"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.PickStringActivity"
+            android:name="com.shikhar.pdfutil.PickStringActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_pick_string"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="stateVisible"
-            android:theme="@android:style/Theme.Holo.Light.Dialog" >
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.CopyEncryptedActivity"
+            android:name="com.shikhar.pdfutil.CopyEncryptedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_copy_encrypted"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.SNPDFSettings"
+            android:name="com.shikhar.pdfutil.SNPDFSettings"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_snpdfsettings"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.SplitOutput"
+            android:name="com.shikhar.pdfutil.SplitOutput"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_split"
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name="com.snpdf.activity.ScanActivity"
+            android:name="com.shikhar.pdfutil.ScanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_scanner"
             android:screenOrientation="nosensor" >
